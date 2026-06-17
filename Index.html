@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seventy7 Supports — Football Jerseys</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--black:#111;--charcoal:#1c1c1c;--slate:#333;--mid:#666;--silver:#aaa;--offwhite:#f4f4f2;--white:#fff;--gold:#c9a84c;--gold-l:#e8c86a}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--offwhite);color:var(--black);overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--black);display:flex;align-items:center;justify-content:space-between;padding:0 4vw;height:60px;border-bottom:1px solid #2a2a2a}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.55rem;color:var(--white);letter-spacing:.08em}
+.nav-logo span{color:var(--gold)}
+.nav-links{display:flex;align-items:center;gap:22px}
+.nav-link{font-size:.72rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--silver);text-decoration:none;transition:color .2s}
+.nav-link:hover{color:var(--white)}
+.cart-btn{background:var(--gold);border:none;cursor:pointer;font-family:'Inter',sans-serif;font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--black);padding:8px 16px;display:flex;align-items:center;gap:7px;transition:background .2s}
+.cart-btn:hover{background:var(--gold-l)}
+.cart-count{background:var(--black);color:var(--gold);border-radius:50%;width:18px;height:18px;font-size:.65rem;font-weight:800;display:flex;align-items:center;justify-content:center}
+.hero{margin-top:60px;background:var(--black);min-height:75vh;display:flex;align-items:center;padding:0 5vw;position:relative;overflow:hidden}
+.hero-bg-num{position:absolute;right:-1vw;top:50%;transform:translateY(-52%);font-family:'Bebas Neue',sans-serif;font-size:clamp(180px,28vw,380px);color:transparent;-webkit-text-stroke:1.5px #222;line-height:1;pointer-events:none;user-select:none}
+.hero-content{position:relative;z-index:2;max-width:580px}
+.hero-eye{font-size:.7rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;display:flex;align-items:center;gap:10px}
+.hero-eye::after{content:'';width:36px;height:1px;background:var(--gold)}
+.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,7.5vw,100px);color:var(--white);line-height:.92;letter-spacing:.02em;margin-bottom:20px}
+.hero-title em{color:var(--gold);font-style:normal}
+.hero-sub{font-size:.92rem;font-weight:300;color:var(--silver);line-height:1.7;max-width:400px;margin-bottom:36px}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+.btn-gold{background:var(--gold);color:var(--black);font-size:.8rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:13px 28px;border:none;cursor:pointer;transition:background .2s;text-decoration:none;display:inline-block}
+.btn-gold:hover{background:var(--gold-l)}
+.btn-out{background:transparent;color:var(--white);font-size:.8rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;padding:13px 28px;border:1px solid #3a3a3a;cursor:pointer;transition:border-color .2s;text-decoration:none;display:inline-block}
+.btn-out:hover{border-color:#777}
+.hero-stats{position:absolute;bottom:36px;left:5vw;display:flex;gap:40px}
+.stat-num{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;color:var(--white);line-height:1}
+.stat-num span{color:var(--gold)}
+.stat-lbl{font-size:.68rem;color:var(--mid);letter-spacing:.14em;text-transform:uppercase;margin-top:3px}
+.ticker{background:var(--gold);overflow:hidden;padding:9px 0;white-space:nowrap}
+.ticker-inner{display:inline-flex;animation:tick 30s linear infinite}
+.ticker-item{font-family:'Bebas Neue',sans-serif;font-size:.88rem;letter-spacing:.18em;color:var(--black);padding:0 32px}
+@keyframes tick{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.toolbar{background:var(--white);border-bottom:1px solid #e0e0e0;padding:14px 4vw;display:flex;align-items:center;gap:14px;flex-wrap:wrap;position:sticky;top:60px;z-index:50}
+.search-wrap{position:relative;flex:1;min-width:180px;max-width:340px}
+.search-wrap input{width:100%;padding:9px 14px 9px 36px;border:1px solid #ddd;font-family:'Inter',sans-serif;font-size:.82rem;color:var(--black);background:var(--offwhite);outline:none;transition:border-color .2s}
+.search-wrap input:focus{border-color:var(--gold)}
+.search-icon{position:absolute;left:11px;top:50%;transform:translateY(-50%);font-size:.85rem;color:var(--mid);pointer-events:none}
+.filter-tabs{display:flex;gap:5px;flex-wrap:wrap}
+.ftab{font-size:.68rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;padding:7px 13px;border:1px solid #ddd;background:transparent;cursor:pointer;color:var(--slate);transition:all .18s;white-space:nowrap}
+.ftab.active,.ftab:hover{background:var(--black);color:var(--white);border-color:var(--black)}
+.results-count{font-size:.73rem;color:var(--mid);white-space:nowrap;margin-left:auto}
+.section{padding:32px 4vw 60px}
+.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:2px}
+.product-card{background:var(--white);cursor:pointer;position:relative;overflow:hidden;transition:transform .22s,box-shadow .22s}
+.product-card:hover{transform:translateY(-5px);box-shadow:0 12px 32px rgba(0,0,0,.12);z-index:2}
+.card-img{width:100%;aspect-ratio:3/4;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;background:#f0f0ee}
+.card-img img{width:100%;height:100%;object-fit:contain;object-position:center;transition:transform .32s;padding:12px}
+.product-card:hover .card-img img{transform:scale(1.06)}
+.card-img .img-fallback{width:80%;height:80%;object-fit:contain;padding:16px}
+.card-badge{position:absolute;top:10px;left:10px;font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:3px 8px}
+.b-new{background:var(--black);color:var(--white)}
+.b-hot{background:var(--gold);color:var(--black)}
+.card-body{padding:14px 16px 18px}
+.card-cat{font-size:.6rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--mid);margin-bottom:4px}
+.card-name{font-family:'Bebas Neue',sans-serif;font-size:1.15rem;letter-spacing:.04em;color:var(--black);margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card-sub{font-size:.73rem;color:var(--mid);margin-bottom:12px}
+.card-footer{display:flex;align-items:center;justify-content:space-between}
+.card-price{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--black)}
+.add-btn{background:var(--black);color:var(--white);border:none;cursor:pointer;width:34px;height:34px;font-size:1.2rem;display:flex;align-items:center;justify-content:center;transition:background .18s}
+.add-btn:hover{background:var(--gold);color:var(--black)}
+.no-results{text-align:center;padding:80px 20px;color:var(--mid);width:100%;display:none}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:200;opacity:0;pointer-events:none;transition:opacity .3s}
+.overlay.open{opacity:1;pointer-events:all}
+.cart-drawer{position:fixed;top:0;right:0;bottom:0;width:min(400px,100vw);background:var(--white);z-index:201;transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column}
+.cart-drawer.open{transform:translateX(0)}
+.drawer-head{display:flex;align-items:center;justify-content:space-between;padding:20px 22px;border-bottom:1px solid #e8e8e8;background:var(--black)}
+.drawer-title{font-family:'Bebas Neue',sans-serif;font-size:1.35rem;color:var(--white);letter-spacing:.06em}
+.drawer-title span{color:var(--gold)}
+.close-btn{background:none;border:none;cursor:pointer;color:var(--silver);font-size:1.3rem;padding:4px;transition:color .2s}
+.close-btn:hover{color:var(--white)}
+.cart-items{flex:1;overflow-y:auto;padding:18px 22px}
+.cart-empty{text-align:center;padding:60px 20px;color:var(--mid)}
+.cart-empty-icon{font-size:2.8rem;margin-bottom:12px}
+.cart-item{display:flex;gap:12px;padding:14px 0;border-bottom:1px solid #f0f0f0;align-items:flex-start}
+.ci-img{width:64px;height:78px;background:var(--offwhite);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden}
+.ci-img img{width:100%;height:100%;object-fit:contain;padding:4px}
+.ci-info{flex:1}
+.ci-cat{font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mid)}
+.ci-name{font-family:'Bebas Neue',sans-serif;font-size:1rem;margin:2px 0 5px}
+.ci-price{font-size:.82rem;font-weight:600}
+.ci-rm{background:none;border:none;cursor:pointer;color:var(--silver);font-size:1rem;padding:2px;transition:color .2s}
+.ci-rm:hover{color:#c0392b}
+.cart-foot{padding:18px 22px;border-top:1px solid #e8e8e8}
+.cart-total{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.ct-label{font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mid)}
+.ct-price{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;color:var(--black)}
+.checkout-btn{width:100%;background:var(--gold);color:var(--black);border:none;cursor:pointer;font-family:'Inter',sans-serif;font-size:.8rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:15px;transition:background .2s}
+.checkout-btn:hover{background:var(--gold-l)}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--black);color:var(--white);padding:11px 22px;font-size:.8rem;font-weight:500;letter-spacing:.06em;z-index:999;border-left:3px solid var(--gold);transition:transform .32s cubic-bezier(.34,1.56,.64,1);white-space:nowrap}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.banner{background:var(--black);display:grid;grid-template-columns:1fr 1fr;min-height:280px;overflow:hidden}
+.banner-text{padding:50px 5vw;display:flex;flex-direction:column;justify-content:center}
+.banner-label{font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.banner-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(28px,4vw,52px);color:var(--white);line-height:1.05;margin-bottom:20px}
+.banner-title em{color:var(--gold);font-style:normal}
+.banner-visual{background:var(--charcoal);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.banner-number{font-family:'Bebas Neue',sans-serif;font-size:clamp(160px,20vw,280px);color:transparent;-webkit-text-stroke:2px var(--gold);opacity:.3;line-height:1;user-select:none}
+footer{background:var(--black);color:var(--silver);padding:50px 4vw 28px;border-top:1px solid #2a2a2a}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;margin-bottom:40px}
+.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--white);margin-bottom:12px}
+.footer-logo span{color:var(--gold)}
+.footer-desc{font-size:.8rem;line-height:1.7;color:#555;max-width:260px}
+.fc-title{font-size:.68rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--white);margin-bottom:16px}
+.footer-links{list-style:none}
+.footer-links li{margin-bottom:9px}
+.footer-links a{font-size:.8rem;color:#555;text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:var(--white)}
+.footer-bottom{border-top:1px solid #222;padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.footer-copy{font-size:.7rem;color:#444}
+@media(max-width:680px){.footer-grid{grid-template-columns:1fr;gap:28px}.toolbar{gap:10px}.results-count{display:none}.hero-stats{gap:24px}.banner{grid-template-columns:1fr}.banner-visual{display:none}.nav-link{display:none}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Seventy<span>7</span> Supports</div>
+  <div class="nav-links">
+    <a href="#shop" class="nav-link">Jerseys</a>
+    <a href="#" class="nav-link">Size Guide</a>
+    <a href="#" class="nav-link">Delivery</a>
+    <button class="cart-btn" onclick="openCart()">🛒 Cart <span class="cart-count" id="cartCount">0</span></button>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg-num">77</div>
+  <div class="hero-content">
+    <div class="hero-eye">World Cup 2026 Collection</div>
+    <h1 class="hero-title">Wear the<br><em>Legend.</em></h1>
+    <p class="hero-sub">100+ official replica jerseys — Argentina, Portugal, Brazil, Real Madrid & more. All at just ₹349. Free delivery across India.</p>
+    <div class="hero-cta">
+      <a href="#shop" class="btn-gold">Shop All Jerseys</a>
+      <a href="#shop" class="btn-out">New Arrivals</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div><div class="stat-num">100<span>+</span></div><div class="stat-lbl">Jerseys</div></div>
+    <div><div class="stat-num">₹<span>349</span></div><div class="stat-lbl">Flat Price</div></div>
+    <div><div class="stat-num">20<span>+</span></div><div class="stat-lbl">Nations</div></div>
+  </div>
+</section>
+
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-item">ARGENTINA</span><span class="ticker-item">·</span><span class="ticker-item">PORTUGAL</span><span class="ticker-item">·</span><span class="ticker-item">BRAZIL</span><span class="ticker-item">·</span><span class="ticker-item">FRANCE</span><span class="ticker-item">·</span><span class="ticker-item">REAL MADRID</span><span class="ticker-item">·</span><span class="ticker-item">MAN CITY</span><span class="ticker-item">·</span><span class="ticker-item">BARCELONA</span><span class="ticker-item">·</span><span class="ticker-item">LIVERPOOL</span><span class="ticker-item">·</span><span class="ticker-item">ONLY ₹349</span><span class="ticker-item">·</span><span class="ticker-item">FREE DELIVERY IN INDIA</span><span class="ticker-item">·</span>
+    <span class="ticker-item">ARGENTINA</span><span class="ticker-item">·</span><span class="ticker-item">PORTUGAL</span><span class="ticker-item">·</span><span class="ticker-item">BRAZIL</span><span class="ticker-item">·</span><span class="ticker-item">FRANCE</span><span class="ticker-item">·</span><span class="ticker-item">REAL MADRID</span><span class="ticker-item">·</span><span class="ticker-item">MAN CITY</span><span class="ticker-item">·</span><span class="ticker-item">BARCELONA</span><span class="ticker-item">·</span><span class="ticker-item">LIVERPOOL</span><span class="ticker-item">·</span><span class="ticker-item">ONLY ₹349</span><span class="ticker-item">·</span><span class="ticker-item">FREE DELIVERY IN INDIA</span><span class="ticker-item">·</span>
+  </div>
+</div>
+
+<div class="toolbar" id="shop">
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="searchInput" placeholder="Search team, player, league…" oninput="doSearch()">
+  </div>
+  <div class="filter-tabs">
+    <button class="ftab active" onclick="setLeague('all',this)">All</button>
+    <button class="ftab" onclick="setLeague('national',this)">🌍 National</button>
+    <button class="ftab" onclick="setLeague('premier-league',this)">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Premier League</button>
+    <button class="ftab" onclick="setLeague('la-liga',this)">🇪🇸 La Liga</button>
+    <button class="ftab" onclick="setLeague('serie-a',this)">🇮🇹 Serie A</button>
+    <button class="ftab" onclick="setLeague('bundesliga',this)">🇩🇪 Bundesliga</button>
+    <button class="ftab" onclick="setLeague('ligue-1',this)">🇫🇷 Ligue 1</button>
+    <button class="ftab" onclick="setLeague('other',this)">⭐ Other Clubs</button>
+  </div>
+  <span class="results-count" id="resultsCount"></span>
+</div>
+
+<div class="section">
+  <div class="product-grid" id="productGrid">
+    <div class="no-results" id="noResults">
+      <div style="font-size:2.5rem">🔍</div>
+      <p style="margin-top:10px">No jerseys found. Try a different search.</p>
+    </div>
+  </div>
+</div>
+
+<div class="banner">
+  <div class="banner-text">
+    <div class="banner-label">Custom Printing</div>
+    <h2 class="banner-title">Add Your Name.<br>Make It <em>Yours.</em></h2>
+    <p style="font-size:.84rem;color:#777;line-height:1.7;margin-bottom:24px;max-width:340px">Personalise any jersey with official-style name & number printing. Delivered to your door across India.</p>
+    <button class="btn-gold">Customise Now</button>
+  </div>
+  <div class="banner-visual"><div class="banner-number">77</div></div>
+</div>
+
+<div class="overlay" id="overlay" onclick="closeCart()"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="drawer-head">
+    <div class="drawer-title">Cart <span id="drawerCount">(0)</span></div>
+    <button class="close-btn" onclick="closeCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty"><div class="cart-empty-icon">👕</div><p style="font-size:.82rem">Your cart is empty.</p></div>
+  </div>
+  <div class="cart-foot" id="cartFoot" style="display:none">
+    <div class="cart-total"><span class="ct-label">Total</span><span class="ct-price" id="cartTotal">₹0</span></div>
+    <button class="checkout-btn">Proceed to Checkout →</button>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo">Seventy<span>7</span> Supports</div>
+      <p class="footer-desc">India's favourite football jersey store. 100+ kits from every corner of the beautiful game. All at ₹349.</p>
+    </div>
+    <div>
+      <div class="fc-title">Shop</div>
+      <ul class="footer-links">
+        <li><a href="#">National Teams</a></li>
+        <li><a href="#">Premier League</a></li>
+        <li><a href="#">La Liga</a></li>
+        <li><a href="#">Serie A</a></li>
+        <li><a href="#">Bundesliga</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="fc-title">Help</div>
+      <ul class="footer-links">
+        <li><a href="#">Size Guide</a></li>
+        <li><a href="#">Delivery Info</a></li>
+        <li><a href="#">Returns</a></li>
+        <li><a href="#">Contact Us</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2025 Seventy7 Supports. All rights reserved.</span>
+    <span class="footer-copy">Made for fans. By fans. 🇮🇳</span>
+  </div>
+</footer>
+
+<script>
+// Real jersey kit image URLs from kitdls.net public CDN
+const IMGS = {
+  // NATIONAL TEAMS
+  arg_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Argentina-Home-Kit-2024-2025.png',
+  arg_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Argentina-Away-Kit-2024-2025.png',
+  por_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Portugal-Home-Kit-2024-2025.png',
+  por_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Portugal-Away-Kit-2024-2025.png',
+  bra_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Brazil-Home-Kit-2024-2025.png',
+  bra_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Brazil-Away-Kit-2024-2025.png',
+  fra_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-France-Home-Kit-2024-2025.png',
+  fra_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-France-Away-Kit-2024-2025.png',
+  ger_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Germany-Home-Kit-2024-2025.png',
+  ger_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Germany-Away-Kit-2024-2025.png',
+  esp_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Spain-Home-Kit-2024-2025.png',
+  esp_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Spain-Away-Kit-2024-2025.png',
+  ita_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Italy-Home-Kit-2024-2025.png',
+  ita_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Italy-Away-Kit-2024-2025.png',
+  eng_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-England-Home-Kit-2024-2025.png',
+  eng_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-England-Away-Kit-2024-2025.png',
+  ned_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Netherlands-Home-Kit-2024-2025.png',
+  ned_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Netherlands-Away-Kit-2024-2025.png',
+  bel_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Belgium-Home-Kit-2024-2025.png',
+  bel_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Belgium-Away-Kit-2024-2025.png',
+  cro_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Croatia-Home-Kit-2024-2025.png',
+  cro_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Croatia-Away-Kit-2024-2025.png',
+  mor_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Morocco-Home-Kit-2024-2025.png',
+  jpn_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Japan-Home-Kit-2024-2025.png',
+  jpn_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Japan-Away-Kit-2024-2025.png',
+  kor_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-South-Korea-Home-Kit-2024-2025.png',
+  usa_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-USA-Home-Kit-2024-2025.png',
+  mex_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Mexico-Home-Kit-2024-2025.png',
+  col_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Colombia-Home-Kit-2024-2025.png',
+  uru_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Uruguay-Home-Kit-2024-2025.png',
+  nga_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Nigeria-Home-Kit-2024-2025.png',
+  nga_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Nigeria-Away-Kit-2024-2025.png',
+  sen_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Senegal-Home-Kit-2024-2025.png',
+  swi_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Switzerland-Home-Kit-2024-2025.png',
+  den_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Denmark-Home-Kit-2024-2025.png',
+  pol_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Poland-Home-Kit-2024-2025.png',
+  tur_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Turkey-Home-Kit-2024-2025.png',
+  sau_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Saudi-Arabia-Home-Kit-2024-2025.png',
+  aus_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Australia-Home-Kit-2024-2025.png',
+  gha_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Ghana-Home-Kit-2024-2025.png',
+  ivc_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Ivory-Coast-Home-Kit-2024-2025.png',
+  ukr_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Ukraine-Home-Kit-2024-2025.png',
+  ind_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-India-Home-Kit-2024-2025.png',
+  swe_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Sweden-Home-Kit-2024-2025.png',
+  // PREMIER LEAGUE
+  mci_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Manchester-City-Home-Kit-2024-2025.png',
+  mci_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Manchester-City-Away-Kit-2024-2025.png',
+  mci_3:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Manchester-City-Third-Kit-2024-2025.png',
+  liv_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Liverpool-Home-Kit-2024-2025.png',
+  liv_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Liverpool-Away-Kit-2024-2025.png',
+  ars_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Arsenal-Home-Kit-2024-2025.png',
+  ars_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Arsenal-Away-Kit-2024-2025.png',
+  che_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Chelsea-Home-Kit-2024-2025.png',
+  che_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Chelsea-Away-Kit-2024-2025.png',
+  tot_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Tottenham-Home-Kit-2024-2025.png',
+  tot_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Tottenham-Away-Kit-2024-2025.png',
+  mnu_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Manchester-United-Home-Kit-2024-2025.png',
+  mnu_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Manchester-United-Away-Kit-2024-2025.png',
+  mnu_3:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Manchester-United-Third-Kit-2024-2025.png',
+  new_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Newcastle-Home-Kit-2024-2025.png',
+  avl_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Aston-Villa-Home-Kit-2024-2025.png',
+  whu_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-West-Ham-Home-Kit-2024-2025.png',
+  bha_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Brighton-Home-Kit-2024-2025.png',
+  eve_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Everton-Home-Kit-2024-2025.png',
+  wol_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Wolves-Home-Kit-2024-2025.png',
+  ful_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Fulham-Home-Kit-2024-2025.png',
+  cpa_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Crystal-Palace-Home-Kit-2024-2025.png',
+  // LA LIGA
+  rma_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Real-Madrid-Home-Kit-2024-2025.png',
+  rma_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Real-Madrid-Away-Kit-2024-2025.png',
+  rma_3:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Real-Madrid-Third-Kit-2024-2025.png',
+  bar_h:   'https://kitdls.net/wp-content/uploads/2024/07/Barcelona-Home-Kit-2024-2025-DLS-24.png',
+  bar_a:   'https://kitdls.net/wp-content/uploads/2024/07/Barcelona-Away-Kit-2024-2025-DLS-24.png',
+  bar_3:   'https://kitdls.net/wp-content/uploads/2024/07/Barcelona-Third-Kit-2024-2025-DLS-24.png',
+  atm_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Atletico-Madrid-Home-Kit-2024-2025.png',
+  atm_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Atletico-Madrid-Away-Kit-2024-2025.png',
+  sev_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Sevilla-Home-Kit-2024-2025.png',
+  vil_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Villarreal-Home-Kit-2024-2025.png',
+  val_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Valencia-Home-Kit-2024-2025.png',
+  bet_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Real-Betis-Home-Kit-2024-2025.png',
+  ath_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Athletic-Bilbao-Home-Kit-2024-2025.png',
+  // SERIE A
+  juv_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Juventus-Home-Kit-2024-2025.png',
+  juv_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Juventus-Away-Kit-2024-2025.png',
+  acm_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-AC-Milan-Home-Kit-2024-2025.png',
+  acm_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-AC-Milan-Away-Kit-2024-2025.png',
+  int_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Inter-Milan-Home-Kit-2024-2025.png',
+  int_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Inter-Milan-Away-Kit-2024-2025.png',
+  nap_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Napoli-Home-Kit-2024-2025.png',
+  nap_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Napoli-Away-Kit-2024-2025.png',
+  rom_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-AS-Roma-Home-Kit-2024-2025.png',
+  laz_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Lazio-Home-Kit-2024-2025.png',
+  fio_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Fiorentina-Home-Kit-2024-2025.png',
+  ata_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Atalanta-Home-Kit-2024-2025.png',
+  // BUNDESLIGA
+  bay_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Bayern-Munich-Home-Kit-2024-2025.png',
+  bay_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Bayern-Munich-Away-Kit-2024-2025.png',
+  bay_3:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Bayern-Munich-Third-Kit-2024-2025.png',
+  bvb_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Dortmund-Home-Kit-2024-2025.png',
+  bvb_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Dortmund-Away-Kit-2024-2025.png',
+  lev_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Leverkusen-Home-Kit-2024-2025.png',
+  rbl_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Leipzig-Home-Kit-2024-2025.png',
+  fra_bun_h: 'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Frankfurt-Home-Kit-2024-2025.png',
+  wol_bun_h: 'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Wolfsburg-Home-Kit-2024-2025.png',
+  // LIGUE 1
+  psg_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-PSG-Home-Kit-2024-2025.png',
+  psg_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-PSG-Away-Kit-2024-2025.png',
+  psg_3:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-PSG-Third-Kit-2024-2025.png',
+  mar_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Marseille-Home-Kit-2024-2025.png',
+  mar_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Marseille-Away-Kit-2024-2025.png',
+  lyo_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Lyon-Home-Kit-2024-2025.png',
+  mon_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Monaco-Home-Kit-2024-2025.png',
+  lil_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Lille-Home-Kit-2024-2025.png',
+  // OTHER
+  cel_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Celtic-Home-Kit-2024-2025.png',
+  ran_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Rangers-Home-Kit-2024-2025.png',
+  ajx_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Ajax-Home-Kit-2024-2025.png',
+  psv_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-PSV-Home-Kit-2024-2025.png',
+  ben_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Benfica-Home-Kit-2024-2025.png',
+  por_fc_h:'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Porto-Home-Kit-2024-2025.png',
+  gal_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Galatasaray-Home-Kit-2024-2025.png',
+  fen_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Fenerbahce-Home-Kit-2024-2025.png',
+  bes_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Besiktas-Home-Kit-2024-2025.png',
+  fla_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Flamengo-Home-Kit-2024-2025.png',
+  boc_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Boca-Juniors-Home-Kit-2024-2025.png',
+  riv_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-River-Plate-Home-Kit-2024-2025.png',
+  aln_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Al-Nassr-Home-Kit-2024-2025.png',
+  alh_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Al-Hilal-Home-Kit-2024-2025.png',
+  mia_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Inter-Miami-Home-Kit-2024-2025.png',
+};
+
+// Fallback SVG — shown if image fails to load
+const FALLBACK_SVG = `<svg viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg"><path d="M60 22 L14 68 L38 78 L38 222 L162 222 L162 78 L186 68 L140 22 C128 34 116 40 100 40 C84 40 72 34 60 22Z" fill="#ddd" stroke="#ccc" stroke-width="1.5"/><text x="100" y="150" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#aaa">Image</text><text x="100" y="168" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#aaa">Loading…</text></svg>`;
+
+const products = [
+  // NATIONAL TEAMS
+  {id:1,img:'arg_h',cat:'national',team:'Argentina',name:'Argentina Home',player:'Messi No.10',badge:'hot'},
+  {id:2,img:'arg_a',cat:'national',team:'Argentina',name:'Argentina Away',player:'Di María No.11',badge:''},
+  {id:3,img:'por_h',cat:'national',team:'Portugal',name:'Portugal Home',player:'Ronaldo No.7',badge:'hot'},
+  {id:4,img:'por_a',cat:'national',team:'Portugal',name:'Portugal Away',player:'Bruno Fernandes No.8',badge:''},
+  {id:5,img:'bra_h',cat:'national',team:'Brazil',name:'Brazil Home',player:'Vini Jr No.7',badge:'hot'},
+  {id:6,img:'bra_a',cat:'national',team:'Brazil',name:'Brazil Away',player:'Rodrygo No.11',badge:''},
+  {id:7,img:'fra_h',cat:'national',team:'France',name:'France Home',player:'Mbappé No.10',badge:'new'},
+  {id:8,img:'fra_a',cat:'national',team:'France',name:'France Away',player:'Griezmann No.7',badge:''},
+  {id:9,img:'ger_h',cat:'national',team:'Germany',name:'Germany Home',player:'Kane No.9',badge:'new'},
+  {id:10,img:'ger_a',cat:'national',team:'Germany',name:'Germany Away',player:'Musiala No.14',badge:''},
+  {id:11,img:'esp_h',cat:'national',team:'Spain',name:'Spain Home',player:'Morata No.9',badge:'hot'},
+  {id:12,img:'esp_a',cat:'national',team:'Spain',name:'Spain Away',player:'Pedri No.26',badge:''},
+  {id:13,img:'ita_h',cat:'national',team:'Italy',name:'Italy Home',player:'Chiesa No.14',badge:''},
+  {id:14,img:'ita_a',cat:'national',team:'Italy',name:'Italy Away',player:'Barella No.18',badge:''},
+  {id:15,img:'eng_h',cat:'national',team:'England',name:'England Home',player:'Bellingham No.22',badge:'new'},
+  {id:16,img:'eng_a',cat:'national',team:'England',name:'England Away',player:'Saka No.7',badge:''},
+  {id:17,img:'ned_h',cat:'national',team:'Netherlands',name:'Netherlands Home',player:'Van Dijk No.5',badge:''},
+  {id:18,img:'ned_a',cat:'national',team:'Netherlands',name:'Netherlands Away',player:'Gakpo No.11',badge:''},
+  {id:19,img:'bel_h',cat:'national',team:'Belgium',name:'Belgium Home',player:'De Bruyne No.7',badge:''},
+  {id:20,img:'bel_a',cat:'national',team:'Belgium',name:'Belgium Away',player:'Lukaku No.9',badge:''},
+  {id:21,img:'cro_h',cat:'national',team:'Croatia',name:'Croatia Home',player:'Modrić No.10',badge:'hot'},
+  {id:22,img:'cro_a',cat:'national',team:'Croatia',name:'Croatia Away',player:'Gvardiol No.24',badge:''},
+  {id:23,img:'mor_h',cat:'national',team:'Morocco',name:'Morocco Home',player:'Hakimi No.2',badge:'new'},
+  {id:24,img:'jpn_h',cat:'national',team:'Japan',name:'Japan Home',player:'Kubo No.20',badge:''},
+  {id:25,img:'jpn_a',cat:'national',team:'Japan',name:'Japan Away',player:'Minamino No.10',badge:''},
+  {id:26,img:'kor_h',cat:'national',team:'South Korea',name:'South Korea Home',player:'Son No.7',badge:'hot'},
+  {id:27,img:'usa_h',cat:'national',team:'USA',name:'USA Home',player:'Pulisic No.10',badge:'new'},
+  {id:28,img:'mex_h',cat:'national',team:'Mexico',name:'Mexico Home',player:'Lozano No.22',badge:''},
+  {id:29,img:'col_h',cat:'national',team:'Colombia',name:'Colombia Home',player:'L. Díaz No.7',badge:''},
+  {id:30,img:'uru_h',cat:'national',team:'Uruguay',name:'Uruguay Home',player:'Núñez No.9',badge:''},
+  {id:31,img:'nga_h',cat:'national',team:'Nigeria',name:'Nigeria Home',player:'Osimhen No.9',badge:'new'},
+  {id:32,img:'nga_a',cat:'national',team:'Nigeria',name:'Nigeria Away',player:'Lookman No.11',badge:''},
+  {id:33,img:'sen_h',cat:'national',team:'Senegal',name:'Senegal Home',player:'Mané No.10',badge:''},
+  {id:34,img:'swi_h',cat:'national',team:'Switzerland',name:'Switzerland Home',player:'Xhaka No.10',badge:''},
+  {id:35,img:'den_h',cat:'national',team:'Denmark',name:'Denmark Home',player:'Eriksen No.10',badge:''},
+  {id:36,img:'pol_h',cat:'national',team:'Poland',name:'Poland Home',player:'Lewandowski No.9',badge:'hot'},
+  {id:37,img:'tur_h',cat:'national',team:'Turkey',name:'Turkey Home',player:'Güler No.10',badge:'new'},
+  {id:38,img:'sau_h',cat:'national',team:'Saudi Arabia',name:'Saudi Arabia Home',player:'Al-Dawsari No.10',badge:''},
+  {id:39,img:'aus_h',cat:'national',team:'Australia',name:'Australia Home',player:'Hrustic No.8',badge:''},
+  {id:40,img:'gha_h',cat:'national',team:'Ghana',name:'Ghana Home',player:'Kudus No.10',badge:''},
+  {id:41,img:'ivc_h',cat:'national',team:'Ivory Coast',name:'Ivory Coast Home',player:'Zaha No.11',badge:''},
+  {id:42,img:'ukr_h',cat:'national',team:'Ukraine',name:'Ukraine Home',player:'Mudryk No.10',badge:''},
+  {id:43,img:'ind_h',cat:'national',team:'India',name:'India Home',player:'Sunil Chhetri',badge:'new'},
+  {id:44,img:'swe_h',cat:'national',team:'Sweden',name:'Sweden Home',player:'Isak No.10',badge:''},
+
+  // PREMIER LEAGUE
+  {id:45,img:'mci_h',cat:'premier-league',team:'Man City',name:'Man City Home',player:'Haaland No.9',badge:'hot'},
+  {id:46,img:'mci_a',cat:'premier-league',team:'Man City',name:'Man City Away',player:'De Bruyne No.17',badge:''},
+  {id:47,img:'mci_3',cat:'premier-league',team:'Man City',name:'Man City 3rd',player:'Foden No.47',badge:'new'},
+  {id:48,img:'liv_h',cat:'premier-league',team:'Liverpool',name:'Liverpool Home',player:'Salah No.11',badge:'hot'},
+  {id:49,img:'liv_a',cat:'premier-league',team:'Liverpool',name:'Liverpool Away',player:'Núñez No.9',badge:''},
+  {id:50,img:'ars_h',cat:'premier-league',team:'Arsenal',name:'Arsenal Home',player:'Saka No.7',badge:'hot'},
+  {id:51,img:'ars_a',cat:'premier-league',team:'Arsenal',name:'Arsenal Away',player:'Ødegaard No.8',badge:''},
+  {id:52,img:'che_h',cat:'premier-league',team:'Chelsea',name:'Chelsea Home',player:'Palmer No.20',badge:'new'},
+  {id:53,img:'che_a',cat:'premier-league',team:'Chelsea',name:'Chelsea Away',player:'Caicedo No.25',badge:''},
+  {id:54,img:'tot_h',cat:'premier-league',team:'Tottenham',name:'Spurs Home',player:'Son No.7',badge:''},
+  {id:55,img:'tot_a',cat:'premier-league',team:'Tottenham',name:'Spurs Away',player:'Maddison No.10',badge:''},
+  {id:56,img:'mnu_h',cat:'premier-league',team:'Man Utd',name:'Man Utd Home',player:'Rashford No.10',badge:''},
+  {id:57,img:'mnu_a',cat:'premier-league',team:'Man Utd',name:'Man Utd Away',player:'Fernandes No.8',badge:''},
+  {id:58,img:'mnu_3',cat:'premier-league',team:'Man Utd',name:'Man Utd 3rd',player:'Mainoo No.37',badge:'new'},
+  {id:59,img:'new_h',cat:'premier-league',team:'Newcastle',name:'Newcastle Home',player:'Isak No.14',badge:''},
+  {id:60,img:'avl_h',cat:'premier-league',team:'Aston Villa',name:'Aston Villa Home',player:'Watkins No.11',badge:'new'},
+  {id:61,img:'whu_h',cat:'premier-league',team:'West Ham',name:'West Ham Home',player:'Paquetá No.11',badge:''},
+  {id:62,img:'bha_h',cat:'premier-league',team:'Brighton',name:'Brighton Home',player:'Mitoma No.22',badge:''},
+  {id:63,img:'eve_h',cat:'premier-league',team:'Everton',name:'Everton Home',player:'Calvert-Lewin No.9',badge:''},
+  {id:64,img:'wol_h',cat:'premier-league',team:'Wolves',name:'Wolves Home',player:'Cunha No.9',badge:''},
+  {id:65,img:'ful_h',cat:'premier-league',team:'Fulham',name:'Fulham Home',player:'Jiménez No.9',badge:''},
+  {id:66,img:'cpa_h',cat:'premier-league',team:'Crystal Palace',name:'Crystal Palace Home',player:'Eze No.10',badge:''},
+
+  // LA LIGA
+  {id:67,img:'rma_h',cat:'la-liga',team:'Real Madrid',name:'Real Madrid Home',player:'Bellingham No.5',badge:'hot'},
+  {id:68,img:'rma_a',cat:'la-liga',team:'Real Madrid',name:'Real Madrid Away',player:'Vini Jr No.7',badge:'hot'},
+  {id:69,img:'rma_3',cat:'la-liga',team:'Real Madrid',name:'Real Madrid 3rd',player:'Rodrygo No.11',badge:'new'},
+  {id:70,img:'bar_h',cat:'la-liga',team:'Barcelona',name:'Barcelona Home',player:'Yamal No.10',badge:'hot'},
+  {id:71,img:'bar_a',cat:'la-liga',team:'Barcelona',name:'Barcelona Away',player:'Lewandowski No.9',badge:''},
+  {id:72,img:'bar_3',cat:'la-liga',team:'Barcelona',name:'Barcelona 3rd',player:'Raphinha No.11',badge:'new'},
+  {id:73,img:'atm_h',cat:'la-liga',team:'Atletico Madrid',name:'Atletico Home',player:'Griezmann No.7',badge:''},
+  {id:74,img:'atm_a',cat:'la-liga',team:'Atletico Madrid',name:'Atletico Away',player:'Morata No.9',badge:''},
+  {id:75,img:'sev_h',cat:'la-liga',team:'Sevilla',name:'Sevilla Home',player:'Lukebakio No.11',badge:''},
+  {id:76,img:'vil_h',cat:'la-liga',team:'Villarreal',name:'Villarreal Home',player:'Baena No.19',badge:''},
+  {id:77,img:'val_h',cat:'la-liga',team:'Valencia',name:'Valencia Home',player:'Pepelu No.14',badge:''},
+  {id:78,img:'bet_h',cat:'la-liga',team:'Real Betis',name:'Real Betis Home',player:'Fekir No.8',badge:''},
+  {id:79,img:'ath_h',cat:'la-liga',team:'Athletic Bilbao',name:'Athletic Bilbao Home',player:'Williams No.9',badge:'new'},
+
+  // SERIE A
+  {id:80,img:'juv_h',cat:'serie-a',team:'Juventus',name:'Juventus Home',player:'Vlahović No.9',badge:''},
+  {id:81,img:'juv_a',cat:'serie-a',team:'Juventus',name:'Juventus Away',player:'Chiesa No.7',badge:''},
+  {id:82,img:'acm_h',cat:'serie-a',team:'AC Milan',name:'AC Milan Home',player:'Leão No.10',badge:'hot'},
+  {id:83,img:'acm_a',cat:'serie-a',team:'AC Milan',name:'AC Milan Away',player:'Giroud No.9',badge:''},
+  {id:84,img:'int_h',cat:'serie-a',team:'Inter Milan',name:'Inter Home',player:'Lautaro No.10',badge:'hot'},
+  {id:85,img:'int_a',cat:'serie-a',team:'Inter Milan',name:'Inter Away',player:'Thuram No.9',badge:''},
+  {id:86,img:'nap_h',cat:'serie-a',team:'Napoli',name:'Napoli Home',player:'Kvara No.77',badge:'new'},
+  {id:87,img:'nap_a',cat:'serie-a',team:'Napoli',name:'Napoli Away',player:'Osimhen No.9',badge:''},
+  {id:88,img:'rom_h',cat:'serie-a',team:'AS Roma',name:'AS Roma Home',player:'Dybala No.21',badge:''},
+  {id:89,img:'laz_h',cat:'serie-a',team:'Lazio',name:'Lazio Home',player:'Immobile No.17',badge:''},
+  {id:90,img:'fio_h',cat:'serie-a',team:'Fiorentina',name:'Fiorentina Home',player:'Jović No.7',badge:''},
+  {id:91,img:'ata_h',cat:'serie-a',team:'Atalanta',name:'Atalanta Home',player:'Lookman No.11',badge:'new'},
+
+  // BUNDESLIGA
+  {id:92,img:'bay_h',cat:'bundesliga',team:'Bayern Munich',name:'Bayern Home',player:'Kane No.9',badge:'hot'},
+  {id:93,img:'bay_a',cat:'bundesliga',team:'Bayern Munich',name:'Bayern Away',player:'Sané No.10',badge:''},
+  {id:94,img:'bay_3',cat:'bundesliga',team:'Bayern Munich',name:'Bayern 3rd',player:'Musiala No.42',badge:'new'},
+  {id:95,img:'bvb_h',cat:'bundesliga',team:'Dortmund',name:'Dortmund Home',player:'Sancho No.10',badge:'hot'},
+  {id:96,img:'bvb_a',cat:'bundesliga',team:'Dortmund',name:'Dortmund Away',player:'Reus No.11',badge:''},
+  {id:97,img:'lev_h',cat:'bundesliga',team:'Leverkusen',name:'Leverkusen Home',player:'Wirtz No.10',badge:'hot'},
+  {id:98,img:'rbl_h',cat:'bundesliga',team:'RB Leipzig',name:'RB Leipzig Home',player:'Werner No.11',badge:''},
+  {id:99,img:'fra_bun_h',cat:'bundesliga',team:'Frankfurt',name:'Frankfurt Home',player:'Knauff No.44',badge:''},
+  {id:100,img:'wol_bun_h',cat:'bundesliga',team:'Wolfsburg',name:'Wolfsburg Home',player:'Wind No.29',badge:''},
+
+  // LIGUE 1
+  {id:101,img:'psg_h',cat:'ligue-1',team:'PSG',name:'PSG Home',player:'Mbappé No.7',badge:'hot'},
+  {id:102,img:'psg_a',cat:'ligue-1',team:'PSG',name:'PSG Away',player:'Neymar No.10',badge:''},
+  {id:103,img:'psg_3',cat:'ligue-1',team:'PSG',name:'PSG 3rd',player:'Hakimi No.2',badge:'new'},
+  {id:104,img:'mar_h',cat:'ligue-1',team:'Marseille',name:'Marseille Home',player:'Harit No.29',badge:''},
+  {id:105,img:'mar_a',cat:'ligue-1',team:'Marseille',name:'Marseille Away',player:'Payet No.10',badge:''},
+  {id:106,img:'lyo_h',cat:'ligue-1',team:'Lyon',name:'Lyon Home',player:'Lacazette No.10',badge:''},
+  {id:107,img:'mon_h',cat:'ligue-1',team:'Monaco',name:'Monaco Home',player:'Ben Yedder No.9',badge:''},
+  {id:108,img:'lil_h',cat:'ligue-1',team:'Lille',name:'Lille Home',player:'David No.9',badge:'new'},
+
+  // OTHER
+  {id:109,img:'cel_h',cat:'other',team:'Celtic',name:'Celtic Home',player:'Kyogo No.8',badge:''},
+  {id:110,img:'ran_h',cat:'other',team:'Rangers',name:'Rangers Home',player:'Kent No.14',badge:''},
+  {id:111,img:'ajx_h',cat:'other',team:'Ajax',name:'Ajax Home',player:'Bergwijn No.7',badge:''},
+  {id:112,img:'psv_h',cat:'other',team:'PSV',name:'PSV Home',player:'Gakpo No.11',badge:''},
+  {id:113,img:'ben_h',cat:'other',team:'Benfica',name:'Benfica Home',player:'Di María No.11',badge:''},
+  {id:114,img:'por_fc_h',cat:'other',team:'Porto',name:'Porto Home',player:'Taremi No.9',badge:''},
+  {id:115,img:'gal_h',cat:'other',team:'Galatasaray',name:'Galatasaray Home',player:'Icardi No.9',badge:'hot'},
+  {id:116,img:'fen_h',cat:'other',team:'Fenerbahce',name:'Fenerbahçe Home',player:'Szymanski No.10',badge:''},
+  {id:117,img:'bes_h',cat:'other',team:'Besiktas',name:'Beşiktaş Home',player:'Aboubakar No.79',badge:''},
+  {id:118,img:'fla_h',cat:'other',team:'Flamengo',name:'Flamengo Home',player:'Arrascaeta No.14',badge:''},
+  {id:119,img:'boc_h',cat:'other',team:'Boca Juniors',name:'Boca Juniors Home',player:'Merentiel No.9',badge:''},
+  {id:120,img:'riv_h',cat:'other',team:'River Plate',name:'River Plate Home',player:'Beltrán No.32',badge:''},
+  {id:121,img:'aln_h',cat:'other',team:'Al-Nassr',name:'Al-Nassr Home',player:'Ronaldo No.7',badge:'hot'},
+  {id:122,img:'alh_h',cat:'other',team:'Al-Hilal',name:'Al-Hilal Home',player:'Neymar No.10',badge:'new'},
+  {id:123,img:'mia_h',cat:'other',team:'Inter Miami',name:'Inter Miami Home',player:'Messi No.10',badge:'hot'},
+];
+
+let activeLeague='all', searchQ='', cart=[];
+
+function imgTag(key,alt){
+  const src=IMGS[key]||'';
+  return `<img src="${src}" alt="${alt}" loading="lazy" onerror="this.outerHTML='${FALLBACK_SVG.replace(/'/g,"\\'")}'" />`;
+}
+
+function renderGrid(){
+  const grid=document.getElementById('productGrid');
+  const noRes=document.getElementById('noResults');
+  // Clear except noResults
+  [...grid.children].forEach(c=>{ if(c!==noRes) c.remove(); });
+  const q=searchQ.toLowerCase();
+  const visible=products.filter(p=>{
+    const lOk=activeLeague==='all'||p.cat===activeLeague;
+    const sOk=!q||p.name.toLowerCase().includes(q)||p.team.toLowerCase().includes(q)||p.player.toLowerCase().includes(q)||p.cat.toLowerCase().includes(q);
+    return lOk&&sOk;
+  });
+  document.getElementById('resultsCount').textContent=`${visible.length} jerseys`;
+  noRes.style.display=visible.length?'none':'block';
+  visible.forEach(p=>{
+    const bHtml=p.badge?`<span class="card-badge ${p.badge==='hot'?'b-hot':'b-new'}">${p.badge==='hot'?'🔥 Hot':'New'}</span>`:'';
+    const card=document.createElement('div');
+    card.className='product-card';
+    card.innerHTML=`
+      <div class="card-img">${imgTag(p.img,p.name)}${bHtml}</div>
+      <div class="card-body">
+        <div class="card-cat">${p.cat.replace(/-/g,' ')}</div>
+        <div class="card-name" title="${p.name}">${p.name}</div>
+        <div class="card-sub">${p.player}</div>
+        <div class="card-footer">
+          <div class="card-price">₹349</div>
+          <button class="add-btn" onclick="addToCart(${p.id},event)" title="Add to cart">+</button>
+        </div>
+      </div>`;
+    grid.appendChild(card);
+  });
+}
+
+function setLeague(l,btn){
+  activeLeague=l;
+  document.querySelectorAll('.ftab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderGrid();
+}
+function doSearch(){ searchQ=document.getElementById('searchInput').value; renderGrid(); }
+
+function addToCart(id,e){
+  e.stopPropagation();
+  const p=products.find(x=>x.id===id);
+  const ex=cart.find(x=>x.id===id);
+  if(ex) ex.qty++; else cart.push({...p,qty:1});
+  updateCartUI();
+  showToast(`✓ ${p.name} added to cart`);
+}
+function removeFromCart(id){ cart=cart.filter(x=>x.id!==id); updateCartUI(); }
+
+function updateCartUI(){
+  const count=cart.reduce((s,x)=>s+x.qty,0);
+  const total=cart.reduce((s,x)=>s+349*x.qty,0);
+  document.getElementById('cartCount').textContent=count;
+  document.getElementById('drawerCount').textContent=`(${count})`;
+  document.getElementById('cartTotal').textContent=`₹${total.toLocaleString('en-IN')}`;
+  document.getElementById('cartFoot').style.display=cart.length?'':'none';
+  const el=document.getElementById('cartItems');
+  if(!cart.length){el.innerHTML=`<div class="cart-empty"><div class="cart-empty-icon">👕</div><p style="font-size:.82rem">Your cart is empty.</p></div>`;return;}
+  el.innerHTML=cart.map(p=>`<div class="cart-item">
+    <div class="ci-img">${imgTag(p.img,p.name)}</div>
+    <div class="ci-info">
+      <div class="ci-cat">${p.cat.replace(/-/g,' ')}</div>
+      <div class="ci-name">${p.name}</div>
+      <div class="ci-price">₹349 × ${p.qty}</div>
+    </div>
+    <button class="ci-rm" onclick="removeFromCart(${p.id})">✕</button>
+  </div>`).join('');
+}
+
+function openCart(){ document.getElementById('cartDrawer').classList.add('open'); document.getElementById('overlay').classList.add('open'); document.body.style.overflow='hidden'; }
+function closeCart(){ document.getElementById('cartDrawer').classList.remove('open'); document.getElementById('overlay').classList.remove('open'); document.body.style.overflow=''; }
+
+let toastT;
+function showToast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove('show'),2200); }
+
+renderGrid();
+</script>
+</body>
+</html>
