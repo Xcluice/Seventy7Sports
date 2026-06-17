@@ -5,7 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Seventy7 Supports — Football Jerseys</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"></noscript>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{--black:#111;--charcoal:#1c1c1c;--slate:#333;--mid:#666;--silver:#aaa;--offwhite:#f4f4f2;--white:#fff;--gold:#c9a84c;--gold-l:#e8c86a}
@@ -17,11 +19,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--black);disp
 .nav-links{display:flex;align-items:center;gap:22px}
 .nav-link{font-size:.72rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--silver);text-decoration:none;transition:color .2s}
 .nav-link:hover{color:var(--white)}
-.cart-btn{background:var(--gold);border:none;cursor:pointer;font-family:'Inter',sans-serif;font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--black);padding:8px 16px;display:flex;align-items:center;gap:7px;transition:background .2s}
+.cart-btn{background:var(--gold);border:none;cursor:pointer;font-family:'Inter',sans-serif;font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--black);padding:8px 14px;border-radius:3px;transition:background .2s}
 .cart-btn:hover{background:var(--gold-l)}
 .cart-count{background:var(--black);color:var(--gold);border-radius:50%;width:18px;height:18px;font-size:.65rem;font-weight:800;display:flex;align-items:center;justify-content:center}
 .hero{margin-top:60px;background:var(--black);min-height:75vh;display:flex;align-items:center;padding:0 5vw;position:relative;overflow:hidden}
-.hero-bg-num{position:absolute;right:-1vw;top:50%;transform:translateY(-52%);font-family:'Bebas Neue',sans-serif;font-size:clamp(180px,28vw,380px);color:transparent;-webkit-text-stroke:1.5px #222;line-height:1;pointer-events:none;user-select:none}
+.hero-bg-num{position:absolute;right:-1vw;top:50%;transform:translateY(-52%);font-family:'Bebas Neue',sans-serif;font-size:clamp(180px,28vw,380px);color:transparent;-webkit-text-stroke:1.5px #222;line-height:1;user-select:none}
 .hero-content{position:relative;z-index:2;max-width:580px}
 .hero-eye{font-size:.7rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;display:flex;align-items:center;gap:10px}
 .hero-eye::after{content:'';width:36px;height:1px;background:var(--gold)}
@@ -29,9 +31,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--black);disp
 .hero-title em{color:var(--gold);font-style:normal}
 .hero-sub{font-size:.92rem;font-weight:300;color:var(--silver);line-height:1.7;max-width:400px;margin-bottom:36px}
 .hero-cta{display:flex;gap:12px;flex-wrap:wrap}
-.btn-gold{background:var(--gold);color:var(--black);font-size:.8rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:13px 28px;border:none;cursor:pointer;transition:background .2s;text-decoration:none;display:inline-block}
+.btn-gold{background:var(--gold);color:var(--black);font-size:.8rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:13px 28px;border:none;cursor:pointer;transition:background .2s}
 .btn-gold:hover{background:var(--gold-l)}
-.btn-out{background:transparent;color:var(--white);font-size:.8rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;padding:13px 28px;border:1px solid #3a3a3a;cursor:pointer;transition:border-color .2s;text-decoration:none;display:inline-block}
+.btn-out{background:transparent;color:var(--white);font-size:.8rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;padding:13px 28px;border:1px solid #3a3a3a;cursor:pointer;transition:border-color .2s}
 .btn-out:hover{border-color:#777}
 .hero-stats{position:absolute;bottom:36px;left:5vw;display:flex;gap:40px}
 .stat-num{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;color:var(--white);line-height:1}
@@ -47,7 +49,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--black);disp
 .search-wrap input:focus{border-color:var(--gold)}
 .search-icon{position:absolute;left:11px;top:50%;transform:translateY(-50%);font-size:.85rem;color:var(--mid);pointer-events:none}
 .filter-tabs{display:flex;gap:5px;flex-wrap:wrap}
-.ftab{font-size:.68rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;padding:7px 13px;border:1px solid #ddd;background:transparent;cursor:pointer;color:var(--slate);transition:all .18s;white-space:nowrap}
+.ftab{font-size:.68rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;padding:7px 13px;border:1px solid #ddd;background:transparent;cursor:pointer;color:var(--slate);transition:all .2s}
 .ftab.active,.ftab:hover{background:var(--black);color:var(--white);border-color:var(--black)}
 .results-count{font-size:.73rem;color:var(--mid);white-space:nowrap;margin-left:auto}
 .section{padding:32px 4vw 60px}
@@ -67,9 +69,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--black);disp
 .card-sub{font-size:.73rem;color:var(--mid);margin-bottom:12px}
 .card-footer{display:flex;align-items:center;justify-content:space-between}
 .card-price{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--black)}
-.add-btn{background:var(--black);color:var(--white);border:none;cursor:pointer;width:34px;height:34px;font-size:1.2rem;display:flex;align-items:center;justify-content:center;transition:background .18s}
+.add-btn{background:var(--black);color:var(--white);border:none;cursor:pointer;width:34px;height:34px;font-size:1.2rem;display:flex;align-items:center;justify-content:center;transition:background .2s}
 .add-btn:hover{background:var(--gold);color:var(--black)}
 .no-results{text-align:center;padding:80px 20px;color:var(--mid);width:100%;display:none}
+.load-more-btn{width:100%;padding:14px;margin:20px 0;background:var(--black);color:var(--white);border:none;cursor:pointer;font-size:.85rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;transition:background .2s}
+.load-more-btn:hover{background:var(--gold);color:var(--black)}
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:200;opacity:0;pointer-events:none;transition:opacity .3s}
 .overlay.open{opacity:1;pointer-events:all}
 .cart-drawer{position:fixed;top:0;right:0;bottom:0;width:min(400px,100vw);background:var(--white);z-index:201;transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column}
@@ -95,9 +99,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--black);disp
 .cart-total{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
 .ct-label{font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mid)}
 .ct-price{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;color:var(--black)}
-.checkout-btn{width:100%;background:var(--gold);color:var(--black);border:none;cursor:pointer;font-family:'Inter',sans-serif;font-size:.8rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:15px;transition:background .2s}
+.checkout-btn{width:100%;background:var(--gold);color:var(--black);border:none;cursor:pointer;font-family:'Inter',sans-serif;font-size:.8rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:12px;transition:background .2s}
 .checkout-btn:hover{background:var(--gold-l)}
-.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--black);color:var(--white);padding:11px 22px;font-size:.8rem;font-weight:500;letter-spacing:.06em;z-index:999;border-left:3px solid var(--gold);transition:transform .32s cubic-bezier(.34,1.56,.64,1);white-space:nowrap}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--black);color:var(--white);padding:11px 22px;font-size:.8rem;font-weight:500;letter-spacing:.06em;border-radius:4px;transition:transform .3s;z-index:300}
 .toast.show{transform:translateX(-50%) translateY(0)}
 .banner{background:var(--black);display:grid;grid-template-columns:1fr 1fr;min-height:280px;overflow:hidden}
 .banner-text{padding:50px 5vw;display:flex;flex-direction:column;justify-content:center}
@@ -118,7 +122,7 @@ footer{background:var(--black);color:var(--silver);padding:50px 4vw 28px;border-
 .footer-links a:hover{color:var(--white)}
 .footer-bottom{border-top:1px solid #222;padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 .footer-copy{font-size:.7rem;color:#444}
-@media(max-width:680px){.footer-grid{grid-template-columns:1fr;gap:28px}.toolbar{gap:10px}.results-count{display:none}.hero-stats{gap:24px}.banner{grid-template-columns:1fr}.banner-visual{display:none}.nav-link{display:none}}
+@media(max-width:680px){.footer-grid{grid-template-columns:1fr;gap:28px}.toolbar{gap:10px}.results-count{display:none}.hero-stats{gap:24px}.banner{grid-template-columns:1fr}.banner-visual{display:none}.cart-drawer{width:100%}}
 </style>
 </head>
 <body>
@@ -153,8 +157,8 @@ footer{background:var(--black);color:var(--silver);padding:50px 4vw 28px;border-
 
 <div class="ticker">
   <div class="ticker-inner">
-    <span class="ticker-item">ARGENTINA</span><span class="ticker-item">·</span><span class="ticker-item">PORTUGAL</span><span class="ticker-item">·</span><span class="ticker-item">BRAZIL</span><span class="ticker-item">·</span><span class="ticker-item">FRANCE</span><span class="ticker-item">·</span><span class="ticker-item">REAL MADRID</span><span class="ticker-item">·</span><span class="ticker-item">MAN CITY</span><span class="ticker-item">·</span><span class="ticker-item">BARCELONA</span><span class="ticker-item">·</span><span class="ticker-item">LIVERPOOL</span><span class="ticker-item">·</span><span class="ticker-item">ONLY ₹349</span><span class="ticker-item">·</span><span class="ticker-item">FREE DELIVERY IN INDIA</span><span class="ticker-item">·</span>
-    <span class="ticker-item">ARGENTINA</span><span class="ticker-item">·</span><span class="ticker-item">PORTUGAL</span><span class="ticker-item">·</span><span class="ticker-item">BRAZIL</span><span class="ticker-item">·</span><span class="ticker-item">FRANCE</span><span class="ticker-item">·</span><span class="ticker-item">REAL MADRID</span><span class="ticker-item">·</span><span class="ticker-item">MAN CITY</span><span class="ticker-item">·</span><span class="ticker-item">BARCELONA</span><span class="ticker-item">·</span><span class="ticker-item">LIVERPOOL</span><span class="ticker-item">·</span><span class="ticker-item">ONLY ₹349</span><span class="ticker-item">·</span><span class="ticker-item">FREE DELIVERY IN INDIA</span><span class="ticker-item">·</span>
+    <span class="ticker-item">ARGENTINA</span><span class="ticker-item">·</span><span class="ticker-item">PORTUGAL</span><span class="ticker-item">·</span><span class="ticker-item">BRAZIL</span><span class="ticker-item">·</span><span class="ticker-item">REAL MADRID</span><span class="ticker-item">·</span><span class="ticker-item">PSG</span><span class="ticker-item">·</span>
+    <span class="ticker-item">ARGENTINA</span><span class="ticker-item">·</span><span class="ticker-item">PORTUGAL</span><span class="ticker-item">·</span><span class="ticker-item">BRAZIL</span><span class="ticker-item">·</span><span class="ticker-item">REAL MADRID</span><span class="ticker-item">·</span><span class="ticker-item">PSG</span><span class="ticker-item">·</span>
   </div>
 </div>
 
@@ -183,6 +187,7 @@ footer{background:var(--black);color:var(--silver);padding:50px 4vw 28px;border-
       <p style="margin-top:10px">No jerseys found. Try a different search.</p>
     </div>
   </div>
+  <button class="load-more-btn" id="loadMoreBtn" style="display:none;" onclick="loadMore()">Load More Jerseys</button>
 </div>
 
 <div class="banner">
@@ -379,7 +384,7 @@ const IMGS = {
 };
 
 // Fallback SVG — shown if image fails to load
-const FALLBACK_SVG = `<svg viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg"><path d="M60 22 L14 68 L38 78 L38 222 L162 222 L162 78 L186 68 L140 22 C128 34 116 40 100 40 C84 40 72 34 60 22Z" fill="#ddd" stroke="#ccc" stroke-width="1.5"/><text x="100" y="150" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#aaa">Image</text><text x="100" y="168" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#aaa">Loading…</text></svg>`;
+const FALLBACK_SVG = `<svg viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="240" fill="#f0f0f0"/><path d="M60 22 L14 68 L38 78 L38 222 L162 222 L162 78 L186 68 L140 22 C128 34 116 40 100 40 C84 40 72 34 60 22" fill="none" stroke="#ccc" stroke-width="2"/></svg>`;
 
 const products = [
   // NATIONAL TEAMS
@@ -520,17 +525,17 @@ const products = [
   {id:123,img:'mia_h',cat:'other',team:'Inter Miami',name:'Inter Miami Home',player:'Messi No.10',badge:'hot'},
 ];
 
-let activeLeague='all', searchQ='', cart=[];
+const ITEMS_PER_PAGE = 24;
+let activeLeague='all', searchQ='', cart=[], displayedCount=ITEMS_PER_PAGE;
 
 function imgTag(key,alt){
   const src=IMGS[key]||'';
-  return `<img src="${src}" alt="${alt}" loading="lazy" onerror="this.outerHTML='${FALLBACK_SVG.replace(/'/g,"\\'")}'" />`;
+  return `<img src="${src}" alt="${alt}" loading="lazy" decoding="async" onerror="this.outerHTML='${FALLBACK_SVG.replace(/'/g,"\\'")}'" />`;
 }
 
 function renderGrid(){
   const grid=document.getElementById('productGrid');
   const noRes=document.getElementById('noResults');
-  // Clear except noResults
   [...grid.children].forEach(c=>{ if(c!==noRes) c.remove(); });
   const q=searchQ.toLowerCase();
   const visible=products.filter(p=>{
@@ -540,7 +545,40 @@ function renderGrid(){
   });
   document.getElementById('resultsCount').textContent=`${visible.length} jerseys`;
   noRes.style.display=visible.length?'none':'block';
-  visible.forEach(p=>{
+  displayedCount=ITEMS_PER_PAGE;
+  const toDisplay=visible.slice(0,displayedCount);
+  toDisplay.forEach(p=>{
+    const bHtml=p.badge?`<span class="card-badge ${p.badge==='hot'?'b-hot':'b-new'}">${p.badge==='hot'?'�� Hot':'New'}</span>`:'';
+    const card=document.createElement('div');
+    card.className='product-card';
+    card.innerHTML=`
+      <div class="card-img">${imgTag(p.img,p.name)}${bHtml}</div>
+      <div class="card-body">
+        <div class="card-cat">${p.cat.replace(/-/g,' ')}</div>
+        <div class="card-name" title="${p.name}">${p.name}</div>
+        <div class="card-sub">${p.player}</div>
+        <div class="card-footer">
+          <div class="card-price">₹349</div>
+          <button class="add-btn" onclick="addToCart(${p.id},event)" title="Add to cart">+</button>
+        </div>
+      </div>`;
+    grid.appendChild(card);
+  });
+  document.getElementById('loadMoreBtn').style.display=visible.length>displayedCount?'block':'none';
+}
+
+function loadMore(){
+  const grid=document.getElementById('productGrid');
+  const noRes=document.getElementById('noResults');
+  const q=searchQ.toLowerCase();
+  const visible=products.filter(p=>{
+    const lOk=activeLeague==='all'||p.cat===activeLeague;
+    const sOk=!q||p.name.toLowerCase().includes(q)||p.team.toLowerCase().includes(q)||p.player.toLowerCase().includes(q)||p.cat.toLowerCase().includes(q);
+    return lOk&&sOk;
+  });
+  displayedCount+=ITEMS_PER_PAGE;
+  const toDisplay=visible.slice(ITEMS_PER_PAGE*Math.floor((displayedCount-ITEMS_PER_PAGE)/ITEMS_PER_PAGE),displayedCount);
+  toDisplay.forEach(p=>{
     const bHtml=p.badge?`<span class="card-badge ${p.badge==='hot'?'b-hot':'b-new'}">${p.badge==='hot'?'🔥 Hot':'New'}</span>`:'';
     const card=document.createElement('div');
     card.className='product-card';
@@ -557,6 +595,7 @@ function renderGrid(){
       </div>`;
     grid.appendChild(card);
   });
+  document.getElementById('loadMoreBtn').style.display=visible.length>displayedCount?'block':'none';
 }
 
 function setLeague(l,btn){
