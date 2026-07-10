@@ -1,648 +1,845 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Seventy7 Supports — Football Jerseys</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-<noscript><link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"></noscript>
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--black:#111;--charcoal:#1c1c1c;--slate:#333;--mid:#666;--silver:#aaa;--offwhite:#f4f4f2;--white:#fff;--gold:#c9a84c;--gold-l:#e8c86a}
-html{scroll-behavior:smooth}
-body{font-family:'Inter',sans-serif;background:var(--offwhite);color:var(--black);overflow-x:hidden}
-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--black);display:flex;align-items:center;justify-content:space-between;padding:0 4vw;height:60px;border-bottom:1px solid #2a2a2a}
-.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.55rem;color:var(--white);letter-spacing:.08em}
-.nav-logo span{color:var(--gold)}
-.nav-links{display:flex;align-items:center;gap:22px}
-.nav-link{font-size:.72rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--silver);text-decoration:none;transition:color .2s}
-.nav-link:hover{color:var(--white)}
-.cart-btn{background:var(--gold);border:none;cursor:pointer;font-family:'Inter',sans-serif;font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--black);padding:8px 14px;border-radius:3px;transition:background .2s}
-.cart-btn:hover{background:var(--gold-l)}
-.cart-count{background:var(--black);color:var(--gold);border-radius:50%;width:18px;height:18px;font-size:.65rem;font-weight:800;display:flex;align-items:center;justify-content:center}
-.hero{margin-top:60px;background:var(--black);min-height:75vh;display:flex;align-items:center;padding:0 5vw;position:relative;overflow:hidden}
-.hero-bg-num{position:absolute;right:-1vw;top:50%;transform:translateY(-52%);font-family:'Bebas Neue',sans-serif;font-size:clamp(180px,28vw,380px);color:transparent;-webkit-text-stroke:1.5px #222;line-height:1;user-select:none}
-.hero-content{position:relative;z-index:2;max-width:580px}
-.hero-eye{font-size:.7rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;display:flex;align-items:center;gap:10px}
-.hero-eye::after{content:'';width:36px;height:1px;background:var(--gold)}
-.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,7.5vw,100px);color:var(--white);line-height:.92;letter-spacing:.02em;margin-bottom:20px}
-.hero-title em{color:var(--gold);font-style:normal}
-.hero-sub{font-size:.92rem;font-weight:300;color:var(--silver);line-height:1.7;max-width:400px;margin-bottom:36px}
-.hero-cta{display:flex;gap:12px;flex-wrap:wrap}
-.btn-gold{background:var(--gold);color:var(--black);font-size:.8rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:13px 28px;border:none;cursor:pointer;transition:background .2s}
-.btn-gold:hover{background:var(--gold-l)}
-.btn-out{background:transparent;color:var(--white);font-size:.8rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;padding:13px 28px;border:1px solid #3a3a3a;cursor:pointer;transition:border-color .2s}
-.btn-out:hover{border-color:#777}
-.hero-stats{position:absolute;bottom:36px;left:5vw;display:flex;gap:40px}
-.stat-num{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;color:var(--white);line-height:1}
-.stat-num span{color:var(--gold)}
-.stat-lbl{font-size:.68rem;color:var(--mid);letter-spacing:.14em;text-transform:uppercase;margin-top:3px}
-.ticker{background:var(--gold);overflow:hidden;padding:9px 0;white-space:nowrap}
-.ticker-inner{display:inline-flex;animation:tick 30s linear infinite}
-.ticker-item{font-family:'Bebas Neue',sans-serif;font-size:.88rem;letter-spacing:.18em;color:var(--black);padding:0 32px}
-@keyframes tick{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-.toolbar{background:var(--white);border-bottom:1px solid #e0e0e0;padding:14px 4vw;display:flex;align-items:center;gap:14px;flex-wrap:wrap;position:sticky;top:60px;z-index:50}
-.search-wrap{position:relative;flex:1;min-width:180px;max-width:340px}
-.search-wrap input{width:100%;padding:9px 14px 9px 36px;border:1px solid #ddd;font-family:'Inter',sans-serif;font-size:.82rem;color:var(--black);background:var(--offwhite);outline:none;transition:border-color .2s}
-.search-wrap input:focus{border-color:var(--gold)}
-.search-icon{position:absolute;left:11px;top:50%;transform:translateY(-50%);font-size:.85rem;color:var(--mid);pointer-events:none}
-.filter-tabs{display:flex;gap:5px;flex-wrap:wrap}
-.ftab{font-size:.68rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;padding:7px 13px;border:1px solid #ddd;background:transparent;cursor:pointer;color:var(--slate);transition:all .2s}
-.ftab.active,.ftab:hover{background:var(--black);color:var(--white);border-color:var(--black)}
-.results-count{font-size:.73rem;color:var(--mid);white-space:nowrap;margin-left:auto}
-.section{padding:32px 4vw 60px}
-.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:2px}
-.product-card{background:var(--white);cursor:pointer;position:relative;overflow:hidden;transition:transform .22s,box-shadow .22s}
-.product-card:hover{transform:translateY(-5px);box-shadow:0 12px 32px rgba(0,0,0,.12);z-index:2}
-.card-img{width:100%;aspect-ratio:3/4;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;background:#f0f0ee}
-.card-img img{width:100%;height:100%;object-fit:contain;object-position:center;transition:transform .32s;padding:12px}
-.product-card:hover .card-img img{transform:scale(1.06)}
-.card-img .img-fallback{width:80%;height:80%;object-fit:contain;padding:16px}
-.card-badge{position:absolute;top:10px;left:10px;font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:3px 8px}
-.b-new{background:var(--black);color:var(--white)}
-.b-hot{background:var(--gold);color:var(--black)}
-.card-body{padding:14px 16px 18px}
-.card-cat{font-size:.6rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--mid);margin-bottom:4px}
-.card-name{font-family:'Bebas Neue',sans-serif;font-size:1.15rem;letter-spacing:.04em;color:var(--black);margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.card-sub{font-size:.73rem;color:var(--mid);margin-bottom:12px}
-.card-footer{display:flex;align-items:center;justify-content:space-between}
-.card-price{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--black)}
-.add-btn{background:var(--black);color:var(--white);border:none;cursor:pointer;width:34px;height:34px;font-size:1.2rem;display:flex;align-items:center;justify-content:center;transition:background .2s}
-.add-btn:hover{background:var(--gold);color:var(--black)}
-.no-results{text-align:center;padding:80px 20px;color:var(--mid);width:100%;display:none}
-.load-more-btn{width:100%;padding:14px;margin:20px 0;background:var(--black);color:var(--white);border:none;cursor:pointer;font-size:.85rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;transition:background .2s}
-.load-more-btn:hover{background:var(--gold);color:var(--black)}
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:200;opacity:0;pointer-events:none;transition:opacity .3s}
-.overlay.open{opacity:1;pointer-events:all}
-.cart-drawer{position:fixed;top:0;right:0;bottom:0;width:min(400px,100vw);background:var(--white);z-index:201;transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column}
-.cart-drawer.open{transform:translateX(0)}
-.drawer-head{display:flex;align-items:center;justify-content:space-between;padding:20px 22px;border-bottom:1px solid #e8e8e8;background:var(--black)}
-.drawer-title{font-family:'Bebas Neue',sans-serif;font-size:1.35rem;color:var(--white);letter-spacing:.06em}
-.drawer-title span{color:var(--gold)}
-.close-btn{background:none;border:none;cursor:pointer;color:var(--silver);font-size:1.3rem;padding:4px;transition:color .2s}
-.close-btn:hover{color:var(--white)}
-.cart-items{flex:1;overflow-y:auto;padding:18px 22px}
-.cart-empty{text-align:center;padding:60px 20px;color:var(--mid)}
-.cart-empty-icon{font-size:2.8rem;margin-bottom:12px}
-.cart-item{display:flex;gap:12px;padding:14px 0;border-bottom:1px solid #f0f0f0;align-items:flex-start}
-.ci-img{width:64px;height:78px;background:var(--offwhite);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden}
-.ci-img img{width:100%;height:100%;object-fit:contain;padding:4px}
-.ci-info{flex:1}
-.ci-cat{font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mid)}
-.ci-name{font-family:'Bebas Neue',sans-serif;font-size:1rem;margin:2px 0 5px}
-.ci-price{font-size:.82rem;font-weight:600}
-.ci-rm{background:none;border:none;cursor:pointer;color:var(--silver);font-size:1rem;padding:2px;transition:color .2s}
-.ci-rm:hover{color:#c0392b}
-.cart-foot{padding:18px 22px;border-top:1px solid #e8e8e8}
-.cart-total{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
-.ct-label{font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mid)}
-.ct-price{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;color:var(--black)}
-.checkout-btn{width:100%;background:var(--gold);color:var(--black);border:none;cursor:pointer;font-family:'Inter',sans-serif;font-size:.8rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:12px;transition:background .2s}
-.checkout-btn:hover{background:var(--gold-l)}
-.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--black);color:var(--white);padding:11px 22px;font-size:.8rem;font-weight:500;letter-spacing:.06em;border-radius:4px;transition:transform .3s;z-index:300}
-.toast.show{transform:translateX(-50%) translateY(0)}
-.banner{background:var(--black);display:grid;grid-template-columns:1fr 1fr;min-height:280px;overflow:hidden}
-.banner-text{padding:50px 5vw;display:flex;flex-direction:column;justify-content:center}
-.banner-label{font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
-.banner-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(28px,4vw,52px);color:var(--white);line-height:1.05;margin-bottom:20px}
-.banner-title em{color:var(--gold);font-style:normal}
-.banner-visual{background:var(--charcoal);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
-.banner-number{font-family:'Bebas Neue',sans-serif;font-size:clamp(160px,20vw,280px);color:transparent;-webkit-text-stroke:2px var(--gold);opacity:.3;line-height:1;user-select:none}
-footer{background:var(--black);color:var(--silver);padding:50px 4vw 28px;border-top:1px solid #2a2a2a}
-.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;margin-bottom:40px}
-.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--white);margin-bottom:12px}
-.footer-logo span{color:var(--gold)}
-.footer-desc{font-size:.8rem;line-height:1.7;color:#555;max-width:260px}
-.fc-title{font-size:.68rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--white);margin-bottom:16px}
-.footer-links{list-style:none}
-.footer-links li{margin-bottom:9px}
-.footer-links a{font-size:.8rem;color:#555;text-decoration:none;transition:color .2s}
-.footer-links a:hover{color:var(--white)}
-.footer-bottom{border-top:1px solid #222;padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
-.footer-copy{font-size:.7rem;color:#444}
-@media(max-width:680px){.footer-grid{grid-template-columns:1fr;gap:28px}.toolbar{gap:10px}.results-count{display:none}.hero-stats{gap:24px}.banner{grid-template-columns:1fr}.banner-visual{display:none}.cart-drawer{width:100%}}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <title>SEVENTY-7SPORTS — Authentic Jersey Archive</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'display': ['Anton', 'sans-serif'],
+                        'body': ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        'paper': '#F6F3EE',
+                        'ink': '#101010',
+                        'lime': '#E8FF26',
+                        'lime-dark': '#D6EB00',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { font-family: 'Space Grotesk', sans-serif; }
+        .font-display { font-family: 'Anton', sans-serif; letter-spacing: 0.02em; }
+        body { background: #F6F3EE; color: #101010; overscroll-behavior: none; -webkit-tap-highlight-color: transparent; }
+        /* No text selection on UI elements */
+        body, nav, header, footer, button, h1, h2, h3, h4, h5, label, .no-select {
+            user-select: none; -webkit-user-select: none;
+        }
+        input, textarea { user-select: text; -webkit-user-select: text; }
+        ::selection { background: #E8FF26; color: #101010; }
+        .text-stroke { -webkit-text-stroke: 1.5px #101010; color: transparent; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        .marquee-track { animation: marquee 30s linear infinite; }
+        .product-card:hover .product-img-2 { opacity: 1; }
+        .product-card:hover .product-img-1 { opacity: 0; }
+        .product-card:hover .quick-add { transform: translateY(0); opacity: 1; }
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+        .clip-corner { clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 0 100%); }
+
+        /* Skeleton shimmer */
+        .skel { background: linear-gradient(90deg, #EDE8E0 25%, #e0dbd3 50%, #EDE8E0 75%); background-size: 200% 100%; animation: shim 1.4s infinite; }
+        @keyframes shim { to { background-position: -200% 0; } }
+
+        /* WhatsApp order button */
+        .wa-btn { background: #25d366; color: #000; }
+        .wa-btn:hover { background: #1fb855; }
+
+        /* Reserve modal */
+        #reserveModal .modal-inner { animation: popIn .3s cubic-bezier(.34,1.56,.64,1); }
+        @keyframes popIn { from { opacity:0; transform:scale(.9) translateY(20px); } to { opacity:1; transform:none; } }
+    </style>
 </head>
-<body>
+<body class="antialiased">
 
-<nav>
-  <div class="nav-logo">Seventy<span>7</span> Supports</div>
-  <div class="nav-links">
-    <a href="#shop" class="nav-link">Jerseys</a>
-    <a href="#" class="nav-link">Size Guide</a>
-    <a href="#" class="nav-link">Delivery</a>
-    <button class="cart-btn" onclick="openCart()">🛒 Cart <span class="cart-count" id="cartCount">0</span></button>
-  </div>
-</nav>
+    <!-- ── SECURITY: block iframes ── -->
+    <script>(function(){if(top!==self){try{top.location=self.location}catch(e){document.body.innerHTML=''}}}());</script>
+    <!-- ── SECURITY: disable right-click ── -->
+    <script>document.addEventListener('contextmenu',e=>e.preventDefault());</script>
 
-<section class="hero">
-  <div class="hero-bg-num">77</div>
-  <div class="hero-content">
-    <div class="hero-eye">World Cup 2026 Collection</div>
-    <h1 class="hero-title">Wear the<br><em>Legend.</em></h1>
-    <p class="hero-sub">100+ official replica jerseys — Argentina, Portugal, Brazil, Real Madrid & more. All at just ₹349. Free delivery across India.</p>
-    <div class="hero-cta">
-      <a href="#shop" class="btn-gold">Shop All Jerseys</a>
-      <a href="#shop" class="btn-out">New Arrivals</a>
+    <!-- Announcement Bar -->
+    <div class="bg-ink text-paper h-[32px] overflow-hidden relative z-50 border-b border-black flex items-center">
+        <div class="flex marquee-track whitespace-nowrap will-change-transform">
+            <span class="flex items-center gap-8 pr-8 text-[11px] tracking-[0.18em] font-bold uppercase">
+                <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-lime rounded-full"></span> RESERVE ONLINE · PICK UP LOCALLY · NO ONLINE PAYMENT</span>
+                <span class="opacity-30">/</span> AUTHENTIC FOOTBALL JERSEYS FROM SEVENTY-7 SPORTS
+                <span class="opacity-30">/</span> ORDER VIA WHATSAPP · CASH ON COLLECTION
+                <span class="opacity-30">/</span> LOCAL PICKUP ONLY · KASHMIR BASED
+                <span class="opacity-30">/</span> RESERVE ONLINE · PICK UP LOCALLY · NO ONLINE PAYMENT
+                <span class="opacity-30">/</span> AUTHENTIC FOOTBALL JERSEYS FROM SEVENTY-7 SPORTS
+                <span class="opacity-30">/</span> ORDER VIA WHATSAPP · CASH ON COLLECTION
+                <span class="opacity-30">/</span> LOCAL PICKUP ONLY · KASHMIR BASED
+            </span>
+            <span class="flex items-center gap-8 pr-8 text-[11px] tracking-[0.18em] font-bold uppercase">
+                <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-lime rounded-full"></span> RESERVE ONLINE · PICK UP LOCALLY · NO ONLINE PAYMENT</span>
+                <span class="opacity-30">/</span> AUTHENTIC FOOTBALL JERSEYS FROM SEVENTY-7 SPORTS
+                <span class="opacity-30">/</span> ORDER VIA WHATSAPP · CASH ON COLLECTION
+                <span class="opacity-30">/</span> LOCAL PICKUP ONLY · KASHMIR BASED
+                <span class="opacity-30">/</span> RESERVE ONLINE · PICK UP LOCALLY · NO ONLINE PAYMENT
+                <span class="opacity-30">/</span> AUTHENTIC FOOTBALL JERSEYS FROM SEVENTY-7 SPORTS
+                <span class="opacity-30">/</span> ORDER VIA WHATSAPP · CASH ON COLLECTION
+                <span class="opacity-30">/</span> LOCAL PICKUP ONLY · KASHMIR BASED
+            </span>
+        </div>
     </div>
-  </div>
-  <div class="hero-stats">
-    <div><div class="stat-num">100<span>+</span></div><div class="stat-lbl">Jerseys</div></div>
-    <div><div class="stat-num">₹<span>349</span></div><div class="stat-lbl">Flat Price</div></div>
-    <div><div class="stat-num">20<span>+</span></div><div class="stat-lbl">Nations</div></div>
-  </div>
-</section>
 
-<div class="ticker">
-  <div class="ticker-inner">
-    <span class="ticker-item">ARGENTINA</span><span class="ticker-item">·</span><span class="ticker-item">PORTUGAL</span><span class="ticker-item">·</span><span class="ticker-item">BRAZIL</span><span class="ticker-item">·</span><span class="ticker-item">REAL MADRID</span><span class="ticker-item">·</span><span class="ticker-item">PSG</span><span class="ticker-item">·</span>
-    <span class="ticker-item">ARGENTINA</span><span class="ticker-item">·</span><span class="ticker-item">PORTUGAL</span><span class="ticker-item">·</span><span class="ticker-item">BRAZIL</span><span class="ticker-item">·</span><span class="ticker-item">REAL MADRID</span><span class="ticker-item">·</span><span class="ticker-item">PSG</span><span class="ticker-item">·</span>
-  </div>
-</div>
+    <!-- Header -->
+    <header class="sticky top-0 z-40 bg-paper border-b-[1.5px] border-ink">
+        <div class="max-w-[1600px] mx-auto px-4 md:px-8 h-[64px] md:h-[76px] flex items-center justify-between gap-6">
+            <button id="openMobile" class="lg:hidden w-10 h-10 flex items-center justify-center border-[1.5px] border-ink">
+                <svg width="18" height="14" viewBox="0 0 18 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M0 1H18M0 7H18M0 13H18"/></svg>
+            </button>
+            <a href="#" class="flex items-center gap-3 shrink-0">
+                <div class="w-[40px] h-[40px] md:w-[46px] md:h-[46px] bg-ink text-lime flex items-center justify-center font-display text-[20px] leading-none">77</div>
+                <div class="leading-[0.85]">
+                    <div class="font-display text-[22px] md:text-[26px] tracking-tight leading-none">SEVENTY-7</div>
+                    <div class="text-[10px] tracking-[0.26em] font-bold opacity-60 mt-0.5">SPORTS • KASHMIR</div>
+                </div>
+            </a>
+            <nav class="hidden lg:flex items-center gap-8 text-[12px] tracking-[0.18em] font-bold uppercase">
+                <a href="#shop" class="hover:underline underline-offset-8 decoration-2">Shop All</a>
+                <a href="#how" class="opacity-60 hover:opacity-100">How It Works</a>
+                <a href="#trust" class="opacity-60 hover:opacity-100">Authenticity</a>
+            </nav>
+            <div class="flex items-center gap-2 md:gap-3 ml-auto">
+                <button id="openSearch" class="w-10 h-10 md:w-11 md:h-11 border-[1.5px] border-ink flex items-center justify-center hover:bg-ink hover:text-paper transition-colors">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+                </button>
+                <button id="openCart" class="h-10 md:h-11 px-4 md:px-5 bg-ink text-paper flex items-center gap-2 md:gap-3 font-bold text-[11px] tracking-[0.16em] uppercase hover:bg-black transition-colors">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 8V6a3 3 0 0 1 6 0v2"/><path d="M3 8h18l-1 12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2L3 8z"/><path d="M3 8l1-5h16l1 5"/></svg>
+                    <span class="hidden md:inline">Bag</span>
+                    <span id="cartCount" class="bg-lime text-ink w-5 h-5 flex items-center justify-center text-[11px] font-bold">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
 
-<div class="toolbar" id="shop">
-  <div class="search-wrap">
-    <span class="search-icon">🔍</span>
-    <input type="text" id="searchInput" placeholder="Search team, player, league…" oninput="doSearch()">
-  </div>
-  <div class="filter-tabs">
-    <button class="ftab active" onclick="setLeague('all',this)">All</button>
-    <button class="ftab" onclick="setLeague('national',this)">🌍 National</button>
-    <button class="ftab" onclick="setLeague('premier-league',this)">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Premier League</button>
-    <button class="ftab" onclick="setLeague('la-liga',this)">🇪🇸 La Liga</button>
-    <button class="ftab" onclick="setLeague('serie-a',this)">🇮🇹 Serie A</button>
-    <button class="ftab" onclick="setLeague('bundesliga',this)">🇩🇪 Bundesliga</button>
-    <button class="ftab" onclick="setLeague('ligue-1',this)">🇫🇷 Ligue 1</button>
-    <button class="ftab" onclick="setLeague('other',this)">⭐ Other Clubs</button>
-  </div>
-  <span class="results-count" id="resultsCount"></span>
-</div>
+    <!-- Hero -->
+    <section class="max-w-[1600px] mx-auto px-4 md:px-8 pt-6 md:pt-10">
+        <div class="grid grid-cols-12 gap-4 md:gap-6">
+            <div class="col-span-12 lg:col-span-8 bg-ink text-paper relative overflow-hidden min-h-[560px] md:min-h-[680px] flex flex-col justify-between clip-corner">
+                <div class="absolute inset-0 opacity-30">
+                    <img src="https://images.unsplash.com/photo-1577224682124-315f967e87ac?q=80&w=1600&auto=format&fit=crop" class="w-full h-full object-cover grayscale" draggable="false"/>
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-b from-ink via-ink/70 to-ink"></div>
+                <div class="relative z-10 p-6 md:p-10">
+                    <div class="inline-flex items-center gap-2 border border-white/20 px-3 py-1 text-[10px] tracking-[0.2em] uppercase font-bold">
+                        <span class="w-1 h-1 bg-lime rounded-full animate-pulse"></span>
+                        Live Now — Fresh Stock
+                    </div>
+                </div>
+                <div class="relative z-10 p-6 md:p-10">
+                    <h1 class="font-display text-[16vw] lg:text-[11vw] leading-[0.85] tracking-tight uppercase">
+                        WEAR<br><span class="text-stroke" style="-webkit-text-stroke-color: white;">THE</span><br>LEGEND<span class="text-lime">.</span>
+                    </h1>
+                    <div class="mt-8 flex flex-wrap gap-6 items-end">
+                        <p class="max-w-[34ch] text-[14px] leading-[1.6] text-white/70">Premium football jerseys. Reserve online, pick up locally in Kashmir. No online payment — cash on collection only.</p>
+                        <div class="flex gap-3">
+                            <a href="#shop" class="h-[48px] px-7 bg-lime text-ink flex items-center gap-2 font-bold text-[12px] tracking-[0.16em] uppercase hover:bg-white transition-colors">
+                                Shop Now
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+                            </a>
+                            <a href="#how" class="h-[48px] px-7 border border-white/30 text-white flex items-center gap-2 font-bold text-[12px] tracking-[0.16em] uppercase hover:bg-white hover:text-ink transition-colors">How It Works</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-<div class="section">
-  <div class="product-grid" id="productGrid">
-    <div class="no-results" id="noResults">
-      <div style="font-size:2.5rem">🔍</div>
-      <p style="margin-top:10px">No jerseys found. Try a different search.</p>
+            <!-- Side Stack -->
+            <div class="col-span-12 lg:col-span-4 grid grid-rows-2 gap-4 md:gap-6">
+                <div class="bg-[#EDE8E0] border-[1.5px] border-ink p-6 flex flex-col justify-between min-h-[300px] relative overflow-hidden">
+                    <div class="flex justify-between items-start">
+                        <div class="text-[11px] font-bold tracking-[0.2em] uppercase opacity-60">Local Pickup Guarantee</div>
+                        <div class="w-8 h-8 rounded-full border-[1.5px] border-ink flex items-center justify-center">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="font-display text-[36px] leading-none tracking-tight uppercase">Reserve <br> Now, Pay <span class="bg-ink text-paper px-2">Later</span></div>
+                        <p class="mt-4 text-[13px] leading-[1.5] opacity-70 max-w-[28ch]">Place your order via WhatsApp. Pick up at our store. Pay cash on the spot. Simple.</p>
+                        <div class="mt-5 flex gap-2">
+                            <div class="h-8 px-3 bg-ink text-paper text-[10px] font-bold tracking-widest uppercase flex items-center gap-1.5"><div class="w-1.5 h-1.5 bg-lime rounded-full"></div> WhatsApp Order</div>
+                            <div class="h-8 px-3 border-[1.5px] border-ink text-[10px] font-bold tracking-widest uppercase flex items-center">Cash Only</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-lime border-[1.5px] border-ink p-6 flex flex-col justify-between min-h-[300px]">
+                    <div class="flex justify-between">
+                        <div class="text-[11px] font-bold tracking-[0.2em] uppercase">How to Order</div>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 16l4-4 4 4 6-6"/></svg>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-7 h-7 bg-ink text-lime flex items-center justify-center font-display text-[14px] shrink-0">1</div>
+                            <div class="text-[13px] font-bold uppercase">Browse & Pick Your Jersey</div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-7 h-7 bg-ink text-lime flex items-center justify-center font-display text-[14px] shrink-0">2</div>
+                            <div class="text-[13px] font-bold uppercase">Reserve via WhatsApp</div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-7 h-7 bg-ink text-lime flex items-center justify-center font-display text-[14px] shrink-0">3</div>
+                            <div class="text-[13px] font-bold uppercase">Pick Up & Pay Cash</div>
+                        </div>
+                    </div>
+                    <a href="#shop" class="mt-4 text-[11px] font-bold tracking-[0.18em] uppercase underline underline-offset-4 decoration-2">Browse All Jerseys →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- League Strip -->
+    <div class="max-w-[1600px] mx-auto px-4 md:px-8 mt-6">
+        <div class="border-[1.5px] border-ink bg-paper h-[52px] flex items-center overflow-hidden">
+            <div class="flex marquee-track whitespace-nowrap">
+                <span class="flex items-center gap-10 pr-10 text-[12px] font-bold tracking-[0.2em] uppercase">
+                    <span>Premier League</span><span class="w-1 h-1 bg-ink rounded-full"></span>
+                    <span>La Liga</span><span class="w-1 h-1 bg-ink rounded-full"></span>
+                    <span>Serie A</span><span class="w-1 h-1 bg-ink rounded-full"></span>
+                    <span>Bundesliga</span><span class="w-1 h-1 bg-ink rounded-full"></span>
+                    <span>Ligue 1</span><span class="w-1 h-1 bg-ink rounded-full"></span>
+                    <span>International</span><span class="w-1 h-1 bg-ink rounded-full"></span>
+                    <span>J-League</span><span class="w-1 h-1 bg-ink rounded-full"></span>
+                    <span>MLS</span>
+                </span>
+                <span class="flex items-center gap-10 pr-10 text-[12px] font-bold tracking-[0.2em] uppercase">
+                    <span>Premier League</span><span class="w-1 h-1 bg-ink rounded-full"></span>
+                    <span>La Liga</span><span class="w-1 h-1 bg-ink rounded-full"></span>
+                    <span>Serie A</span><span class="w-1 h-1 bg-ink rounded-full"></span>
+                    <span>Bundesliga</span><span class="w-1 h-1 bg-ink rounded-full"></span>
+                    <span>Ligue 1</span><span class="w-1 h-1 bg-ink rounded-full"></span>
+                    <span>International</span><span class="w-1 h-1 bg-ink rounded-full"></span>
+                    <span>J-League</span><span class="w-1 h-1 bg-ink rounded-full"></span>
+                    <span>MLS</span>
+                </span>
+            </div>
+        </div>
     </div>
-  </div>
-  <button class="load-more-btn" id="loadMoreBtn" style="display:none;" onclick="loadMore()">Load More Jerseys</button>
-</div>
 
-<div class="banner">
-  <div class="banner-text">
-    <div class="banner-label">Custom Printing</div>
-    <h2 class="banner-title">Add Your Name.<br>Make It <em>Yours.</em></h2>
-    <p style="font-size:.84rem;color:#777;line-height:1.7;margin-bottom:24px;max-width:340px">Personalise any jersey with official-style name & number printing. Delivered to your door across India.</p>
-    <button class="btn-gold">Customise Now</button>
-  </div>
-  <div class="banner-visual"><div class="banner-number">77</div></div>
-</div>
+    <!-- Shop -->
+    <section id="shop" class="max-w-[1600px] mx-auto px-4 md:px-8 mt-12 md:mt-20">
+        <div class="flex flex-wrap gap-4 md:gap-0 md:items-end justify-between border-b-[1.5px] border-ink pb-6">
+            <div class="flex items-baseline gap-4">
+                <h2 class="font-display text-[44px] md:text-[72px] leading-[0.85] uppercase">The Archive</h2>
+                <span id="productCount" class="hidden md:inline text-[13px] font-bold opacity-40 tracking-widest">LOADING...</span>
+            </div>
+            <div class="flex items-center gap-2 w-full md:w-auto">
+                <div class="relative flex-1 md:w-[280px]">
+                    <input id="searchInput" placeholder="SEARCH TEAM OR PLAYER..." class="w-full h-[44px] border-[1.5px] border-ink bg-transparent px-4 pr-10 text-[12px] font-bold tracking-[0.12em] uppercase placeholder:opacity-40 outline-none focus:bg-white"/>
+                    <svg class="absolute right-3 top-1/2 -translate-y-1/2" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="6"/><path d="M21 21l-4.3-4.3"/></svg>
+                </div>
+                <select id="teamFilter" class="h-[44px] border-[1.5px] border-ink bg-paper px-4 text-[12px] font-bold tracking-[0.12em] uppercase outline-none">
+                    <option value="">All Teams</option>
+                </select>
+            </div>
+        </div>
 
-<div class="overlay" id="overlay" onclick="closeCart()"></div>
-<div class="cart-drawer" id="cartDrawer">
-  <div class="drawer-head">
-    <div class="drawer-title">Cart <span id="drawerCount">(0)</span></div>
-    <button class="close-btn" onclick="closeCart()">✕</button>
-  </div>
-  <div class="cart-items" id="cartItems">
-    <div class="cart-empty"><div class="cart-empty-icon">👕</div><p style="font-size:.82rem">Your cart is empty.</p></div>
-  </div>
-  <div class="cart-foot" id="cartFoot" style="display:none">
-    <div class="cart-total"><span class="ct-label">Total</span><span class="ct-price" id="cartTotal">₹0</span></div>
-    <button class="checkout-btn">Proceed to Checkout →</button>
-  </div>
-</div>
-<div class="toast" id="toast"></div>
+        <!-- Grid -->
+        <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-[1.5px] bg-ink border-[1.5px] border-ink mt-6">
+            <!-- Injected by JS -->
+        </div>
+    </section>
 
-<footer>
-  <div class="footer-grid">
-    <div>
-      <div class="footer-logo">Seventy<span>7</span> Supports</div>
-      <p class="footer-desc">India's favourite football jersey store. 100+ kits from every corner of the beautiful game. All at ₹349.</p>
+    <!-- How It Works -->
+    <section id="how" class="max-w-[1600px] mx-auto px-4 md:px-8 mt-14 md:mt-24">
+        <div class="border-[1.5px] border-ink bg-ink p-[1.5px]">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-[1.5px] bg-ink">
+                <div class="bg-paper p-8 md:p-10">
+                    <div class="font-display text-[56px] leading-none text-lime" style="-webkit-text-stroke:2px #101010;color:transparent">01</div>
+                    <div class="font-display text-[22px] uppercase mt-4 leading-[0.9]">Browse The Archive</div>
+                    <p class="mt-3 text-[13px] leading-[1.6] opacity-60">Find your player, your club, your size from our live inventory pulled directly from the database.</p>
+                </div>
+                <div class="bg-lime p-8 md:p-10">
+                    <div class="font-display text-[56px] leading-none" style="-webkit-text-stroke:2px #101010;color:transparent">02</div>
+                    <div class="font-display text-[22px] uppercase mt-4 leading-[0.9]">Reserve via WhatsApp</div>
+                    <p class="mt-3 text-[13px] leading-[1.6] opacity-70">One tap sends your order details straight to us. No accounts, no cards, no online payments.</p>
+                </div>
+                <div class="bg-paper p-8 md:p-10">
+                    <div class="font-display text-[56px] leading-none" style="-webkit-text-stroke:2px #101010;color:transparent">03</div>
+                    <div class="font-display text-[22px] uppercase mt-4 leading-[0.9]">Pick Up & Pay Cash</div>
+                    <p class="mt-3 text-[13px] leading-[1.6] opacity-60">Come collect your jersey at our local store. Pay cash on arrival. That's it.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Strip -->
+    <section id="trust" class="max-w-[1600px] mx-auto px-4 md:px-8 mt-6 grid grid-cols-1 md:grid-cols-3 gap-[1.5px] bg-ink border-[1.5px] border-ink p-[1.5px]">
+        <div class="bg-paper p-5 flex items-center gap-4">
+            <div class="w-11 h-11 border-[1.5px] border-ink flex items-center justify-center shrink-0">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+            </div>
+            <div><div class="font-bold text-[12px] tracking-[0.12em] uppercase">Authentic Jerseys</div><div class="text-[11px] opacity-60 mt-0.5">Every item verified before listing</div></div>
+        </div>
+        <div class="bg-paper p-5 flex items-center gap-4">
+            <div class="w-11 h-11 border-[1.5px] border-ink flex items-center justify-center shrink-0">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <div><div class="font-bold text-[12px] tracking-[0.12em] uppercase">WhatsApp Support</div><div class="text-[11px] opacity-60 mt-0.5">Direct line to the shop, always</div></div>
+        </div>
+        <div class="bg-paper p-5 flex items-center gap-4">
+            <div class="w-11 h-11 border-[1.5px] border-ink flex items-center justify-center shrink-0">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 9V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2m2 4h10a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2zm7-5a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"/></svg>
+            </div>
+            <div><div class="font-bold text-[12px] tracking-[0.12em] uppercase">Cash on Collection</div><div class="text-[11px] opacity-60 mt-0.5">No online payments ever</div></div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="max-w-[1600px] mx-auto px-4 md:px-8 mt-10 border-t-[1.5px] border-ink">
+        <div class="grid grid-cols-12 gap-8 py-10">
+            <div class="col-span-12 md:col-span-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-[40px] h-[40px] bg-ink text-lime flex items-center justify-center font-display text-[18px]">77</div>
+                    <div class="font-display text-[22px] leading-none">SEVENTY-7SPORTS</div>
+                </div>
+                <p class="mt-4 text-[13px] leading-[1.6] opacity-60 max-w-[32ch]">Premium football jerseys in Kashmir. Reserve online, collect in store, pay cash. Simple, authentic, local.</p>
+            </div>
+            <div class="col-span-6 md:col-span-2">
+                <div class="text-[11px] font-bold tracking-[0.2em] uppercase">Shop</div>
+                <ul class="mt-4 space-y-2 text-[12px] opacity-70">
+                    <li><a class="hover:opacity-100 hover:underline" href="#shop">All Jerseys</a></li>
+                    <li><a class="hover:opacity-100 hover:underline" href="#how">How It Works</a></li>
+                    <li><a class="hover:opacity-100 hover:underline" href="#trust">Authenticity</a></li>
+                </ul>
+            </div>
+            <div class="col-span-12 md:col-span-4">
+                <div class="bg-ink text-paper p-6">
+                    <div class="flex items-center gap-2 text-[11px] font-bold tracking-[0.18em] uppercase"><span class="w-1.5 h-1.5 bg-lime rounded-full"></span> WhatsApp Us Anytime</div>
+                    <div class="mt-3 font-display text-[22px] leading-[0.9] uppercase">Seventy-7 Sports<br>Kashmir</div>
+                    <div class="mt-4 text-[11px] opacity-60">Reserve via WhatsApp · Cash on Pickup</div>
+                </div>
+            </div>
+        </div>
+        <div class="border-t-[1.5px] border-ink py-4 flex flex-col md:flex-row gap-2 md:items-center justify-between text-[10px] tracking-[0.18em] uppercase font-bold opacity-50">
+            <div>© <span id="year"></span> SEVENTY-7SPORTS · ALL RIGHTS RESERVED</div>
+            <div>LOCAL PICKUP ONLY · NO ONLINE PAYMENT</div>
+        </div>
+    </footer>
+
+    <!-- ════════════════════════════════════════
+         PRODUCT QUICK-VIEW MODAL
+    ════════════════════════════════════════ -->
+    <div id="productModal" class="fixed inset-0 z-[60] hidden">
+        <div id="modalBackdrop" class="absolute inset-0 bg-ink/80 backdrop-blur-sm"></div>
+        <div class="relative h-[100dvh] overflow-auto p-4 md:p-8 flex items-start justify-center">
+            <div class="bg-paper border-[1.5px] border-ink max-w-[900px] w-full relative flex flex-col md:flex-row min-h-[540px] mt-8">
+                <button id="closeModal" class="absolute top-3 right-3 z-10 w-10 h-10 bg-ink text-paper flex items-center justify-center hover:bg-black">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+                <div class="md:w-[50%] bg-[#EDE8E0] relative overflow-hidden min-h-[400px]">
+                    <img id="mMainImg" src="" class="absolute inset-0 w-full h-full object-cover" draggable="false"/>
+                    <div id="mTag" class="absolute top-4 left-4 h-7 px-3 bg-ink text-paper text-[10px] font-bold tracking-widest uppercase flex items-center">JERSEY</div>
+                </div>
+                <div class="md:w-[50%] p-6 md:p-8 flex flex-col">
+                    <div class="text-[11px] font-bold tracking-[0.2em] uppercase opacity-50" id="mTeam"></div>
+                    <h3 id="mTitle" class="font-display text-[28px] md:text-[34px] leading-[0.9] uppercase mt-2"></h3>
+                    <div class="mt-3 flex items-center gap-2">
+                        <span class="flex items-center gap-1 text-[11px] font-bold tracking-widest uppercase"><span class="w-2 h-2 bg-[#1DB954] rounded-full"></span> In Stock</span>
+                        <span class="ml-auto text-[11px] font-bold tracking-widest uppercase border border-ink px-2 py-1">LOCAL PICKUP</span>
+                    </div>
+                    <div class="mt-6">
+                        <div class="text-[11px] font-bold tracking-[0.18em] uppercase mb-3">Select Size</div>
+                        <div id="mSizes" class="grid grid-cols-5 gap-[1.5px] bg-ink p-[1.5px]"></div>
+                    </div>
+                    <div class="mt-auto pt-8 flex flex-col gap-3">
+                        <button id="reserveBtn" class="w-full h-[52px] bg-ink text-paper font-bold text-[12px] tracking-[0.18em] uppercase flex items-center justify-center gap-2 hover:bg-black transition-colors">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 8V6a3 3 0 0 1 6 0v2"/><path d="M3 8h18l-1 12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2L3 8z"/><path d="M3 8l1-5h16l1 5"/></svg>
+                            Add to Bag
+                        </button>
+                        <button id="waDirectBtn" class="w-full h-[52px] wa-btn font-bold text-[12px] tracking-[0.18em] uppercase flex items-center justify-center gap-2 transition-colors">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+                            Order Directly via WhatsApp
+                        </button>
+                    </div>
+                    <div class="mt-4 grid grid-cols-2 gap-2 text-[10px] tracking-widest uppercase font-bold opacity-60">
+                        <div class="flex items-center gap-1.5"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg> Authentic</div>
+                        <div class="flex items-center gap-1.5"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 9V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2m2 4h10a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2z"/></svg> Cash on Pickup</div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div>
-      <div class="fc-title">Shop</div>
-      <ul class="footer-links">
-        <li><a href="#">National Teams</a></li>
-        <li><a href="#">Premier League</a></li>
-        <li><a href="#">La Liga</a></li>
-        <li><a href="#">Serie A</a></li>
-        <li><a href="#">Bundesliga</a></li>
-      </ul>
+
+    <!-- ════════════════════════════════════════
+         CART DRAWER
+    ════════════════════════════════════════ -->
+    <div id="cartDrawer" class="fixed inset-0 z-[70] hidden">
+        <div id="cartBackdrop" class="absolute inset-0 bg-ink/60 backdrop-blur-sm"></div>
+        <div id="cartPanel" class="absolute right-0 top-0 h-[100dvh] w-[92%] md:w-[440px] bg-paper border-l-[1.5px] border-ink flex flex-col translate-x-full transition-transform duration-300">
+            <div class="h-[64px] border-b-[1.5px] border-ink px-6 flex items-center justify-between shrink-0">
+                <div class="font-display text-[22px] tracking-tight uppercase">Bag (<span id="cartCountHead">0</span>)</div>
+                <button id="closeCart" class="w-9 h-9 border-[1.5px] border-ink flex items-center justify-center hover:bg-ink hover:text-paper">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+            <div id="cartItems" class="flex-1 overflow-auto p-2 space-y-[1.5px] bg-ink/5"></div>
+            <div class="border-t-[1.5px] border-ink p-6 bg-paper shrink-0">
+                <div class="space-y-2 text-[12px]">
+                    <div class="flex justify-between"><span class="opacity-60 uppercase tracking-widest font-bold">Items</span><span id="cartItemCount" class="font-bold">0</span></div>
+                    <div class="flex justify-between"><span class="opacity-60 uppercase tracking-widest font-bold">Payment</span><span class="font-bold text-[#1DB954]">Cash on Pickup</span></div>
+                </div>
+                <button id="checkoutWaBtn" class="mt-5 w-full h-[52px] wa-btn font-bold text-[12px] tracking-[0.18em] uppercase flex items-center justify-center gap-2">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+                    Send Order via WhatsApp
+                </button>
+                <div class="mt-3 text-center text-[10px] tracking-widest uppercase opacity-50 font-bold">No online payment · Cash on pickup</div>
+            </div>
+        </div>
     </div>
-    <div>
-      <div class="fc-title">Help</div>
-      <ul class="footer-links">
-        <li><a href="#">Size Guide</a></li>
-        <li><a href="#">Delivery Info</a></li>
-        <li><a href="#">Returns</a></li>
-        <li><a href="#">Contact Us</a></li>
-      </ul>
+
+    <!-- ════════════════════════════════════════
+         RESERVE FORM MODAL
+    ════════════════════════════════════════ -->
+    <div id="reserveModal" class="fixed inset-0 z-[80] hidden items-center justify-center p-4">
+        <div class="absolute inset-0 bg-ink/70 backdrop-blur-sm" id="reserveBackdrop"></div>
+        <div class="modal-inner relative bg-paper border-[1.5px] border-ink w-full max-w-[420px] p-8 z-10">
+            <button id="closeReserve" class="absolute top-3 right-3 w-9 h-9 bg-ink text-paper flex items-center justify-center hover:bg-black">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+            <div class="font-display text-[26px] uppercase leading-[0.9] mb-6">Reserve Jersey</div>
+            <div id="rsv-product-info" class="bg-[#EDE8E0] border border-ink p-3 mb-6 text-[12px] font-bold uppercase tracking-wide"></div>
+            <div class="space-y-3">
+                <input id="rsv-name" type="text" placeholder="YOUR NAME" maxlength="60" class="w-full h-[48px] border-[1.5px] border-ink px-4 text-[12px] font-bold tracking-[0.12em] uppercase outline-none focus:bg-white bg-paper"/>
+                <input id="rsv-phone" type="tel" placeholder="PHONE / WHATSAPP" maxlength="20" class="w-full h-[48px] border-[1.5px] border-ink px-4 text-[12px] font-bold tracking-[0.12em] uppercase outline-none focus:bg-white bg-paper"/>
+                <select id="rsv-size" class="w-full h-[48px] border-[1.5px] border-ink px-4 text-[12px] font-bold tracking-[0.12em] uppercase outline-none bg-paper">
+                    <option>S</option><option>M</option><option selected>L</option><option>XL</option><option>XXL</option>
+                </select>
+            </div>
+            <button id="rsv-confirm" class="mt-6 w-full h-[52px] wa-btn font-bold text-[12px] tracking-[0.18em] uppercase flex items-center justify-center gap-2">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+                Confirm via WhatsApp
+            </button>
+        </div>
     </div>
-  </div>
-  <div class="footer-bottom">
-    <span class="footer-copy">© 2025 Seventy7 Supports. All rights reserved.</span>
-    <span class="footer-copy">Made for fans. By fans. 🇮🇳</span>
-  </div>
-</footer>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="fixed inset-0 z-[70] hidden">
+        <div id="mobileBackdrop" class="absolute inset-0 bg-ink/60"></div>
+        <div id="mobilePanel" class="absolute left-0 top-0 h-[100dvh] w-[86%] bg-paper border-r-[1.5px] border-ink p-6 flex flex-col -translate-x-full transition-transform duration-300">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center gap-2"><div class="w-8 h-8 bg-ink text-lime flex items-center justify-center font-display">77</div><div class="font-display text-[18px]">SEVENTY-7</div></div>
+                <button id="closeMobile" class="w-9 h-9 border-[1.5px] border-ink flex items-center justify-center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+            </div>
+            <nav class="mt-10 space-y-1 font-display text-[36px] leading-[0.9] uppercase">
+                <a href="#shop" class="block border-b border-ink/10 py-3">Shop All</a>
+                <a href="#how" class="block border-b border-ink/10 py-3 opacity-50">How It Works</a>
+                <a href="#trust" class="block border-b border-ink/10 py-3 opacity-50">Authenticity</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Search Overlay -->
+    <div id="searchOverlay" class="fixed inset-0 z-[80] hidden">
+        <div id="searchBackdrop" class="absolute inset-0 bg-paper/90 backdrop-blur-md"></div>
+        <div class="relative max-w-[720px] mx-auto mt-[12vh] p-6">
+            <div class="flex justify-between items-center mb-6">
+                <div class="text-[11px] font-bold tracking-[0.2em] uppercase opacity-60">Search Jerseys</div>
+                <button id="closeSearch" class="w-9 h-9 border border-ink flex items-center justify-center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+            </div>
+            <input id="searchOverlayInput" autofocus placeholder="TYPE PLAYER OR TEAM..." class="w-full h-[64px] border-b-[2px] border-ink bg-transparent text-[28px] md:text-[36px] font-display uppercase outline-none placeholder:opacity-20"/>
+            <div id="searchResults" class="mt-8 grid gap-2"></div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast" class="fixed bottom-4 left-4 z-[90] pointer-events-none opacity-0 translate-y-2 transition-all duration-300">
+        <div class="bg-ink text-paper border border-ink px-4 py-3 flex items-center gap-3 shadow-[4px_4px_0px_0px_#101010]">
+            <div class="w-6 h-6 bg-lime text-ink flex items-center justify-center"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5l10-10"/></svg></div>
+            <span id="toastMsg" class="text-[12px] font-bold tracking-[0.12em] uppercase">Added to bag</span>
+        </div>
+    </div>
 
 <script>
-// Real jersey kit image URLs from kitdls.net public CDN
-const IMGS = {
-  // NATIONAL TEAMS
-  arg_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Argentina-Home-Kit-2024-2025.png',
-  arg_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Argentina-Away-Kit-2024-2025.png',
-  por_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Portugal-Home-Kit-2024-2025.png',
-  por_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Portugal-Away-Kit-2024-2025.png',
-  bra_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Brazil-Home-Kit-2024-2025.png',
-  bra_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Brazil-Away-Kit-2024-2025.png',
-  fra_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-France-Home-Kit-2024-2025.png',
-  fra_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-France-Away-Kit-2024-2025.png',
-  ger_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Germany-Home-Kit-2024-2025.png',
-  ger_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Germany-Away-Kit-2024-2025.png',
-  esp_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Spain-Home-Kit-2024-2025.png',
-  esp_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Spain-Away-Kit-2024-2025.png',
-  ita_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Italy-Home-Kit-2024-2025.png',
-  ita_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Italy-Away-Kit-2024-2025.png',
-  eng_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-England-Home-Kit-2024-2025.png',
-  eng_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-England-Away-Kit-2024-2025.png',
-  ned_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Netherlands-Home-Kit-2024-2025.png',
-  ned_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Netherlands-Away-Kit-2024-2025.png',
-  bel_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Belgium-Home-Kit-2024-2025.png',
-  bel_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Belgium-Away-Kit-2024-2025.png',
-  cro_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Croatia-Home-Kit-2024-2025.png',
-  cro_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Croatia-Away-Kit-2024-2025.png',
-  mor_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Morocco-Home-Kit-2024-2025.png',
-  jpn_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Japan-Home-Kit-2024-2025.png',
-  jpn_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Japan-Away-Kit-2024-2025.png',
-  kor_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-South-Korea-Home-Kit-2024-2025.png',
-  usa_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-USA-Home-Kit-2024-2025.png',
-  mex_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Mexico-Home-Kit-2024-2025.png',
-  col_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Colombia-Home-Kit-2024-2025.png',
-  uru_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Uruguay-Home-Kit-2024-2025.png',
-  nga_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Nigeria-Home-Kit-2024-2025.png',
-  nga_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Nigeria-Away-Kit-2024-2025.png',
-  sen_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Senegal-Home-Kit-2024-2025.png',
-  swi_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Switzerland-Home-Kit-2024-2025.png',
-  den_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Denmark-Home-Kit-2024-2025.png',
-  pol_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Poland-Home-Kit-2024-2025.png',
-  tur_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Turkey-Home-Kit-2024-2025.png',
-  sau_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Saudi-Arabia-Home-Kit-2024-2025.png',
-  aus_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Australia-Home-Kit-2024-2025.png',
-  gha_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Ghana-Home-Kit-2024-2025.png',
-  ivc_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Ivory-Coast-Home-Kit-2024-2025.png',
-  ukr_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Ukraine-Home-Kit-2024-2025.png',
-  ind_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-India-Home-Kit-2024-2025.png',
-  swe_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Sweden-Home-Kit-2024-2025.png',
-  // PREMIER LEAGUE
-  mci_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Manchester-City-Home-Kit-2024-2025.png',
-  mci_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Manchester-City-Away-Kit-2024-2025.png',
-  mci_3:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Manchester-City-Third-Kit-2024-2025.png',
-  liv_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Liverpool-Home-Kit-2024-2025.png',
-  liv_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Liverpool-Away-Kit-2024-2025.png',
-  ars_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Arsenal-Home-Kit-2024-2025.png',
-  ars_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Arsenal-Away-Kit-2024-2025.png',
-  che_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Chelsea-Home-Kit-2024-2025.png',
-  che_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Chelsea-Away-Kit-2024-2025.png',
-  tot_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Tottenham-Home-Kit-2024-2025.png',
-  tot_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Tottenham-Away-Kit-2024-2025.png',
-  mnu_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Manchester-United-Home-Kit-2024-2025.png',
-  mnu_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Manchester-United-Away-Kit-2024-2025.png',
-  mnu_3:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Manchester-United-Third-Kit-2024-2025.png',
-  new_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Newcastle-Home-Kit-2024-2025.png',
-  avl_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Aston-Villa-Home-Kit-2024-2025.png',
-  whu_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-West-Ham-Home-Kit-2024-2025.png',
-  bha_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Brighton-Home-Kit-2024-2025.png',
-  eve_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Everton-Home-Kit-2024-2025.png',
-  wol_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Wolves-Home-Kit-2024-2025.png',
-  ful_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Fulham-Home-Kit-2024-2025.png',
-  cpa_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Crystal-Palace-Home-Kit-2024-2025.png',
-  // LA LIGA
-  rma_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Real-Madrid-Home-Kit-2024-2025.png',
-  rma_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Real-Madrid-Away-Kit-2024-2025.png',
-  rma_3:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Real-Madrid-Third-Kit-2024-2025.png',
-  bar_h:   'https://kitdls.net/wp-content/uploads/2024/07/Barcelona-Home-Kit-2024-2025-DLS-24.png',
-  bar_a:   'https://kitdls.net/wp-content/uploads/2024/07/Barcelona-Away-Kit-2024-2025-DLS-24.png',
-  bar_3:   'https://kitdls.net/wp-content/uploads/2024/07/Barcelona-Third-Kit-2024-2025-DLS-24.png',
-  atm_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Atletico-Madrid-Home-Kit-2024-2025.png',
-  atm_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Atletico-Madrid-Away-Kit-2024-2025.png',
-  sev_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Sevilla-Home-Kit-2024-2025.png',
-  vil_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Villarreal-Home-Kit-2024-2025.png',
-  val_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Valencia-Home-Kit-2024-2025.png',
-  bet_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Real-Betis-Home-Kit-2024-2025.png',
-  ath_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Athletic-Bilbao-Home-Kit-2024-2025.png',
-  // SERIE A
-  juv_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Juventus-Home-Kit-2024-2025.png',
-  juv_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Juventus-Away-Kit-2024-2025.png',
-  acm_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-AC-Milan-Home-Kit-2024-2025.png',
-  acm_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-AC-Milan-Away-Kit-2024-2025.png',
-  int_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Inter-Milan-Home-Kit-2024-2025.png',
-  int_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Inter-Milan-Away-Kit-2024-2025.png',
-  nap_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Napoli-Home-Kit-2024-2025.png',
-  nap_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Napoli-Away-Kit-2024-2025.png',
-  rom_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-AS-Roma-Home-Kit-2024-2025.png',
-  laz_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Lazio-Home-Kit-2024-2025.png',
-  fio_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Fiorentina-Home-Kit-2024-2025.png',
-  ata_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Atalanta-Home-Kit-2024-2025.png',
-  // BUNDESLIGA
-  bay_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Bayern-Munich-Home-Kit-2024-2025.png',
-  bay_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Bayern-Munich-Away-Kit-2024-2025.png',
-  bay_3:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Bayern-Munich-Third-Kit-2024-2025.png',
-  bvb_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Dortmund-Home-Kit-2024-2025.png',
-  bvb_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Dortmund-Away-Kit-2024-2025.png',
-  lev_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Leverkusen-Home-Kit-2024-2025.png',
-  rbl_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Leipzig-Home-Kit-2024-2025.png',
-  fra_bun_h: 'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Frankfurt-Home-Kit-2024-2025.png',
-  wol_bun_h: 'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Wolfsburg-Home-Kit-2024-2025.png',
-  // LIGUE 1
-  psg_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-PSG-Home-Kit-2024-2025.png',
-  psg_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-PSG-Away-Kit-2024-2025.png',
-  psg_3:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-PSG-Third-Kit-2024-2025.png',
-  mar_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Marseille-Home-Kit-2024-2025.png',
-  mar_a:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Marseille-Away-Kit-2024-2025.png',
-  lyo_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Lyon-Home-Kit-2024-2025.png',
-  mon_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Monaco-Home-Kit-2024-2025.png',
-  lil_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Lille-Home-Kit-2024-2025.png',
-  // OTHER
-  cel_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Celtic-Home-Kit-2024-2025.png',
-  ran_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Rangers-Home-Kit-2024-2025.png',
-  ajx_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Ajax-Home-Kit-2024-2025.png',
-  psv_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-PSV-Home-Kit-2024-2025.png',
-  ben_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Benfica-Home-Kit-2024-2025.png',
-  por_fc_h:'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Porto-Home-Kit-2024-2025.png',
-  gal_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Galatasaray-Home-Kit-2024-2025.png',
-  fen_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Fenerbahce-Home-Kit-2024-2025.png',
-  bes_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Besiktas-Home-Kit-2024-2025.png',
-  fla_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Flamengo-Home-Kit-2024-2025.png',
-  boc_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Boca-Juniors-Home-Kit-2024-2025.png',
-  riv_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-River-Plate-Home-Kit-2024-2025.png',
-  aln_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Al-Nassr-Home-Kit-2024-2025.png',
-  alh_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Al-Hilal-Home-Kit-2024-2025.png',
-  mia_h:   'https://kitdls.net/wp-content/uploads/2024/07/DLS-24-Inter-Miami-Home-Kit-2024-2025.png',
-};
+/* ════════════════════════════════════════════
+   CONFIG
+════════════════════════════════════════════ */
+const SB_URL   = 'https://sedwzszpgispblzudkxu.supabase.co';
+const SB_KEY   = 'sb_publishable_6iVgLMcaksXvFABpayNlIg_u7t7yai2';
+const TABLE    = 'nameandimagesinfo';
+const WA_NUM   = '923001234567'; // ← replace with real WhatsApp number (international format, no +)
 
-// Fallback SVG — shown if image fails to load
-const FALLBACK_SVG = `<svg viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="240" fill="#f0f0f0"/><path d="M60 22 L14 68 L38 78 L38 222 L162 222 L162 78 L186 68 L140 22 C128 34 116 40 100 40 C84 40 72 34 60 22" fill="none" stroke="#ccc" stroke-width="2"/></svg>`;
+/* ════════════════════════════════════════════
+   STATE
+════════════════════════════════════════════ */
+let allProducts   = [];
+let searchQ       = '';
+let activeProduct = null;
+let selectedSize  = 'L';
+let cart          = [];
+let rsvTarget     = null;
+const sizes       = ['XS','S','M','L','XL','XXL'];
 
-const products = [
-  // NATIONAL TEAMS
-  {id:1,img:'arg_h',cat:'national',team:'Argentina',name:'Argentina Home',player:'Messi No.10',badge:'hot'},
-  {id:2,img:'arg_a',cat:'national',team:'Argentina',name:'Argentina Away',player:'Di María No.11',badge:''},
-  {id:3,img:'por_h',cat:'national',team:'Portugal',name:'Portugal Home',player:'Ronaldo No.7',badge:'hot'},
-  {id:4,img:'por_a',cat:'national',team:'Portugal',name:'Portugal Away',player:'Bruno Fernandes No.8',badge:''},
-  {id:5,img:'bra_h',cat:'national',team:'Brazil',name:'Brazil Home',player:'Vini Jr No.7',badge:'hot'},
-  {id:6,img:'bra_a',cat:'national',team:'Brazil',name:'Brazil Away',player:'Rodrygo No.11',badge:''},
-  {id:7,img:'fra_h',cat:'national',team:'France',name:'France Home',player:'Mbappé No.10',badge:'new'},
-  {id:8,img:'fra_a',cat:'national',team:'France',name:'France Away',player:'Griezmann No.7',badge:''},
-  {id:9,img:'ger_h',cat:'national',team:'Germany',name:'Germany Home',player:'Kane No.9',badge:'new'},
-  {id:10,img:'ger_a',cat:'national',team:'Germany',name:'Germany Away',player:'Musiala No.14',badge:''},
-  {id:11,img:'esp_h',cat:'national',team:'Spain',name:'Spain Home',player:'Morata No.9',badge:'hot'},
-  {id:12,img:'esp_a',cat:'national',team:'Spain',name:'Spain Away',player:'Pedri No.26',badge:''},
-  {id:13,img:'ita_h',cat:'national',team:'Italy',name:'Italy Home',player:'Chiesa No.14',badge:''},
-  {id:14,img:'ita_a',cat:'national',team:'Italy',name:'Italy Away',player:'Barella No.18',badge:''},
-  {id:15,img:'eng_h',cat:'national',team:'England',name:'England Home',player:'Bellingham No.22',badge:'new'},
-  {id:16,img:'eng_a',cat:'national',team:'England',name:'England Away',player:'Saka No.7',badge:''},
-  {id:17,img:'ned_h',cat:'national',team:'Netherlands',name:'Netherlands Home',player:'Van Dijk No.5',badge:''},
-  {id:18,img:'ned_a',cat:'national',team:'Netherlands',name:'Netherlands Away',player:'Gakpo No.11',badge:''},
-  {id:19,img:'bel_h',cat:'national',team:'Belgium',name:'Belgium Home',player:'De Bruyne No.7',badge:''},
-  {id:20,img:'bel_a',cat:'national',team:'Belgium',name:'Belgium Away',player:'Lukaku No.9',badge:''},
-  {id:21,img:'cro_h',cat:'national',team:'Croatia',name:'Croatia Home',player:'Modrić No.10',badge:'hot'},
-  {id:22,img:'cro_a',cat:'national',team:'Croatia',name:'Croatia Away',player:'Gvardiol No.24',badge:''},
-  {id:23,img:'mor_h',cat:'national',team:'Morocco',name:'Morocco Home',player:'Hakimi No.2',badge:'new'},
-  {id:24,img:'jpn_h',cat:'national',team:'Japan',name:'Japan Home',player:'Kubo No.20',badge:''},
-  {id:25,img:'jpn_a',cat:'national',team:'Japan',name:'Japan Away',player:'Minamino No.10',badge:''},
-  {id:26,img:'kor_h',cat:'national',team:'South Korea',name:'South Korea Home',player:'Son No.7',badge:'hot'},
-  {id:27,img:'usa_h',cat:'national',team:'USA',name:'USA Home',player:'Pulisic No.10',badge:'new'},
-  {id:28,img:'mex_h',cat:'national',team:'Mexico',name:'Mexico Home',player:'Lozano No.22',badge:''},
-  {id:29,img:'col_h',cat:'national',team:'Colombia',name:'Colombia Home',player:'L. Díaz No.7',badge:''},
-  {id:30,img:'uru_h',cat:'national',team:'Uruguay',name:'Uruguay Home',player:'Núñez No.9',badge:''},
-  {id:31,img:'nga_h',cat:'national',team:'Nigeria',name:'Nigeria Home',player:'Osimhen No.9',badge:'new'},
-  {id:32,img:'nga_a',cat:'national',team:'Nigeria',name:'Nigeria Away',player:'Lookman No.11',badge:''},
-  {id:33,img:'sen_h',cat:'national',team:'Senegal',name:'Senegal Home',player:'Mané No.10',badge:''},
-  {id:34,img:'swi_h',cat:'national',team:'Switzerland',name:'Switzerland Home',player:'Xhaka No.10',badge:''},
-  {id:35,img:'den_h',cat:'national',team:'Denmark',name:'Denmark Home',player:'Eriksen No.10',badge:''},
-  {id:36,img:'pol_h',cat:'national',team:'Poland',name:'Poland Home',player:'Lewandowski No.9',badge:'hot'},
-  {id:37,img:'tur_h',cat:'national',team:'Turkey',name:'Turkey Home',player:'Güler No.10',badge:'new'},
-  {id:38,img:'sau_h',cat:'national',team:'Saudi Arabia',name:'Saudi Arabia Home',player:'Al-Dawsari No.10',badge:''},
-  {id:39,img:'aus_h',cat:'national',team:'Australia',name:'Australia Home',player:'Hrustic No.8',badge:''},
-  {id:40,img:'gha_h',cat:'national',team:'Ghana',name:'Ghana Home',player:'Kudus No.10',badge:''},
-  {id:41,img:'ivc_h',cat:'national',team:'Ivory Coast',name:'Ivory Coast Home',player:'Zaha No.11',badge:''},
-  {id:42,img:'ukr_h',cat:'national',team:'Ukraine',name:'Ukraine Home',player:'Mudryk No.10',badge:''},
-  {id:43,img:'ind_h',cat:'national',team:'India',name:'India Home',player:'Sunil Chhetri',badge:'new'},
-  {id:44,img:'swe_h',cat:'national',team:'Sweden',name:'Sweden Home',player:'Isak No.10',badge:''},
-
-  // PREMIER LEAGUE
-  {id:45,img:'mci_h',cat:'premier-league',team:'Man City',name:'Man City Home',player:'Haaland No.9',badge:'hot'},
-  {id:46,img:'mci_a',cat:'premier-league',team:'Man City',name:'Man City Away',player:'De Bruyne No.17',badge:''},
-  {id:47,img:'mci_3',cat:'premier-league',team:'Man City',name:'Man City 3rd',player:'Foden No.47',badge:'new'},
-  {id:48,img:'liv_h',cat:'premier-league',team:'Liverpool',name:'Liverpool Home',player:'Salah No.11',badge:'hot'},
-  {id:49,img:'liv_a',cat:'premier-league',team:'Liverpool',name:'Liverpool Away',player:'Núñez No.9',badge:''},
-  {id:50,img:'ars_h',cat:'premier-league',team:'Arsenal',name:'Arsenal Home',player:'Saka No.7',badge:'hot'},
-  {id:51,img:'ars_a',cat:'premier-league',team:'Arsenal',name:'Arsenal Away',player:'Ødegaard No.8',badge:''},
-  {id:52,img:'che_h',cat:'premier-league',team:'Chelsea',name:'Chelsea Home',player:'Palmer No.20',badge:'new'},
-  {id:53,img:'che_a',cat:'premier-league',team:'Chelsea',name:'Chelsea Away',player:'Caicedo No.25',badge:''},
-  {id:54,img:'tot_h',cat:'premier-league',team:'Tottenham',name:'Spurs Home',player:'Son No.7',badge:''},
-  {id:55,img:'tot_a',cat:'premier-league',team:'Tottenham',name:'Spurs Away',player:'Maddison No.10',badge:''},
-  {id:56,img:'mnu_h',cat:'premier-league',team:'Man Utd',name:'Man Utd Home',player:'Rashford No.10',badge:''},
-  {id:57,img:'mnu_a',cat:'premier-league',team:'Man Utd',name:'Man Utd Away',player:'Fernandes No.8',badge:''},
-  {id:58,img:'mnu_3',cat:'premier-league',team:'Man Utd',name:'Man Utd 3rd',player:'Mainoo No.37',badge:'new'},
-  {id:59,img:'new_h',cat:'premier-league',team:'Newcastle',name:'Newcastle Home',player:'Isak No.14',badge:''},
-  {id:60,img:'avl_h',cat:'premier-league',team:'Aston Villa',name:'Aston Villa Home',player:'Watkins No.11',badge:'new'},
-  {id:61,img:'whu_h',cat:'premier-league',team:'West Ham',name:'West Ham Home',player:'Paquetá No.11',badge:''},
-  {id:62,img:'bha_h',cat:'premier-league',team:'Brighton',name:'Brighton Home',player:'Mitoma No.22',badge:''},
-  {id:63,img:'eve_h',cat:'premier-league',team:'Everton',name:'Everton Home',player:'Calvert-Lewin No.9',badge:''},
-  {id:64,img:'wol_h',cat:'premier-league',team:'Wolves',name:'Wolves Home',player:'Cunha No.9',badge:''},
-  {id:65,img:'ful_h',cat:'premier-league',team:'Fulham',name:'Fulham Home',player:'Jiménez No.9',badge:''},
-  {id:66,img:'cpa_h',cat:'premier-league',team:'Crystal Palace',name:'Crystal Palace Home',player:'Eze No.10',badge:''},
-
-  // LA LIGA
-  {id:67,img:'rma_h',cat:'la-liga',team:'Real Madrid',name:'Real Madrid Home',player:'Bellingham No.5',badge:'hot'},
-  {id:68,img:'rma_a',cat:'la-liga',team:'Real Madrid',name:'Real Madrid Away',player:'Vini Jr No.7',badge:'hot'},
-  {id:69,img:'rma_3',cat:'la-liga',team:'Real Madrid',name:'Real Madrid 3rd',player:'Rodrygo No.11',badge:'new'},
-  {id:70,img:'bar_h',cat:'la-liga',team:'Barcelona',name:'Barcelona Home',player:'Yamal No.10',badge:'hot'},
-  {id:71,img:'bar_a',cat:'la-liga',team:'Barcelona',name:'Barcelona Away',player:'Lewandowski No.9',badge:''},
-  {id:72,img:'bar_3',cat:'la-liga',team:'Barcelona',name:'Barcelona 3rd',player:'Raphinha No.11',badge:'new'},
-  {id:73,img:'atm_h',cat:'la-liga',team:'Atletico Madrid',name:'Atletico Home',player:'Griezmann No.7',badge:''},
-  {id:74,img:'atm_a',cat:'la-liga',team:'Atletico Madrid',name:'Atletico Away',player:'Morata No.9',badge:''},
-  {id:75,img:'sev_h',cat:'la-liga',team:'Sevilla',name:'Sevilla Home',player:'Lukebakio No.11',badge:''},
-  {id:76,img:'vil_h',cat:'la-liga',team:'Villarreal',name:'Villarreal Home',player:'Baena No.19',badge:''},
-  {id:77,img:'val_h',cat:'la-liga',team:'Valencia',name:'Valencia Home',player:'Pepelu No.14',badge:''},
-  {id:78,img:'bet_h',cat:'la-liga',team:'Real Betis',name:'Real Betis Home',player:'Fekir No.8',badge:''},
-  {id:79,img:'ath_h',cat:'la-liga',team:'Athletic Bilbao',name:'Athletic Bilbao Home',player:'Williams No.9',badge:'new'},
-
-  // SERIE A
-  {id:80,img:'juv_h',cat:'serie-a',team:'Juventus',name:'Juventus Home',player:'Vlahović No.9',badge:''},
-  {id:81,img:'juv_a',cat:'serie-a',team:'Juventus',name:'Juventus Away',player:'Chiesa No.7',badge:''},
-  {id:82,img:'acm_h',cat:'serie-a',team:'AC Milan',name:'AC Milan Home',player:'Leão No.10',badge:'hot'},
-  {id:83,img:'acm_a',cat:'serie-a',team:'AC Milan',name:'AC Milan Away',player:'Giroud No.9',badge:''},
-  {id:84,img:'int_h',cat:'serie-a',team:'Inter Milan',name:'Inter Home',player:'Lautaro No.10',badge:'hot'},
-  {id:85,img:'int_a',cat:'serie-a',team:'Inter Milan',name:'Inter Away',player:'Thuram No.9',badge:''},
-  {id:86,img:'nap_h',cat:'serie-a',team:'Napoli',name:'Napoli Home',player:'Kvara No.77',badge:'new'},
-  {id:87,img:'nap_a',cat:'serie-a',team:'Napoli',name:'Napoli Away',player:'Osimhen No.9',badge:''},
-  {id:88,img:'rom_h',cat:'serie-a',team:'AS Roma',name:'AS Roma Home',player:'Dybala No.21',badge:''},
-  {id:89,img:'laz_h',cat:'serie-a',team:'Lazio',name:'Lazio Home',player:'Immobile No.17',badge:''},
-  {id:90,img:'fio_h',cat:'serie-a',team:'Fiorentina',name:'Fiorentina Home',player:'Jović No.7',badge:''},
-  {id:91,img:'ata_h',cat:'serie-a',team:'Atalanta',name:'Atalanta Home',player:'Lookman No.11',badge:'new'},
-
-  // BUNDESLIGA
-  {id:92,img:'bay_h',cat:'bundesliga',team:'Bayern Munich',name:'Bayern Home',player:'Kane No.9',badge:'hot'},
-  {id:93,img:'bay_a',cat:'bundesliga',team:'Bayern Munich',name:'Bayern Away',player:'Sané No.10',badge:''},
-  {id:94,img:'bay_3',cat:'bundesliga',team:'Bayern Munich',name:'Bayern 3rd',player:'Musiala No.42',badge:'new'},
-  {id:95,img:'bvb_h',cat:'bundesliga',team:'Dortmund',name:'Dortmund Home',player:'Sancho No.10',badge:'hot'},
-  {id:96,img:'bvb_a',cat:'bundesliga',team:'Dortmund',name:'Dortmund Away',player:'Reus No.11',badge:''},
-  {id:97,img:'lev_h',cat:'bundesliga',team:'Leverkusen',name:'Leverkusen Home',player:'Wirtz No.10',badge:'hot'},
-  {id:98,img:'rbl_h',cat:'bundesliga',team:'RB Leipzig',name:'RB Leipzig Home',player:'Werner No.11',badge:''},
-  {id:99,img:'fra_bun_h',cat:'bundesliga',team:'Frankfurt',name:'Frankfurt Home',player:'Knauff No.44',badge:''},
-  {id:100,img:'wol_bun_h',cat:'bundesliga',team:'Wolfsburg',name:'Wolfsburg Home',player:'Wind No.29',badge:''},
-
-  // LIGUE 1
-  {id:101,img:'psg_h',cat:'ligue-1',team:'PSG',name:'PSG Home',player:'Mbappé No.7',badge:'hot'},
-  {id:102,img:'psg_a',cat:'ligue-1',team:'PSG',name:'PSG Away',player:'Neymar No.10',badge:''},
-  {id:103,img:'psg_3',cat:'ligue-1',team:'PSG',name:'PSG 3rd',player:'Hakimi No.2',badge:'new'},
-  {id:104,img:'mar_h',cat:'ligue-1',team:'Marseille',name:'Marseille Home',player:'Harit No.29',badge:''},
-  {id:105,img:'mar_a',cat:'ligue-1',team:'Marseille',name:'Marseille Away',player:'Payet No.10',badge:''},
-  {id:106,img:'lyo_h',cat:'ligue-1',team:'Lyon',name:'Lyon Home',player:'Lacazette No.10',badge:''},
-  {id:107,img:'mon_h',cat:'ligue-1',team:'Monaco',name:'Monaco Home',player:'Ben Yedder No.9',badge:''},
-  {id:108,img:'lil_h',cat:'ligue-1',team:'Lille',name:'Lille Home',player:'David No.9',badge:'new'},
-
-  // OTHER
-  {id:109,img:'cel_h',cat:'other',team:'Celtic',name:'Celtic Home',player:'Kyogo No.8',badge:''},
-  {id:110,img:'ran_h',cat:'other',team:'Rangers',name:'Rangers Home',player:'Kent No.14',badge:''},
-  {id:111,img:'ajx_h',cat:'other',team:'Ajax',name:'Ajax Home',player:'Bergwijn No.7',badge:''},
-  {id:112,img:'psv_h',cat:'other',team:'PSV',name:'PSV Home',player:'Gakpo No.11',badge:''},
-  {id:113,img:'ben_h',cat:'other',team:'Benfica',name:'Benfica Home',player:'Di María No.11',badge:''},
-  {id:114,img:'por_fc_h',cat:'other',team:'Porto',name:'Porto Home',player:'Taremi No.9',badge:''},
-  {id:115,img:'gal_h',cat:'other',team:'Galatasaray',name:'Galatasaray Home',player:'Icardi No.9',badge:'hot'},
-  {id:116,img:'fen_h',cat:'other',team:'Fenerbahce',name:'Fenerbahçe Home',player:'Szymanski No.10',badge:''},
-  {id:117,img:'bes_h',cat:'other',team:'Besiktas',name:'Beşiktaş Home',player:'Aboubakar No.79',badge:''},
-  {id:118,img:'fla_h',cat:'other',team:'Flamengo',name:'Flamengo Home',player:'Arrascaeta No.14',badge:''},
-  {id:119,img:'boc_h',cat:'other',team:'Boca Juniors',name:'Boca Juniors Home',player:'Merentiel No.9',badge:''},
-  {id:120,img:'riv_h',cat:'other',team:'River Plate',name:'River Plate Home',player:'Beltrán No.32',badge:''},
-  {id:121,img:'aln_h',cat:'other',team:'Al-Nassr',name:'Al-Nassr Home',player:'Ronaldo No.7',badge:'hot'},
-  {id:122,img:'alh_h',cat:'other',team:'Al-Hilal',name:'Al-Hilal Home',player:'Neymar No.10',badge:'new'},
-  {id:123,img:'mia_h',cat:'other',team:'Inter Miami',name:'Inter Miami Home',player:'Messi No.10',badge:'hot'},
-];
-
-const ITEMS_PER_PAGE = 24;
-let activeLeague='all', searchQ='', cart=[], displayedCount=ITEMS_PER_PAGE;
-
-function imgTag(key,alt){
-  const src=IMGS[key]||'';
-  return `<img src="${src}" alt="${alt}" loading="lazy" decoding="async" onerror="this.outerHTML='${FALLBACK_SVG.replace(/'/g,"\\'")}'" />`;
+/* ════════════════════════════════════════════
+   SUPABASE FETCH
+════════════════════════════════════════════ */
+async function fetchProducts() {
+    renderSkeletons();
+    try {
+        const res = await fetch(`${SB_URL}/rest/v1/${TABLE}?select=*&order=id.desc&limit=20`, {
+            headers: {
+                'apikey': SB_KEY,
+                'Authorization': 'Bearer ' + SB_KEY
+            }
+        });
+        if (!res.ok) throw new Error('Fetch failed: ' + res.status);
+        allProducts = await res.json();
+        buildTeamFilter();
+        renderProducts();
+    } catch(e) {
+        console.error(e);
+        document.getElementById('productGrid').innerHTML =
+            `<div class="col-span-full bg-paper p-16 text-center"><div class="font-display text-[28px] uppercase">Could Not Load Jerseys</div><p class="text-[13px] opacity-60 mt-2">Please refresh the page.</p></div>`;
+    }
 }
 
-function renderGrid(){
-  const grid=document.getElementById('productGrid');
-  const noRes=document.getElementById('noResults');
-  [...grid.children].forEach(c=>{ if(c!==noRes) c.remove(); });
-  const q=searchQ.toLowerCase();
-  const visible=products.filter(p=>{
-    const lOk=activeLeague==='all'||p.cat===activeLeague;
-    const sOk=!q||p.name.toLowerCase().includes(q)||p.team.toLowerCase().includes(q)||p.player.toLowerCase().includes(q)||p.cat.toLowerCase().includes(q);
-    return lOk&&sOk;
-  });
-  document.getElementById('resultsCount').textContent=`${visible.length} jerseys`;
-  noRes.style.display=visible.length?'none':'block';
-  displayedCount=ITEMS_PER_PAGE;
-  const toDisplay=visible.slice(0,displayedCount);
-  toDisplay.forEach(p=>{
-    const bHtml=p.badge?`<span class="card-badge ${p.badge==='hot'?'b-hot':'b-new'}">${p.badge==='hot'?'�� Hot':'New'}</span>`:'';
-    const card=document.createElement('div');
-    card.className='product-card';
-    card.innerHTML=`
-      <div class="card-img">${imgTag(p.img,p.name)}${bHtml}</div>
-      <div class="card-body">
-        <div class="card-cat">${p.cat.replace(/-/g,' ')}</div>
-        <div class="card-name" title="${p.name}">${p.name}</div>
-        <div class="card-sub">${p.player}</div>
-        <div class="card-footer">
-          <div class="card-price">₹349</div>
-          <button class="add-btn" onclick="addToCart(${p.id},event)" title="Add to cart">+</button>
-        </div>
-      </div>`;
-    grid.appendChild(card);
-  });
-  document.getElementById('loadMoreBtn').style.display=visible.length>displayedCount?'block':'none';
+/* ════════════════════════════════════════════
+   SKELETONS
+════════════════════════════════════════════ */
+function renderSkeletons() {
+    document.getElementById('productGrid').innerHTML =
+        Array.from({length:8}).map(()=>`
+            <div class="bg-paper">
+                <div class="aspect-[4/5] skel"></div>
+                <div class="p-4">
+                    <div class="h-4 skel rounded mb-2 w-3/4"></div>
+                    <div class="h-3 skel rounded w-1/2"></div>
+                </div>
+            </div>`).join('');
 }
 
-function loadMore(){
-  const grid=document.getElementById('productGrid');
-  const noRes=document.getElementById('noResults');
-  const q=searchQ.toLowerCase();
-  const visible=products.filter(p=>{
-    const lOk=activeLeague==='all'||p.cat===activeLeague;
-    const sOk=!q||p.name.toLowerCase().includes(q)||p.team.toLowerCase().includes(q)||p.player.toLowerCase().includes(q)||p.cat.toLowerCase().includes(q);
-    return lOk&&sOk;
-  });
-  displayedCount+=ITEMS_PER_PAGE;
-  const toDisplay=visible.slice(ITEMS_PER_PAGE*Math.floor((displayedCount-ITEMS_PER_PAGE)/ITEMS_PER_PAGE),displayedCount);
-  toDisplay.forEach(p=>{
-    const bHtml=p.badge?`<span class="card-badge ${p.badge==='hot'?'b-hot':'b-new'}">${p.badge==='hot'?'🔥 Hot':'New'}</span>`:'';
-    const card=document.createElement('div');
-    card.className='product-card';
-    card.innerHTML=`
-      <div class="card-img">${imgTag(p.img,p.name)}${bHtml}</div>
-      <div class="card-body">
-        <div class="card-cat">${p.cat.replace(/-/g,' ')}</div>
-        <div class="card-name" title="${p.name}">${p.name}</div>
-        <div class="card-sub">${p.player}</div>
-        <div class="card-footer">
-          <div class="card-price">₹349</div>
-          <button class="add-btn" onclick="addToCart(${p.id},event)" title="Add to cart">+</button>
-        </div>
-      </div>`;
-    grid.appendChild(card);
-  });
-  document.getElementById('loadMoreBtn').style.display=visible.length>displayedCount?'block':'none';
+/* ════════════════════════════════════════════
+   TEAM FILTER
+════════════════════════════════════════════ */
+function buildTeamFilter() {
+    const sel = document.getElementById('teamFilter');
+    const teams = [...new Set(allProducts.map(p => p.team).filter(Boolean))].sort();
+    teams.forEach(t => {
+        const o = document.createElement('option');
+        o.value = t; o.textContent = t;
+        sel.appendChild(o);
+    });
 }
 
-function setLeague(l,btn){
-  activeLeague=l;
-  document.querySelectorAll('.ftab').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  renderGrid();
+/* ════════════════════════════════════════════
+   RENDER GRID
+════════════════════════════════════════════ */
+function renderProducts() {
+    const q  = searchQ.toLowerCase();
+    const tm = document.getElementById('teamFilter').value;
+    const filtered = allProducts.filter(p => {
+        const n = (p.player_name || '').toLowerCase();
+        const t = (p.team || '').toLowerCase();
+        const matchQ  = !q  || n.includes(q) || t.includes(q);
+        const matchTm = !tm || p.team === tm;
+        return matchQ && matchTm;
+    });
+    document.getElementById('productCount').textContent = `${filtered.length} JERSEYS`;
+    const grid = document.getElementById('productGrid');
+    if (!filtered.length) {
+        grid.innerHTML = `<div class="col-span-full bg-paper p-16 text-center"><div class="font-display text-[32px] uppercase">No Matches</div><p class="text-[13px] opacity-60 mt-2">Try another search or clear filters</p></div>`;
+        return;
+    }
+    grid.innerHTML = filtered.map((p, i) => {
+        const name = esc(p.player_name || 'Jersey');
+        const team = esc(p.team || '');
+        const img  = esc(p.image_url || '');
+        const imgEl = img
+            ? `<img src="${img}" alt="${name}" class="product-img-1 absolute inset-0 w-full h-full object-cover transition-opacity duration-500" draggable="false" onerror="this.parentNode.innerHTML='<div class=\'w-full h-full flex items-center justify-center font-display text-[56px] opacity-10\'>77</div>'">`
+            : `<div class="w-full h-full flex items-center justify-center font-display text-[56px] opacity-10">77</div>`;
+        return `
+        <div data-idx="${i}" class="product-card group bg-paper relative flex flex-col cursor-pointer">
+            <div class="relative aspect-[4/5] overflow-hidden bg-[#EDE8E0] border-b-[1.5px] border-ink">
+                ${imgEl}
+                <div class="absolute top-3 left-3 flex gap-1.5 z-10">
+                    <div class="h-6 px-2 bg-ink text-paper text-[10px] font-bold tracking-widest uppercase flex items-center">JERSEY</div>
+                </div>
+                <button class="quick-add absolute bottom-0 left-0 right-0 h-[42px] bg-ink text-paper text-[11px] font-bold tracking-[0.16em] uppercase flex items-center justify-center gap-2 translate-y-full opacity-0 transition-all duration-300" onclick="quickReserve(event,${i})">
+                    Quick Reserve
+                </button>
+            </div>
+            <div class="p-4 flex-1 flex flex-col" onclick="openProduct(${i})">
+                <div class="flex items-start justify-between gap-3">
+                    <h3 class="font-bold text-[13px] leading-[1.2] uppercase tracking-tight max-w-[18ch]">${name}</h3>
+                    <div class="text-right shrink-0">
+                        <div class="font-display text-[18px] leading-none">LOCAL</div>
+                        <div class="text-[10px] opacity-40">PICKUP</div>
+                    </div>
+                </div>
+                <div class="mt-3 text-[11px] opacity-60 uppercase tracking-widest font-bold">${team}</div>
+            </div>
+        </div>`;
+    }).join('');
+
+    // click on card body → open modal; quick-add handled separately
+    document.querySelectorAll('.product-card').forEach(card => {
+        card.addEventListener('click', function(e) {
+            if (e.target.closest('.quick-add')) return;
+            openProduct(parseInt(this.dataset.idx));
+        });
+    });
 }
-function doSearch(){ searchQ=document.getElementById('searchInput').value; renderGrid(); }
 
-function addToCart(id,e){
-  e.stopPropagation();
-  const p=products.find(x=>x.id===id);
-  const ex=cart.find(x=>x.id===id);
-  if(ex) ex.qty++; else cart.push({...p,qty:1});
-  updateCartUI();
-  showToast(`✓ ${p.name} added to cart`);
+/* ════════════════════════════════════════════
+   PRODUCT MODAL
+════════════════════════════════════════════ */
+function openProduct(idx) {
+    const p = allProducts[idx];
+    if (!p) return;
+    activeProduct = { ...p, _idx: idx };
+    selectedSize  = 'L';
+    document.getElementById('mMainImg').src   = esc(p.image_url || '');
+    document.getElementById('mTag').textContent  = 'JERSEY';
+    document.getElementById('mTeam').textContent = esc(p.team || '');
+    document.getElementById('mTitle').textContent = esc(p.player_name || 'Jersey');
+    document.getElementById('mSizes').innerHTML = sizes.map(s =>
+        `<button data-size="${s}" class="size-btn h-[44px] text-[12px] font-bold border-[1.5px] transition-colors ${s === selectedSize ? 'bg-ink text-paper border-ink' : 'bg-paper text-ink border-paper hover:border-ink'}">${s}</button>`
+    ).join('');
+    document.querySelectorAll('.size-btn').forEach(b => {
+        b.addEventListener('click', () => {
+            document.querySelectorAll('.size-btn').forEach(x => { x.classList.remove('bg-ink','text-paper'); x.classList.add('bg-paper','text-ink'); });
+            b.classList.add('bg-ink','text-paper'); b.classList.remove('bg-paper','text-ink');
+            selectedSize = b.dataset.size;
+        });
+    });
+    document.getElementById('productModal').classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
 }
-function removeFromCart(id){ cart=cart.filter(x=>x.id!==id); updateCartUI(); }
-
-function updateCartUI(){
-  const count=cart.reduce((s,x)=>s+x.qty,0);
-  const total=cart.reduce((s,x)=>s+349*x.qty,0);
-  document.getElementById('cartCount').textContent=count;
-  document.getElementById('drawerCount').textContent=`(${count})`;
-  document.getElementById('cartTotal').textContent=`₹${total.toLocaleString('en-IN')}`;
-  document.getElementById('cartFoot').style.display=cart.length?'':'none';
-  const el=document.getElementById('cartItems');
-  if(!cart.length){el.innerHTML=`<div class="cart-empty"><div class="cart-empty-icon">👕</div><p style="font-size:.82rem">Your cart is empty.</p></div>`;return;}
-  el.innerHTML=cart.map(p=>`<div class="cart-item">
-    <div class="ci-img">${imgTag(p.img,p.name)}</div>
-    <div class="ci-info">
-      <div class="ci-cat">${p.cat.replace(/-/g,' ')}</div>
-      <div class="ci-name">${p.name}</div>
-      <div class="ci-price">₹349 × ${p.qty}</div>
-    </div>
-    <button class="ci-rm" onclick="removeFromCart(${p.id})">✕</button>
-  </div>`).join('');
+function closeProduct() {
+    document.getElementById('productModal').classList.add('hidden');
+    document.body.style.overflow = '';
 }
 
-function openCart(){ document.getElementById('cartDrawer').classList.add('open'); document.getElementById('overlay').classList.add('open'); document.body.style.overflow='hidden'; }
-function closeCart(){ document.getElementById('cartDrawer').classList.remove('open'); document.getElementById('overlay').classList.remove('open'); document.body.style.overflow=''; }
+/* ════════════════════════════════════════════
+   ADD TO BAG
+════════════════════════════════════════════ */
+function addToBag(product, size) {
+    const key = `${product.id}-${size}`;
+    const existing = cart.find(c => c.key === key);
+    if (existing) { existing.qty++; }
+    else { cart.push({ key, id: product.id, player_name: product.player_name, team: product.team, image_url: product.image_url, size, qty: 1 }); }
+    updateCartUI();
+    showToast(`${product.player_name || 'Jersey'} added to bag`);
+}
 
-let toastT;
-function showToast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove('show'),2200); }
+function quickReserve(e, idx) {
+    e.stopPropagation();
+    openReserveModal(allProducts[idx]);
+}
 
-renderGrid();
+/* ════════════════════════════════════════════
+   CART
+════════════════════════════════════════════ */
+function updateCartUI() {
+    const total = cart.reduce((s, c) => s + c.qty, 0);
+    document.getElementById('cartCount').textContent     = total;
+    document.getElementById('cartCountHead').textContent = total;
+    document.getElementById('cartItemCount').textContent = total + ' item' + (total !== 1 ? 's' : '');
+    const wrap = document.getElementById('cartItems');
+    if (!cart.length) {
+        wrap.innerHTML = `<div class="bg-paper border border-dashed border-ink/20 p-12 text-center"><div class="font-display text-[18px] uppercase">Bag Empty</div><p class="text-[12px] opacity-60 mt-1">Browse jerseys above</p></div>`;
+        return;
+    }
+    wrap.innerHTML = cart.map((c, i) => `
+        <div class="bg-paper border-[1.5px] border-ink p-3 flex gap-3">
+            <div class="w-[72px] h-[88px] bg-[#EDE8E0] border border-ink/10 overflow-hidden shrink-0">
+                ${c.image_url ? `<img src="${esc(c.image_url)}" class="w-full h-full object-cover" draggable="false">` : '<div class="w-full h-full flex items-center justify-center font-display text-2xl opacity-10">77</div>'}
+            </div>
+            <div class="flex-1 min-w-0">
+                <div class="flex items-start justify-between gap-2">
+                    <h4 class="font-bold text-[12px] leading-[1.2] uppercase">${esc(c.player_name || 'Jersey')}</h4>
+                    <button onclick="removeCart(${i})" class="w-5 h-5 border border-ink flex items-center justify-center shrink-0 hover:bg-ink hover:text-paper">
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    </button>
+                </div>
+                <div class="text-[10px] tracking-widest uppercase opacity-60 mt-1">${esc(c.team || '')} · Size ${c.size}</div>
+                <div class="mt-3 flex items-center gap-2">
+                    <div class="flex border border-ink h-7">
+                        <button onclick="changeQty(${i},-1)" class="w-7 flex items-center justify-center hover:bg-ink hover:text-paper"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+                        <span class="w-7 flex items-center justify-center text-[11px] font-bold border-x border-ink">${c.qty}</span>
+                        <button onclick="changeQty(${i},1)" class="w-7 flex items-center justify-center hover:bg-ink hover:text-paper"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+                    </div>
+                    <div class="ml-auto text-[11px] font-bold uppercase opacity-60">x${c.qty}</div>
+                </div>
+            </div>
+        </div>`).join('');
+}
+window.removeCart  = (i) => { cart.splice(i, 1); updateCartUI(); };
+window.changeQty   = (i, d) => { cart[i].qty += d; if (cart[i].qty <= 0) cart.splice(i, 1); updateCartUI(); };
+
+/* ════════════════════════════════════════════
+   RESERVE MODAL
+════════════════════════════════════════════ */
+function openReserveModal(product) {
+    rsvTarget = product;
+    document.getElementById('rsv-product-info').textContent =
+        (product.player_name || 'Jersey') + (product.team ? ' · ' + product.team : '');
+    document.getElementById('rsv-name').value  = '';
+    document.getElementById('rsv-phone').value = '';
+    const m = document.getElementById('reserveModal');
+    m.classList.remove('hidden');
+    m.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+}
+function closeReserveModal() {
+    const m = document.getElementById('reserveModal');
+    m.classList.add('hidden');
+    m.classList.remove('flex');
+    document.body.style.overflow = '';
+    rsvTarget = null;
+}
+
+/* ════════════════════════════════════════════
+   WHATSAPP MESSAGES
+════════════════════════════════════════════ */
+function buildSingleMsg(product, size, name, phone) {
+    return `🏆 *Seventy-7 Sports — Reservation*\n\n*Jersey:* ${product.player_name || 'Jersey'}\n*Team:* ${product.team || 'N/A'}\n*Size:* ${size}\n*Customer:* ${name}\n*Phone:* ${phone}\n\nPlease confirm my reservation for local pickup. Thanks!`;
+}
+function buildCartMsg() {
+    const lines = cart.map(c => `• ${c.player_name || 'Jersey'} (${c.team || 'N/A'}) — Size ${c.size}, Qty: ${c.qty}`);
+    return `🏆 *Seventy-7 Sports — Bag Order*\n\n${lines.join('\n')}\n\nPlease confirm my order for local pickup. Thanks!`;
+}
+function waOpen(msg) {
+    window.open(`https://wa.me/${WA_NUM}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener,noreferrer');
+}
+
+/* ════════════════════════════════════════════
+   CART OPEN/CLOSE
+════════════════════════════════════════════ */
+const cartDrawer = document.getElementById('cartDrawer');
+const cartPanel  = document.getElementById('cartPanel');
+function openCart()  { cartDrawer.classList.remove('hidden'); requestAnimationFrame(() => cartPanel.classList.remove('translate-x-full')); }
+function closeCart() { cartPanel.classList.add('translate-x-full'); setTimeout(() => cartDrawer.classList.add('hidden'), 300); }
+window.closeCart = closeCart;
+
+document.getElementById('openCart').addEventListener('click', openCart);
+document.getElementById('closeCart').addEventListener('click', closeCart);
+document.getElementById('cartBackdrop').addEventListener('click', closeCart);
+
+document.getElementById('checkoutWaBtn').addEventListener('click', () => {
+    if (!cart.length) { showToast('Your bag is empty'); return; }
+    waOpen(buildCartMsg());
+});
+
+/* ════════════════════════════════════════════
+   MODAL EVENTS
+════════════════════════════════════════════ */
+document.getElementById('closeModal').addEventListener('click', closeProduct);
+document.getElementById('modalBackdrop').addEventListener('click', closeProduct);
+
+document.getElementById('reserveBtn').addEventListener('click', () => {
+    if (!activeProduct) return;
+    closeProduct();
+    openReserveModal(activeProduct);
+});
+
+document.getElementById('waDirectBtn').addEventListener('click', () => {
+    if (!activeProduct) return;
+    const msg = `Hi! I'd like to order:\n\n*${activeProduct.player_name || 'Jersey'}* — ${activeProduct.team || ''}\nSize: ${selectedSize}\n\nPlease share pickup details. Thanks!`;
+    waOpen(msg);
+});
+
+document.getElementById('closeReserve').addEventListener('click', closeReserveModal);
+document.getElementById('reserveBackdrop').addEventListener('click', closeReserveModal);
+
+document.getElementById('rsv-confirm').addEventListener('click', () => {
+    const name  = document.getElementById('rsv-name').value.trim();
+    const phone = document.getElementById('rsv-phone').value.trim();
+    const size  = document.getElementById('rsv-size').value;
+    if (!name || !phone) { showToast('Please enter name and phone'); return; }
+    waOpen(buildSingleMsg(rsvTarget, size, name, phone));
+    closeReserveModal();
+    showToast('Redirecting to WhatsApp…');
+});
+
+/* ════════════════════════════════════════════
+   SEARCH
+════════════════════════════════════════════ */
+document.getElementById('searchInput').addEventListener('input', e => { searchQ = e.target.value; renderProducts(); });
+document.getElementById('teamFilter').addEventListener('change', () => renderProducts());
+
+const searchOverlay      = document.getElementById('searchOverlay');
+const searchOverlayInput = document.getElementById('searchOverlayInput');
+const searchResults      = document.getElementById('searchResults');
+function openSearch()  { searchOverlay.classList.remove('hidden'); searchOverlayInput.focus(); renderSearchResults(''); }
+function closeSearch() { searchOverlay.classList.add('hidden'); }
+document.getElementById('openSearch').addEventListener('click', openSearch);
+document.getElementById('closeSearch').addEventListener('click', closeSearch);
+document.getElementById('searchBackdrop').addEventListener('click', closeSearch);
+searchOverlayInput.addEventListener('input', e => renderSearchResults(e.target.value));
+function renderSearchResults(q) {
+    const filtered = allProducts.filter(p =>
+        `${p.player_name} ${p.team}`.toLowerCase().includes(q.toLowerCase())
+    ).slice(0, 5);
+    searchResults.innerHTML = filtered.map((p, i) => `
+        <button class="w-full text-left flex items-center gap-4 border-[1.5px] border-ink bg-paper p-3 hover:bg-ink hover:text-paper group transition-colors" onclick="closeSearch(); openProduct(${allProducts.indexOf(p)})">
+            <div class="w-14 h-14 bg-[#EDE8E0] overflow-hidden shrink-0">
+                ${p.image_url ? `<img src="${esc(p.image_url)}" class="w-full h-full object-cover" draggable="false">` : ''}
+            </div>
+            <div>
+                <div class="font-bold text-[13px] uppercase">${esc(p.player_name || 'Jersey')}</div>
+                <div class="text-[11px] opacity-60 group-hover:text-white/60">${esc(p.team || '')}</div>
+            </div>
+            <svg class="ml-auto" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+        </button>`).join('') || `<div class="text-[13px] opacity-60">No results for "${esc(q)}"</div>`;
+}
+
+/* ════════════════════════════════════════════
+   MOBILE MENU
+════════════════════════════════════════════ */
+const mobileMenu  = document.getElementById('mobileMenu');
+const mobilePanel = document.getElementById('mobilePanel');
+function openMobile()  { mobileMenu.classList.remove('hidden'); requestAnimationFrame(() => mobilePanel.classList.remove('-translate-x-full')); }
+function closeMobile() { mobilePanel.classList.add('-translate-x-full'); setTimeout(() => mobileMenu.classList.add('hidden'), 300); }
+document.getElementById('openMobile').addEventListener('click', openMobile);
+document.getElementById('closeMobile').addEventListener('click', closeMobile);
+document.getElementById('mobileBackdrop').addEventListener('click', closeMobile);
+mobilePanel.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMobile));
+
+/* ════════════════════════════════════════════
+   TOAST
+════════════════════════════════════════════ */
+let toastTimer;
+function showToast(msg) {
+    const t = document.getElementById('toast');
+    document.getElementById('toastMsg').textContent = msg;
+    t.classList.remove('opacity-0','translate-y-2');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.add('opacity-0','translate-y-2'), 2600);
+}
+
+/* ════════════════════════════════════════════
+   UTILS
+════════════════════════════════════════════ */
+function esc(s) { const d = document.createElement('div'); d.textContent = String(s||''); return d.innerHTML; }
+
+/* ════════════════════════════════════════════
+   ESC KEY
+════════════════════════════════════════════ */
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { closeProduct(); closeCart(); closeMobile(); closeSearch(); closeReserveModal(); }
+});
+
+/* ════════════════════════════════════════════
+   INIT
+════════════════════════════════════════════ */
+document.getElementById('year').textContent = new Date().getFullYear();
+fetchProducts();
+updateCartUI();
 </script>
 </body>
 </html>
