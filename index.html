@@ -15,7 +15,21 @@
       --text:#f8fafc;--muted:#94a3b8;--border:rgba(255,255,255,.1);
       --font:"DM Sans",system-ui,sans-serif;--display:Oswald,system-ui,sans-serif;
     }
-    *{box-sizing:border-box}html{scroll-behavior:smooth}
+    *{box-sizing:border-box}
+
+    /* Remove mobile blue tap highlight */
+    html, body, a, button, input, select, textarea, label, summary, [role="button"] {
+      -webkit-tap-highlight-color: transparent;
+      -webkit-touch-callout: none;
+    }
+    button, a, input, select, textarea {
+      outline: none;
+    }
+    button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+      outline: 2px solid #c8f542;
+      outline-offset: 2px;
+    }
+html{scroll-behavior:smooth}
     body{margin:0;min-height:100vh;font-family:var(--font);background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
     h1,h2,h3,h4{font-family:var(--display);letter-spacing:.01em;margin:0}
     p{margin:0}a{color:inherit;text-decoration:none}
@@ -336,7 +350,7 @@ loadRrweb();
           <ul>
             <li><a href="#/shop" data-link>All Football Jerseys</a></li>
             <li><a href="#/shop" data-link>New Arrivals</a></li>
-            <li><a href="/admin.html">Sell / Admin</a></li>
+            <li><a href="https://77sportsadmin.vercel.app" target="_blank" rel="noopener noreferrer">Sell / Admin</a></li>
           </ul>
         </div>
         <div>
@@ -344,22 +358,18 @@ loadRrweb();
           <ul>
             <li><a href="#/about" data-link>About Us</a></li>
             <li><a href="#/contact" data-link>Contact</a></li>
-            <li><a href="/admin.html">AdminCompanion</a></li>
+            <li><a href="https://77sportsadmin.vercel.app" target="_blank" rel="noopener noreferrer">AdminCompanion</a></li>
           </ul>
         </div>
         <div>
           <h4>Contact</h4>
           <div class="contact-line">
             <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-            <span>77 Arena Boulevard, Suite 700<br />Los Angeles, CA 90015</span>
+            <span>Dooniwari Kupwara</span>
           </div>
           <div class="contact-line">
-            <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            <a href="tel:+13105557777">(310) 555-7777</a>
-          </div>
-          <div class="contact-line">
-            <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-            <a href="mailto:hello@seventy7sports.com">hello@seventy7sports.com</a>
+            <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+            <a href="https://www.instagram.com/seventy7sports/" target="_blank" rel="noopener noreferrer">@seventy7sports on Instagram</a>
           </div>
         </div>
       </div>
@@ -506,7 +516,7 @@ function renderNav(activePath){
 
 function emptyCatalog(msg){
   return `<div class="empty"><h3>No jerseys yet</h3><p>${msg||'Upload kits from AdminCompanion to populate the store.'}</p>
-  <a class="btn btn-lime btn-md" href="/admin.html">Open AdminCompanion</a></div>`
+  <a class="btn btn-lime btn-md" href="https://77sportsadmin.vercel.app" target="_blank" rel="noopener noreferrer">Open AdminCompanion</a></div>`
 }
 
 function pageHome(){
@@ -710,7 +720,7 @@ function pageContact(){
     <div class="eyebrow">Get in touch</div><h1 class="page-title">Contact Seventy-7Sports</h1>
     <p class="page-sub">Questions about sizing, custom name printing, wholesale, or an order?</p>
     <div class="contact-grid"><div>
-      ${[{ic:'map',t:'Visit the Flagship',lines:['77 Arena Boulevard, Suite 700','Los Angeles, CA 90015']},{ic:'phone',t:'Call Us',lines:['(310) 555-7777','Mon–Fri, 9am – 6pm PT']},{ic:'mail',t:'Email',lines:['hello@seventy7sports.com','orders@seventy7sports.com']},{ic:'clock',t:'Support Hours',lines:['Customer chat: 8am – 8pm PT','Weekend email support available']}].map(c=>`<div class="info-card"><span class="icon-box">${icon(c.ic)}</span><div><h3>${c.t}</h3>${c.lines.map(l=>`<p>${l}</p>`).join('')}</div></div>`).join('')}
+      ${[{ic:'map',t:'Location',lines:['Dooniwari Kupwara']},{ic:'message',t:'Instagram',lines:['@seventy7sports','www.instagram.com/seventy7sports']},{ic:'clock',t:'Support Hours',lines:['Customer chat: 8am – 8pm PT','Weekend support available']}].map(c=>`<div class="info-card"><span class="icon-box">${icon(c.ic)}</span><div><h3>${c.t}</h3>${c.lines.map(l=>c.t==='Instagram'&&l.includes('instagram')?`<p><a href="https://www.instagram.com/seventy7sports/" target="_blank" rel="noopener noreferrer" style="color:var(--lime)">${l}</a></p>`:`<p>${l}</p>`).join('')}</div></div>`).join('')}
     </div>
     <div class="form-card"><div style="display:flex;align-items:center;gap:.6rem;margin-bottom:1.25rem">${icon('message','icon-md')}<h2 style="font-size:1.25rem">Send a Message</h2></div>
       <form id="contact-form">
