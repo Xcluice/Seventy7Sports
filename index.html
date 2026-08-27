@@ -5,9 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Seventy-7Sports — premium football jerseys powered by live Supabase inventory." />
   
-  <!-- Optimization: Preconnect to Supabase to speed up API and Image delivery -->
   <link rel="preconnect" href="https://sedwzszpgispblzudkxu.supabase.co" crossorigin />
-  
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -71,7 +69,6 @@
     .btn-lg{padding:.9rem 1.5rem;font-size:.875rem}.btn-md{padding:.7rem 1.1rem;font-size:.875rem}.btn-block{width:100%}
     .btn:disabled{opacity:.7;cursor:not-allowed}
     
-    /* Optimization: Shimmer Animation for Images */
     @keyframes shimmer {
       0% { background-position: 200% 0; }
       100% { background-position: -200% 0; }
@@ -116,14 +113,6 @@
     .section-head h2{font-size:clamp(1.75rem,3vw,2rem);margin-top:.4rem}
     .text-link{color:var(--lime);font-size:.875rem;font-weight:800;display:inline-flex;align-items:center;gap:.3rem}
     .text-link:hover{text-decoration:underline}
-    .cat-grid{display:grid;gap:1rem;grid-template-columns:1fr}
-    @media(min-width:640px){.cat-grid{grid-template-columns:repeat(2,1fr)}}
-    @media(min-width:1024px){.cat-grid{grid-template-columns:repeat(5,1fr)}}
-    .cat-card{position:relative;overflow:hidden;border-radius:1rem;border:1px solid var(--border);aspect-ratio:3/4;display:flex;align-items:flex-end;padding:1rem;
-      background:linear-gradient(160deg,rgba(200,245,66,.12),rgba(15,23,42,.95) 55%,#0b1220)}
-    .cat-card:hover{border-color:rgba(200,245,66,.35);transform:translateY(-2px);transition:.2s}
-    .cat-card .icon-box{width:36px;height:36px;margin-bottom:.5rem;background:var(--lime);color:var(--bg)}
-    .cat-card h3{font-size:1.1rem}.cat-card span{font-size:.75rem;color:#cbd5e1}
 
     .product-grid{display:grid;gap:1.25rem;grid-template-columns:1fr}
     @media(min-width:640px){.product-grid{grid-template-columns:repeat(2,1fr)}}
@@ -133,36 +122,24 @@
     .product-card{
       display:flex;flex-direction:column;overflow:visible;border-radius:1rem;border:1px solid var(--border);
       background:var(--card);box-shadow:0 16px 40px rgba(0,0,0,.2);
-      transform-style:preserve-3d;
-      transition:box-shadow .3s,border-color .3s;
-      will-change:transform;
-      position:relative;
+      transform-style:preserve-3d; transition:box-shadow .3s,border-color .3s; will-change:transform; position:relative;
     }
-    .product-card:hover{
-      box-shadow:0 28px 60px rgba(0,0,0,.45),0 0 0 1px rgba(200,245,66,.25);
-      border-color:rgba(200,245,66,.3);
-    }
+    .product-card:hover{ box-shadow:0 28px 60px rgba(0,0,0,.45),0 0 0 1px rgba(200,245,66,.25); border-color:rgba(200,245,66,.3); }
     .product-card::before{
-      content:"";
-      position:absolute;inset:0;
-      border-radius:1rem;
+      content:""; position:absolute; inset:0; border-radius:1rem;
       background:linear-gradient(135deg,rgba(255,255,255,.18) 0%,rgba(255,255,255,0) 50%,rgba(255,255,255,.06) 100%);
-      pointer-events:none;
-      z-index:3;
-      opacity:0;
-      transition:opacity .3s;
+      pointer-events:none; z-index:3; opacity:0; transition:opacity .3s;
     }
     .product-card:hover::before{opacity:1}
 
+    /* Fixed overflow for 3D flip */
     .product-media{
-      position:relative;aspect-ratio:4/5;overflow:hidden;display:block;
-      border-radius:1rem 1rem 0 0;
+      position:relative;aspect-ratio:4/5;display:block; border-radius:1rem 1rem 0 0;
     }
     .product-media img{
       width:100%;height:100%;object-fit:cover;
       transition:transform .5s cubic-bezier(.25,.46,.45,.94),filter .4s;
-      transform-origin:center center;
-      will-change:transform;
+      transform-origin:center center; will-change:transform;
     }
     .product-card:hover .product-media img{transform:scale(1.08)}
 
@@ -170,19 +147,12 @@
       content:"";position:absolute;inset:0;
       background:linear-gradient(135deg,rgba(255,255,255,.15) 0%,transparent 40%,transparent 60%,rgba(0,0,0,.25) 100%),
                 linear-gradient(to top,rgba(11,18,32,.85),transparent 55%);
-      pointer-events:none;z-index:1;
-      transition:opacity .3s;
+      pointer-events:none;z-index:1; transition:opacity .3s; border-radius:inherit;
     }
     .product-card::after{
-      content:"";
-      position:absolute;bottom:-8px;left:8px;right:8px;height:20px;
-      background:rgba(0,0,0,.4);
-      filter:blur(12px);
-      border-radius:50%;
-      z-index:-1;
-      opacity:0;
-      transition:opacity .3s,transform .3s;
-      transform:scaleX(.9);
+      content:""; position:absolute;bottom:-8px;left:8px;right:8px;height:20px;
+      background:rgba(0,0,0,.4); filter:blur(12px); border-radius:50%; z-index:-1;
+      opacity:0; transition:opacity .3s,transform .3s; transform:scaleX(.9);
     }
     .product-card:hover::after{opacity:1;transform:scaleX(1)}
 
@@ -228,36 +198,42 @@
     .results-meta{color:#94a3b8;font-size:.875rem;margin-bottom:1rem}.results-meta strong{color:#fff}
     .empty{border:1px dashed rgba(255,255,255,.15);background:var(--card);border-radius:1rem;padding:3.5rem 1.5rem;text-align:center}
     .empty h3{font-size:1.2rem;margin-bottom:.5rem}.empty p{color:#94a3b8;margin-bottom:1.25rem}
-    .drawer-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:60;display:none}
-    .drawer-backdrop.open{display:block}
-    .drawer{position:fixed;left:0;right:0;bottom:0;z-index:70;max-height:85vh;overflow:auto;border-radius:1.5rem 1.5rem 0 0;border-top:1px solid var(--border);background:var(--card);padding:1.5rem;transform:translateY(110%);transition:transform .25s}
-    .drawer.open{transform:translateY(0)}
-    .drawer-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
-    .back-link{display:inline-flex;align-items:center;gap:.4rem;color:#94a3b8;font-size:.875rem;font-weight:600;margin-bottom:1.5rem;background:none;border:0;cursor:pointer;padding:0}
-    .back-link:hover{color:var(--lime)}
+    
     .detail-grid{display:grid;gap:2.5rem}@media(min-width:1024px){.detail-grid{grid-template-columns:1fr 1fr}}
 
+    /* Fixed overflow for 3D Gallery Flip */
     .gallery-main{
-      border-radius:1.5rem;overflow:hidden;border:1px solid var(--border);background:var(--card);aspect-ratio:1;
-      position:relative;
-      transform-style:preserve-3d;
-      box-shadow:0 20px 60px rgba(0,0,0,.5);
-      transition:box-shadow .3s;
+      border-radius:1.5rem;border:1px solid var(--border);background:var(--card);aspect-ratio:1;
+      position:relative; transform-style:preserve-3d; box-shadow:0 20px 60px rgba(0,0,0,.5); transition:box-shadow .3s;
     }
     .gallery-main:hover{box-shadow:0 32px 80px rgba(0,0,0,.65),0 0 0 1px rgba(200,245,66,.2)}
     .gallery-main img{
       width:100%;height:100%;object-fit:cover;
-      transition:transform .5s cubic-bezier(.25,.46,.45,.94),filter .4s;
-      will-change:transform;
+      transition:transform .5s cubic-bezier(.25,.46,.45,.94),filter .4s; will-change:transform;
     }
     .gallery-shine{
       position:absolute;inset:0;
       background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.18) 0%,transparent 60%);
-      pointer-events:none;z-index:2;
-      transition:background .05s;
-      border-radius:inherit;
+      pointer-events:none;z-index:2; transition:background .05s; border-radius:inherit;
     }
 
+    /* Flip mechanics */
+    .flip-card{position:relative;width:100%;height:100%;perspective:1200px}
+    .flip-inner{position:relative;width:100%;height:100%;transition:transform .6s cubic-bezier(.4,.2,.2,1);transform-style:preserve-3d}
+    .flip-inner.flipped{transform:rotateY(180deg)}
+    .flip-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden; overflow:hidden; border-radius:inherit;}
+    .flip-front{transform:rotateY(0deg)}
+    .flip-back{transform:rotateY(180deg)}
+    .flip-btn{position:absolute;z-index:3;top:.6rem;right:.6rem;width:32px;height:32px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.55);color:#fff;display:grid;place-items:center;cursor:pointer;backdrop-filter:blur(4px);transition:.15s}
+    .flip-btn:hover{background:var(--lime);color:var(--bg);border-color:var(--lime)}
+    .gallery-main .flip-btn{top:1rem;right:1rem;width:40px;height:40px}
+
+    /* Auth Modal CSS */
+    .modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,.8); z-index:100; display:none; place-items:center; backdrop-filter:blur(4px); }
+    .modal-overlay.open { display:grid; }
+    .modal-content { background:var(--card); padding:2rem; border-radius:1.5rem; width:90%; max-width:400px; border:1px solid var(--border); box-shadow:0 25px 50px rgba(0,0,0,.5); }
+    .modal-content h2 { font-size:1.5rem; margin-bottom:1rem; }
+    
     .detail-tags{display:flex;flex-wrap:wrap;gap:.5rem}
     .tag{border-radius:999px;background:rgba(255,255,255,.1);color:#cbd5e1;padding:.3rem .75rem;font-size:.75rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em}
     .tag-lime{background:var(--lime);color:var(--bg)}
@@ -345,17 +321,6 @@
     .hidden{display:none!important}.mt-section{margin-top:3.5rem}.text-center{text-align:center}
     .loading-bar{display:flex;align-items:center;justify-content:center;gap:.6rem;padding:4rem;color:#94a3b8}
     .spin{animation:spin .8s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
-
-    /* Jersey front/back flip */
-    .flip-card{position:relative;width:100%;height:100%;perspective:1200px}
-    .flip-inner{position:relative;width:100%;height:100%;transition:transform .6s cubic-bezier(.4,.2,.2,1);transform-style:preserve-3d}
-    .flip-inner.flipped{transform:rotateY(180deg)}
-    .flip-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden}
-    .flip-face img{width:100%;height:100%;object-fit:cover}
-    .flip-back{transform:rotateY(180deg)}
-    .flip-btn{position:absolute;z-index:3;top:.6rem;right:.6rem;width:32px;height:32px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.55);color:#fff;display:grid;place-items:center;cursor:pointer;backdrop-filter:blur(4px);transition:.15s}
-    .flip-btn:hover{background:var(--lime);color:var(--bg);border-color:var(--lime)}
-    .gallery-main .flip-btn{top:1rem;right:1rem;width:40px;height:40px}
   </style>
 </head>
 <body>
@@ -378,6 +343,10 @@
             <input type="search" name="q" placeholder="Search jerseys..." aria-label="Search jerseys" />
             <button class="search-go" type="submit">Go</button>
           </form>
+          <!-- Auth Toggle Button -->
+          <button class="icon-btn" id="auth-toggle" aria-label="Account">
+            <svg class="icon icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </button>
           <a href="#/cart" class="icon-btn" data-link aria-label="Cart">
             <svg class="icon icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
             <span class="cart-badge hidden" id="cart-badge">0</span>
@@ -449,6 +418,32 @@
   <div class="drawer-backdrop" id="drawer-backdrop"></div>
   <div class="drawer" id="filter-drawer"></div>
 
+  <!-- Auth Modal -->
+  <div class="modal-overlay" id="auth-modal">
+    <div class="modal-content">
+       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+         <h2 id="auth-title">Sign In</h2>
+         <button id="close-auth" style="background:transparent;border:0;color:white;cursor:pointer">
+           <svg class="icon icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+         </button>
+       </div>
+       <div id="auth-forms-container">
+         <form id="auth-form">
+           <div class="form-row"><label><span>Email</span><input type="email" id="auth-email" required></label></div>
+           <div class="form-row"><label><span>Password</span><input type="password" id="auth-pass" required></label></div>
+           <button type="submit" class="btn btn-lime btn-block" style="margin-top:1rem" id="auth-submit">Sign In</button>
+         </form>
+         <p style="text-align:center; margin-top:1rem; font-size:0.875rem; color:var(--muted)">
+           <a href="#" id="auth-switch" style="color:var(--lime)">Need an account? Sign Up</a>
+         </p>
+       </div>
+       <div id="auth-logged-in-container" class="hidden">
+         <p style="margin-bottom:1.5rem; text-align:center; color:var(--muted)">You are signed in to Seventy-7Sports.</p>
+         <button id="auth-logout" class="btn btn-ghost btn-block">Log Out</button>
+       </div>
+    </div>
+  </div>
+
   <script>
 const SUPABASE_URL='https://sedwzszpgispblzudkxu.supabase.co';
 const SUPABASE_KEY='sb_publishable_6iVgLMcaksXvFABpayNlIg_u7t7yai2';
@@ -457,7 +452,19 @@ const SMS_NUMBER='+917889335300';
 const SPORTS=['Football'];
 const CACHE_KEY='s77-products-cache';
 
-// Optimization: Formats the image URL with Supabase transformations
+// AUTH STATE
+let isSignUpMode = false;
+let authUser = localStorage.getItem('s77_token') ? { 
+  id: localStorage.getItem('s77_user_id'), 
+  token: localStorage.getItem('s77_token') 
+} : null;
+
+let products=[],loadError=null,isReady=false;
+let cart = []; // Cart is now loaded from DB
+let orderDone=false,mobileOpen=false,contactSubmitted=false;
+let shopState={sport:'All',q:'',newOnly:false,sort:'featured',maxPrice:1000};
+let productUI={};
+
 function optImg(url, width=400) {
   if(!url) return '';
   try {
@@ -471,7 +478,6 @@ function optImg(url, width=400) {
   }
 }
 
-// ── 3D tilt engine ──────────────────────────────────────────────
 function bind3DTilt(el){
   const inner=el.querySelector('.product-media img');
   if(!inner)return;
@@ -479,9 +485,6 @@ function bind3DTilt(el){
   function apply(rx,ry,shine){
     el.style.transform=`perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg) scale3d(1.04,1.04,1.04)`;
     if(inner) inner.style.transform=`scale(1.08) translate(${-ry*.6}px,${rx*.6}px)`;
-    const sx=50+ry*2,sy=50-rx*2;
-    el.style.setProperty('--shine-x',sx+'%');
-    el.style.setProperty('--shine-y',sy+'%');
   }
   el.addEventListener('mousemove',e=>{
     const r=el.getBoundingClientRect();
@@ -495,7 +498,6 @@ function bind3DTilt(el){
     if(inner){inner.style.transform='scale(1) translate(0,0)';inner.style.transition='transform .5s';}
     setTimeout(()=>{el.style.transition='';if(inner)inner.style.transition='';},500);
   },{passive:true});
-  // touch tilt
   el.addEventListener('touchmove',e=>{
     const t=e.touches[0];const r=el.getBoundingClientRect();
     const x=(t.clientX-r.left)/r.width-0.5;
@@ -507,7 +509,6 @@ function bind3DTilt(el){
   },{passive:true});
 }
 
-// 3D tilt for gallery-main on product detail
 function bind3DGallery(el){
   const img=el.querySelector('img');
   const shine=el.querySelector('.gallery-shine');
@@ -567,31 +568,196 @@ mail:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" st
 clock:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
 target:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>',
 award:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"/><circle cx="12" cy="8" r="6"/></svg>',
-users:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
-zap:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>',
-handshake:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3 1 11h-2"/><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/><path d="M3 4h8"/></svg>'
+users:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>'
 };
 function icon(name,cls='icon-md'){return(icons[name]||icons.shirt).replace('class="icon"',`class="icon ${cls}"`)}
-
-let products=[],loadError=null,isReady=false;
-let cart=JSON.parse(localStorage.getItem('s77-cart')||'[]');
-let orderDone=false,mobileOpen=false,contactSubmitted=false;
-let shopState={sport:'All',q:'',newOnly:false,sort:'featured',maxPrice:1000};
-let productUI={};
 
 function mapRow(r){
   return{
     id:r.id,name:`${r.player_name} Jersey`,player_name:r.player_name,
     team:r.team||'Seventy-7Sports',sport:'Football',price:Number(r.price)||0,
     image:r.image_url||'',imageBack:r.image_back_url||'',images:r.image_url?[r.image_url]:[],
-    description:`Official ${r.player_name} jersey${r.team?` for ${r.team}`:''}. Premium kit listed via AdminCompanion.`,
+    description:`Official ${r.player_name} jersey${r.team?` for ${r.team}`:''}.`,
     sizes:['S','M','L','XL','XXL'],colors:['Default'],
-    featured:true,newArrival:true,rating:4.9,reviews:12,tags:['live','admin'],created_at:r.created_at
+    featured:true,newArrival:true,rating:4.9,reviews:12,created_at:r.created_at
   };
 }
 
+// --- DB CART LOGIC ---
+async function loadCartFromDB(){
+  if(!authUser) { cart = []; updateCartBadge(); if(location.hash==='#/cart') render(); return; }
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/user_carts?user_id=eq.${authUser.id}&select=*`, {
+      headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${authUser.token}` }
+    });
+    if(res.ok) {
+      const rows = await res.json();
+      cart = rows.map(r => {
+        const p = products.find(x => x.id === r.jersey_id) || {};
+        return { 
+          db_id: r.id, id: r.jersey_id, name: p.name||'Jersey', team: p.team||'', 
+          image: p.image||'', price: p.price||0, size: r.size, quantity: r.quantity, 
+          key: `${r.jersey_id}__${r.size}` 
+        };
+      });
+    }
+  } catch(e) {}
+  updateCartBadge();
+  if(location.hash==='#/cart') render();
+}
+
+async function addToCart(p,size,color,qty){
+  if(!authUser) { alert("Please sign in to add items to your cart!"); showAuthModal(); return; }
+  const key=`${p.id}__${size}`;
+  const ex=cart.find(i=>i.key===key);
+  
+  if(ex) {
+    ex.quantity += qty;
+    fetch(`${SUPABASE_URL}/rest/v1/user_carts?id=eq.${ex.db_id}`, {
+      method: 'PATCH',
+      headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${authUser.token}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ quantity: ex.quantity })
+    });
+  } else {
+    const tempItem = { key, id: p.id, name: p.name, team: p.team, image: p.image, price: p.price, size, quantity: qty };
+    cart.push(tempItem);
+    fetch(`${SUPABASE_URL}/rest/v1/user_carts`, {
+      method: 'POST',
+      headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${authUser.token}`, 'Content-Type': 'application/json', 'Prefer': 'return=representation' },
+      body: JSON.stringify({ user_id: authUser.id, jersey_id: p.id, size: size, quantity: qty })
+    }).then(r=>r.json()).then(data=>{ if(data && data[0]) tempItem.db_id = data[0].id; });
+  }
+  updateCartBadge();
+}
+
+async function removeFromCart(key){
+  const ex = cart.find(i=>i.key===key);
+  cart = cart.filter(i=>i.key!==key);
+  if(ex && ex.db_id && authUser) {
+    fetch(`${SUPABASE_URL}/rest/v1/user_carts?id=eq.${ex.db_id}`, {
+      method: 'DELETE',
+      headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${authUser.token}` }
+    });
+  }
+  updateCartBadge();
+}
+
+async function updateQty(key,qty){
+  if(qty<=0) return removeFromCart(key);
+  const ex=cart.find(i=>i.key===key);
+  if(ex) {
+    ex.quantity=qty;
+    if(ex.db_id && authUser) {
+      fetch(`${SUPABASE_URL}/rest/v1/user_carts?id=eq.${ex.db_id}`, {
+        method: 'PATCH',
+        headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${authUser.token}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ quantity: ex.quantity })
+      });
+    }
+  }
+  updateCartBadge();
+}
+
+async function clearCart(){
+  cart = [];
+  if(authUser) {
+    fetch(`${SUPABASE_URL}/rest/v1/user_carts?user_id=eq.${authUser.id}`, {
+      method: 'DELETE',
+      headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${authUser.token}` }
+    });
+  }
+  updateCartBadge();
+}
+
+function cartCount(){return cart.reduce((s,i)=>s+i.quantity,0)}
+function cartSubtotal(){return cart.reduce((s,i)=>s+i.price*i.quantity,0)}
+function updateCartBadge(){
+  const b=document.getElementById('cart-badge'),n=cartCount();
+  if(n>0){b.textContent=n>99?'99+':n;b.classList.remove('hidden')}else b.classList.add('hidden');
+}
+
+// --- AUTH UI LOGIC ---
+const authModal = document.getElementById('auth-modal');
+const authToggleBtn = document.getElementById('auth-toggle');
+
+function showAuthModal() {
+  if (authUser) {
+    document.getElementById('auth-forms-container').classList.add('hidden');
+    document.getElementById('auth-logged-in-container').classList.remove('hidden');
+    document.getElementById('auth-title').textContent = 'Account';
+  } else {
+    document.getElementById('auth-forms-container').classList.remove('hidden');
+    document.getElementById('auth-logged-in-container').classList.add('hidden');
+    document.getElementById('auth-title').textContent = isSignUpMode ? 'Sign Up' : 'Sign In';
+  }
+  authModal.classList.add('open');
+}
+
+document.getElementById('close-auth').onclick = () => authModal.classList.remove('open');
+authToggleBtn.onclick = showAuthModal;
+
+document.getElementById('auth-switch').onclick = (e) => {
+  e.preventDefault();
+  isSignUpMode = !isSignUpMode;
+  document.getElementById('auth-title').textContent = isSignUpMode ? 'Sign Up' : 'Sign In';
+  document.getElementById('auth-submit').textContent = isSignUpMode ? 'Create Account' : 'Sign In';
+  document.getElementById('auth-switch').textContent = isSignUpMode ? 'Already have an account? Sign In' : 'Need an account? Sign Up';
+};
+
+document.getElementById('auth-form').onsubmit = async (e) => {
+  e.preventDefault();
+  const email = document.getElementById('auth-email').value;
+  const pass = document.getElementById('auth-pass').value;
+  const btn = document.getElementById('auth-submit');
+  btn.textContent = 'Loading...';
+  btn.disabled = true;
+
+  try {
+    if (isSignUpMode) {
+      const res = await fetch(`${SUPABASE_URL}/auth/v1/signup`, {
+        method: 'POST',
+        headers: { 'apikey': SUPABASE_KEY, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password: pass })
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.msg || data.error_description || 'Signup failed');
+      alert("Account created! You can now log in.");
+      isSignUpMode = false;
+      document.getElementById('auth-switch').click(); // switch back to login
+    } else {
+      const res = await fetch(`${SUPABASE_URL}/auth/v1/token?grant_type=password`, {
+        method: 'POST',
+        headers: { 'apikey': SUPABASE_KEY, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password: pass })
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error_description || 'Login failed');
+      
+      localStorage.setItem('s77_token', data.access_token);
+      localStorage.setItem('s77_user_id', data.user.id);
+      authUser = { id: data.user.id, token: data.access_token };
+      authModal.classList.remove('open');
+      loadCartFromDB(); // Fetch their DB cart
+    }
+  } catch(err) {
+    alert(err.message);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = isSignUpMode ? 'Create Account' : 'Sign In';
+  }
+};
+
+document.getElementById('auth-logout').onclick = () => {
+  localStorage.removeItem('s77_token');
+  localStorage.removeItem('s77_user_id');
+  authUser = null;
+  authModal.classList.remove('open');
+  cart = []; // clear local cart
+  updateCartBadge();
+  if(location.hash === '#/cart') render();
+};
+
 async function loadLiveJerseys(){
-  // Optimization: Read from localStorage cache to prevent initial load blocking
   const cached = localStorage.getItem(CACHE_KEY);
   if(cached) {
     try { 
@@ -607,14 +773,15 @@ async function loadLiveJerseys(){
     });
     if(!res.ok)throw new Error('Could not load inventory');
     const rows=await res.json();
-    
-    // Optimization: Cache results for next visit
     localStorage.setItem(CACHE_KEY, JSON.stringify(rows));
-    
     products=Array.isArray(rows)?rows.map(mapRow):[];
     loadError=null;
+    
+    // Once products load, load the DB cart so we can map names/images
+    if (authUser) loadCartFromDB();
+    
   }catch(e){
-    if(!products.length) { loadError=e.message||'Failed to load inventory'; }
+    if(!products.length) loadError=e.message||'Failed to load inventory';
   } finally {
     isReady = true;
     if(!location.hash) location.hash = '/'; 
@@ -622,34 +789,12 @@ async function loadLiveJerseys(){
   }
 }
 
-function saveCart(){localStorage.setItem('s77-cart',JSON.stringify(cart));updateCartBadge()}
-function cartCount(){return cart.reduce((s,i)=>s+i.quantity,0)}
-function cartSubtotal(){return cart.reduce((s,i)=>s+i.price*i.quantity,0)}
-function updateCartBadge(){
-  const b=document.getElementById('cart-badge'),n=cartCount();
-  if(n>0){b.textContent=n>99?'99+':n;b.classList.remove('hidden')}else b.classList.add('hidden');
-}
-function addToCart(p,size,color,qty){
-  const key=`${p.id}__${size}__${color}`,ex=cart.find(i=>i.key===key);
-  if(ex)ex.quantity+=qty;
-  else cart.push({key,id:p.id,name:p.name,team:p.team,image:p.image,price:p.price,size,color,quantity:qty});
-  saveCart();
-}
-function removeFromCart(key){cart=cart.filter(i=>i.key!==key);saveCart()}
-function updateQty(key,qty){if(qty<=0)return removeFromCart(key);const i=cart.find(i=>i.key===key);if(i){i.quantity=qty;saveCart()}}
-function clearCart(){cart=[];saveCart()}
-
 function sendOrderViaSMS(){
   const lines=cart.map(item=>{
     const url=`${STORE_URL}/#/product/${item.id}`;
     return `- ${item.name} (${item.team}) | Size:${item.size} Qty:${item.quantity} ${money(item.price)} | ${url}`;
   });
-  const msg=`New order @ Seventy-7Sports:
-
-${lines.join('\n\n')}
-
-Total: ${money(cartSubtotal())}
-Please confirm!`;
+  const msg=`New order @ Seventy-7Sports:\n\n${lines.join('\n\n')}\n\nTotal: ${money(cartSubtotal())}\nPlease confirm!`;
   window.location.href=`sms:${SMS_NUMBER}${/iP(hone|ad|od)/.test(navigator.userAgent)?'&':'?'}body=${encodeURIComponent(msg)}`;
   setTimeout(()=>{clearCart();orderDone=true;render();},600);
 }
@@ -660,7 +805,6 @@ function money(n){return new Intl.NumberFormat('en-IN',{style:'currency',currenc
 function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
 
 function productCard(p, index = 99){
-  // Optimization: apply 'eager' load to the first 4 products, 'lazy' for the rest
   const loadAttr = index < 4 ? 'eager' : 'lazy';
   const hasBack = !!p.imageBack;
   return`<article class="product-card">
@@ -796,11 +940,7 @@ function pageProduct(id){
   const ui=productUI[p.id];
   const related=products.filter(x=>x.id!==p.id&&(x.sport===p.sport||x.team===p.team)).slice(0,4);
   const hasBack=!!p.imageBack;
-  const smsBody=encodeURIComponent(`Hi! I want to order:
-${p.name} (${p.team})
-Price: ${money(p.price)}
-${STORE_URL}/#/product/${p.id}
-Please confirm!`);
+  const smsBody=encodeURIComponent(`Hi! I want to order:\n${p.name} (${p.team})\nPrice: ${money(p.price)}\n${STORE_URL}/#/product/${p.id}\nPlease confirm!`);
   const smsSep=/iP(hone|ad|od)/.test(navigator.userAgent)?'&':'?';
   return`<div class="page-pad"><div class="container">
     <a class="back-link" href="#/shop" data-link>${icon('arrowLeft','icon-sm')} Back to Shop</a>
@@ -867,7 +1007,6 @@ function pageCart(){
       <div class="summary-total"><span>Total</span><span>${money(subtotal)}</span></div>
       <button class="btn btn-sms btn-lg btn-block" style="margin-top:1.25rem" type="button" id="checkout-btn">${icon('sms','icon-sm')} Order via SMS</button>
       <a class="btn btn-ghost btn-md btn-block" style="margin-top:.6rem" href="#/shop" data-link>Continue Shopping</a>
-      <p style="color:#64748b;font-size:.75rem;text-align:center;margin-top:.75rem">Opens your default SMS app with the full order pre-filled.</p>
     </aside></div></div></div>`
 }
 function pageAbout(){
@@ -957,11 +1096,10 @@ function bindPageEvents(path){
   }
   document.getElementById('contact-form')?.addEventListener('submit',(e)=>{e.preventDefault();contactSubmitted=true;render()});
   document.getElementById('reset-contact')?.addEventListener('click',()=>{contactSubmitted=false;render()});
-  // init 3D after DOM settled
+  
   requestAnimationFrame(initTilts);
 }
 function render(){
-  // Prevent rendering if app is still in its initial loading state without cache
   if (!isReady) return;
 
   const{path,params}=parseRoute(),app=document.getElementById('app');
@@ -985,9 +1123,6 @@ document.getElementById('header-search').onsubmit=(e)=>{e.preventDefault();const
 document.getElementById('mobile-search').onsubmit=(e)=>{e.preventDefault();const q=new FormData(e.target).get('q')||'';closeMobile();location.hash=q?`/shop?q=${encodeURIComponent(String(q))}`:'/shop';e.target.reset()};
 document.getElementById('drawer-backdrop').onclick=closeFilterDrawer;
 document.body.addEventListener('click',(e)=>{if(e.target.closest('a[data-link]'))closeMobile()});
-// Flip-to-back handler for jersey images (front/back). Runs in the capture
-// phase so it fires before the link-close handler above and before the
-// surrounding <a> tag's default navigation.
 document.body.addEventListener('click',(e)=>{
   const flipBtn=e.target.closest('[data-flip]');
   if(!flipBtn)return;
