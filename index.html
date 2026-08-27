@@ -228,7 +228,7 @@
     .flip-btn:hover{background:var(--lime);color:var(--bg);border-color:var(--lime)}
     .gallery-main .flip-btn{top:1rem;right:1rem;width:40px;height:40px}
 
-    /* Auth Modal CSS */
+    /* Custom Auth Modal CSS */
     .modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,.8); z-index:100; display:none; place-items:center; backdrop-filter:blur(4px); }
     .modal-overlay.open { display:grid; }
     .modal-content { background:var(--card); padding:2rem; border-radius:1.5rem; width:90%; max-width:400px; border:1px solid var(--border); box-shadow:0 25px 50px rgba(0,0,0,.5); }
@@ -343,7 +343,7 @@
             <input type="search" name="q" placeholder="Search jerseys..." aria-label="Search jerseys" />
             <button class="search-go" type="submit">Go</button>
           </form>
-          <!-- Auth Toggle Button -->
+          <!-- Custom Auth Toggle Button -->
           <button class="icon-btn" id="auth-toggle" aria-label="Account">
             <svg class="icon icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
           </button>
@@ -418,28 +418,34 @@
   <div class="drawer-backdrop" id="drawer-backdrop"></div>
   <div class="drawer" id="filter-drawer"></div>
 
-  <!-- Auth Modal -->
+  <!-- Custom Auth Modal (Xcluice Style) -->
   <div class="modal-overlay" id="auth-modal">
     <div class="modal-content">
        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
-         <h2 id="auth-title">Sign In</h2>
+         <h2 id="auth-title">Sign in to Store</h2>
          <button id="close-auth" style="background:transparent;border:0;color:white;cursor:pointer">
            <svg class="icon icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
          </button>
        </div>
        <div id="auth-forms-container">
-         <form id="auth-form">
-           <div class="form-row"><label><span>Email</span><input type="email" id="auth-email" required></label></div>
-           <div class="form-row"><label><span>Password</span><input type="password" id="auth-pass" required></label></div>
-           <button type="submit" class="btn btn-lime btn-block" style="margin-top:1rem" id="auth-submit">Sign In</button>
-         </form>
+         <div class="form-row">
+            <label><span>Username</span><input type="text" id="auth-username" required placeholder="yourname"></label>
+         </div>
+         <div class="form-row">
+            <label><span>Password</span><input type="password" id="auth-pass" required placeholder="••••••••"></label>
+         </div>
+         <div class="form-row hidden" id="confirm-pass-div">
+            <label><span>Confirm Password</span><input type="password" id="auth-confirm-pass" placeholder="••••••••"></label>
+         </div>
+         <button class="btn btn-lime btn-block" style="margin-top:1rem" id="auth-submit" onclick="submitCustomAuth()">Sign In</button>
+         
          <p style="text-align:center; margin-top:1rem; font-size:0.875rem; color:var(--muted)">
-           <a href="#" id="auth-switch" style="color:var(--lime)">Need an account? Sign Up</a>
+           <a href="#" id="auth-switch" onclick="toggleAuthMode(event)" style="color:var(--lime)">Need an account? Sign Up</a>
          </p>
        </div>
        <div id="auth-logged-in-container" class="hidden">
-         <p style="margin-bottom:1.5rem; text-align:center; color:var(--muted)">You are signed in to Seventy-7Sports.</p>
-         <button id="auth-logout" class="btn btn-ghost btn-block">Log Out</button>
+         <p style="margin-bottom:1.5rem; text-align:center; color:var(--muted)">You are signed in as <span id="logged-in-name" style="color:#fff;font-weight:bold;"></span>.</p>
+         <button id="auth-logout" onclick="logOutCustom()" class="btn btn-ghost btn-block">Log Out</button>
        </div>
     </div>
   </div>
@@ -451,16 +457,18 @@ const STORE_URL='https://seventy7sportswear.vercel.app';
 const SMS_NUMBER='+917889335300';
 const SPORTS=['Football'];
 const CACHE_KEY='s77-products-cache';
+const SESSION_KEY = 's77_session';
 
-// AUTH STATE
-let isSignUpMode = false;
-let authUser = localStorage.getItem('s77_token') ? { 
-  id: localStorage.getItem('s77_user_id'), 
-  token: localStorage.getItem('s77_token') 
-} : null;
+// CUSTOM AUTH STATE
+let authMode = 'login';
+let currentUser = null;
+try {
+  const s = JSON.parse(localStorage.getItem(SESSION_KEY) || 'null');
+  if (s && s.id) currentUser = s;
+} catch(e){}
 
 let products=[],loadError=null,isReady=false;
-let cart = []; // Cart is now loaded from DB
+let cart = [];
 let orderDone=false,mobileOpen=false,contactSubmitted=false;
 let shopState={sport:'All',q:'',newOnly:false,sort:'featured',maxPrice:1000};
 let productUI={};
@@ -583,12 +591,106 @@ function mapRow(r){
   };
 }
 
-// --- DB CART LOGIC ---
-async function loadCartFromDB(){
-  if(!authUser) { cart = []; updateCartBadge(); if(location.hash==='#/cart') render(); return; }
+
+// --- CUSTOM AUTH LOGIC (Xcluice Hash Method) ---
+function generateHash(str) {
+  let hash = 5381;
+  for (let i = 0; i < str.length; i++) hash = ((hash << 5) + hash) + str.charCodeAt(i);
+  return "s77_" + Math.abs(hash).toString(16) + btoa(str).slice(0, 12);
+}
+
+const authModal = document.getElementById('auth-modal');
+const authToggleBtn = document.getElementById('auth-toggle');
+
+function showAuthModal() {
+  if (currentUser) {
+    document.getElementById('auth-forms-container').classList.add('hidden');
+    document.getElementById('auth-logged-in-container').classList.remove('hidden');
+    document.getElementById('logged-in-name').textContent = currentUser.username;
+    document.getElementById('auth-title').textContent = 'Account';
+  } else {
+    document.getElementById('auth-forms-container').classList.remove('hidden');
+    document.getElementById('auth-logged-in-container').classList.add('hidden');
+    document.getElementById('auth-title').textContent = authMode === 'register' ? 'Sign Up' : 'Sign In';
+  }
+  authModal.classList.add('open');
+}
+
+document.getElementById('close-auth').onclick = () => authModal.classList.remove('open');
+authToggleBtn.onclick = showAuthModal;
+
+function toggleAuthMode(e) {
+  e.preventDefault();
+  authMode = authMode === 'login' ? 'register' : 'login';
+  document.getElementById('auth-title').textContent = authMode === 'login' ? 'Sign In' : 'Sign Up';
+  document.getElementById('auth-submit').textContent = authMode === 'login' ? 'Sign In' : 'Create Account';
+  document.getElementById('auth-switch').textContent = authMode === 'login' ? 'Need an account? Sign Up' : 'Already have an account? Sign In';
+  document.getElementById('confirm-pass-div').classList.toggle('hidden', authMode === 'login');
+}
+
+async function submitCustomAuth() {
+  const rawUser = document.getElementById('auth-username').value.trim().toLowerCase();
+  const pass = document.getElementById('auth-pass').value;
+  
+  if (!rawUser || !pass) { alert('Fields cannot be empty'); return; }
+  const cleanUser = rawUser.replace(/[^a-z0-9_.]/g, '');
+  if (cleanUser.length < 3) { alert('Username min 3 characters'); return; }
+  
+  const passHash = generateHash(pass);
+  const btn = document.getElementById('auth-submit');
+  btn.disabled = true; btn.textContent = 'Processing…';
+  
   try {
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/user_carts?user_id=eq.${authUser.id}&select=*`, {
-      headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${authUser.token}` }
+    if (authMode === 'register') {
+      const pass2 = document.getElementById('auth-confirm-pass').value;
+      if (pass !== pass2) { throw new Error('Passwords do not match'); }
+      
+      const check = await fetch(`${SUPABASE_URL}/rest/v1/s77_users?username=eq.${cleanUser}`, { headers:{ apikey:SUPABASE_KEY } });
+      const existing = await check.json();
+      if (existing.length > 0) { throw new Error('Username already taken'); }
+      
+      const ins = await fetch(`${SUPABASE_URL}/rest/v1/s77_users`, {
+        method:'POST', headers:{ apikey:SUPABASE_KEY, 'Content-Type':'application/json', Prefer:'return=representation' },
+        body: JSON.stringify({ username:cleanUser, password_hash:passHash })
+      });
+      if (!ins.ok) throw new Error('Server rejected account creation');
+      const newUser = (await ins.json())[0];
+      setSignedInUser(newUser); alert('Account created!');
+    } else {
+      const sel = await fetch(`${SUPABASE_URL}/rest/v1/s77_users?username=eq.${cleanUser}&password_hash=eq.${passHash}`, { headers:{ apikey:SUPABASE_KEY } });
+      const users = await sel.json();
+      if (!users || users.length === 0) { throw new Error('Invalid credentials'); }
+      setSignedInUser(users[0]); alert(`Welcome back, ${users[0].username}`);
+    }
+  } catch(e) { 
+    alert(e.message); 
+  } finally { 
+    btn.disabled = false; btn.textContent = authMode === 'login' ? 'Sign In' : 'Create Account'; 
+  }
+}
+
+function setSignedInUser(profile) {
+  currentUser = profile;
+  localStorage.setItem(SESSION_KEY, JSON.stringify(profile));
+  authModal.classList.remove('open');
+  loadCartFromDB();
+}
+
+function logOutCustom() {
+  localStorage.removeItem(SESSION_KEY);
+  currentUser = null;
+  authModal.classList.remove('open');
+  cart = []; 
+  updateCartBadge();
+  if(location.hash === '#/cart') render();
+}
+
+// --- DB CART LOGIC (Custom Table) ---
+async function loadCartFromDB(){
+  if(!currentUser) { cart = []; updateCartBadge(); if(location.hash==='#/cart') render(); return; }
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/s77_carts?user_id=eq.${currentUser.id}&select=*`, {
+      headers: { apikey: SUPABASE_KEY }
     });
     if(res.ok) {
       const rows = await res.json();
@@ -607,24 +709,24 @@ async function loadCartFromDB(){
 }
 
 async function addToCart(p,size,color,qty){
-  if(!authUser) { alert("Please sign in to add items to your cart!"); showAuthModal(); return; }
+  if(!currentUser) { alert("Please sign in to add items to your cart!"); showAuthModal(); return; }
   const key=`${p.id}__${size}`;
   const ex=cart.find(i=>i.key===key);
   
   if(ex) {
     ex.quantity += qty;
-    fetch(`${SUPABASE_URL}/rest/v1/user_carts?id=eq.${ex.db_id}`, {
+    fetch(`${SUPABASE_URL}/rest/v1/s77_carts?id=eq.${ex.db_id}`, {
       method: 'PATCH',
-      headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${authUser.token}`, 'Content-Type': 'application/json' },
+      headers: { apikey: SUPABASE_KEY, 'Content-Type': 'application/json' },
       body: JSON.stringify({ quantity: ex.quantity })
     });
   } else {
     const tempItem = { key, id: p.id, name: p.name, team: p.team, image: p.image, price: p.price, size, quantity: qty };
     cart.push(tempItem);
-    fetch(`${SUPABASE_URL}/rest/v1/user_carts`, {
+    fetch(`${SUPABASE_URL}/rest/v1/s77_carts`, {
       method: 'POST',
-      headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${authUser.token}`, 'Content-Type': 'application/json', 'Prefer': 'return=representation' },
-      body: JSON.stringify({ user_id: authUser.id, jersey_id: p.id, size: size, quantity: qty })
+      headers: { apikey: SUPABASE_KEY, 'Content-Type': 'application/json', 'Prefer': 'return=representation' },
+      body: JSON.stringify({ user_id: currentUser.id, jersey_id: p.id, size: size, quantity: qty })
     }).then(r=>r.json()).then(data=>{ if(data && data[0]) tempItem.db_id = data[0].id; });
   }
   updateCartBadge();
@@ -633,10 +735,10 @@ async function addToCart(p,size,color,qty){
 async function removeFromCart(key){
   const ex = cart.find(i=>i.key===key);
   cart = cart.filter(i=>i.key!==key);
-  if(ex && ex.db_id && authUser) {
-    fetch(`${SUPABASE_URL}/rest/v1/user_carts?id=eq.${ex.db_id}`, {
+  if(ex && ex.db_id && currentUser) {
+    fetch(`${SUPABASE_URL}/rest/v1/s77_carts?id=eq.${ex.db_id}`, {
       method: 'DELETE',
-      headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${authUser.token}` }
+      headers: { apikey: SUPABASE_KEY }
     });
   }
   updateCartBadge();
@@ -647,10 +749,10 @@ async function updateQty(key,qty){
   const ex=cart.find(i=>i.key===key);
   if(ex) {
     ex.quantity=qty;
-    if(ex.db_id && authUser) {
-      fetch(`${SUPABASE_URL}/rest/v1/user_carts?id=eq.${ex.db_id}`, {
+    if(ex.db_id && currentUser) {
+      fetch(`${SUPABASE_URL}/rest/v1/s77_carts?id=eq.${ex.db_id}`, {
         method: 'PATCH',
-        headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${authUser.token}`, 'Content-Type': 'application/json' },
+        headers: { apikey: SUPABASE_KEY, 'Content-Type': 'application/json' },
         body: JSON.stringify({ quantity: ex.quantity })
       });
     }
@@ -660,10 +762,10 @@ async function updateQty(key,qty){
 
 async function clearCart(){
   cart = [];
-  if(authUser) {
-    fetch(`${SUPABASE_URL}/rest/v1/user_carts?user_id=eq.${authUser.id}`, {
+  if(currentUser) {
+    fetch(`${SUPABASE_URL}/rest/v1/s77_carts?user_id=eq.${currentUser.id}`, {
       method: 'DELETE',
-      headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${authUser.token}` }
+      headers: { apikey: SUPABASE_KEY }
     });
   }
   updateCartBadge();
@@ -676,86 +778,6 @@ function updateCartBadge(){
   if(n>0){b.textContent=n>99?'99+':n;b.classList.remove('hidden')}else b.classList.add('hidden');
 }
 
-// --- AUTH UI LOGIC ---
-const authModal = document.getElementById('auth-modal');
-const authToggleBtn = document.getElementById('auth-toggle');
-
-function showAuthModal() {
-  if (authUser) {
-    document.getElementById('auth-forms-container').classList.add('hidden');
-    document.getElementById('auth-logged-in-container').classList.remove('hidden');
-    document.getElementById('auth-title').textContent = 'Account';
-  } else {
-    document.getElementById('auth-forms-container').classList.remove('hidden');
-    document.getElementById('auth-logged-in-container').classList.add('hidden');
-    document.getElementById('auth-title').textContent = isSignUpMode ? 'Sign Up' : 'Sign In';
-  }
-  authModal.classList.add('open');
-}
-
-document.getElementById('close-auth').onclick = () => authModal.classList.remove('open');
-authToggleBtn.onclick = showAuthModal;
-
-document.getElementById('auth-switch').onclick = (e) => {
-  e.preventDefault();
-  isSignUpMode = !isSignUpMode;
-  document.getElementById('auth-title').textContent = isSignUpMode ? 'Sign Up' : 'Sign In';
-  document.getElementById('auth-submit').textContent = isSignUpMode ? 'Create Account' : 'Sign In';
-  document.getElementById('auth-switch').textContent = isSignUpMode ? 'Already have an account? Sign In' : 'Need an account? Sign Up';
-};
-
-document.getElementById('auth-form').onsubmit = async (e) => {
-  e.preventDefault();
-  const email = document.getElementById('auth-email').value;
-  const pass = document.getElementById('auth-pass').value;
-  const btn = document.getElementById('auth-submit');
-  btn.textContent = 'Loading...';
-  btn.disabled = true;
-
-  try {
-    if (isSignUpMode) {
-      const res = await fetch(`${SUPABASE_URL}/auth/v1/signup`, {
-        method: 'POST',
-        headers: { 'apikey': SUPABASE_KEY, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password: pass })
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.msg || data.error_description || 'Signup failed');
-      alert("Account created! You can now log in.");
-      isSignUpMode = false;
-      document.getElementById('auth-switch').click(); // switch back to login
-    } else {
-      const res = await fetch(`${SUPABASE_URL}/auth/v1/token?grant_type=password`, {
-        method: 'POST',
-        headers: { 'apikey': SUPABASE_KEY, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password: pass })
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error_description || 'Login failed');
-      
-      localStorage.setItem('s77_token', data.access_token);
-      localStorage.setItem('s77_user_id', data.user.id);
-      authUser = { id: data.user.id, token: data.access_token };
-      authModal.classList.remove('open');
-      loadCartFromDB(); // Fetch their DB cart
-    }
-  } catch(err) {
-    alert(err.message);
-  } finally {
-    btn.disabled = false;
-    btn.textContent = isSignUpMode ? 'Create Account' : 'Sign In';
-  }
-};
-
-document.getElementById('auth-logout').onclick = () => {
-  localStorage.removeItem('s77_token');
-  localStorage.removeItem('s77_user_id');
-  authUser = null;
-  authModal.classList.remove('open');
-  cart = []; // clear local cart
-  updateCartBadge();
-  if(location.hash === '#/cart') render();
-};
 
 async function loadLiveJerseys(){
   const cached = localStorage.getItem(CACHE_KEY);
@@ -769,7 +791,7 @@ async function loadLiveJerseys(){
 
   try{
     const res=await fetch(`${SUPABASE_URL}/rest/v1/jerseys?select=*&order=created_at.desc`,{
-      headers:{apikey:SUPABASE_KEY,Authorization:`Bearer ${SUPABASE_KEY}`,Accept:'application/json'}
+      headers:{apikey:SUPABASE_KEY,Accept:'application/json'}
     });
     if(!res.ok)throw new Error('Could not load inventory');
     const rows=await res.json();
@@ -778,7 +800,7 @@ async function loadLiveJerseys(){
     loadError=null;
     
     // Once products load, load the DB cart so we can map names/images
-    if (authUser) loadCartFromDB();
+    if (currentUser) loadCartFromDB();
     
   }catch(e){
     if(!products.length) loadError=e.message||'Failed to load inventory';
