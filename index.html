@@ -345,6 +345,17 @@
     .hidden{display:none!important}.mt-section{margin-top:3.5rem}.text-center{text-align:center}
     .loading-bar{display:flex;align-items:center;justify-content:center;gap:.6rem;padding:4rem;color:#94a3b8}
     .spin{animation:spin .8s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
+
+    /* Jersey front/back flip */
+    .flip-card{position:relative;width:100%;height:100%;perspective:1200px}
+    .flip-inner{position:relative;width:100%;height:100%;transition:transform .6s cubic-bezier(.4,.2,.2,1);transform-style:preserve-3d}
+    .flip-inner.flipped{transform:rotateY(180deg)}
+    .flip-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+    .flip-face img{width:100%;height:100%;object-fit:cover}
+    .flip-back{transform:rotateY(180deg)}
+    .flip-btn{position:absolute;z-index:3;top:.6rem;right:.6rem;width:32px;height:32px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.55);color:#fff;display:grid;place-items:center;cursor:pointer;backdrop-filter:blur(4px);transition:.15s}
+    .flip-btn:hover{background:var(--lime);color:var(--bg);border-color:var(--lime)}
+    .gallery-main .flip-btn{top:1rem;right:1rem;width:40px;height:40px}
   </style>
 </head>
 <body>
@@ -572,7 +583,7 @@ function mapRow(r){
   return{
     id:r.id,name:`${r.player_name} Jersey`,player_name:r.player_name,
     team:r.team||'Seventy-7Sports',sport:'Football',price:Number(r.price)||0,
-    image:r.image_url||'',images:r.image_url?[r.image_url]:[],
+    image:r.image_url||'',imageBack:r.image_back_url||'',images:r.image_url?[r.image_url]:[],
     description:`Official ${r.player_name} jersey${r.team?` for ${r.team}`:''}. Premium kit listed via AdminCompanion.`,
     sizes:['S','M','L','XL','XXL'],colors:['Default'],
     featured:true,newArrival:true,rating:4.9,reviews:12,tags:['live','admin'],created_at:r.created_at
@@ -651,11 +662,18 @@ function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').
 function productCard(p, index = 99){
   // Optimization: apply 'eager' load to the first 4 products, 'lazy' for the rest
   const loadAttr = index < 4 ? 'eager' : 'lazy';
+  const hasBack = !!p.imageBack;
   return`<article class="product-card">
     <a class="product-media shimmer-bg" href="#/product/${p.id}" data-link>
-      ${p.image?`<img src="${esc(optImg(p.image, 400))}" alt="${esc(p.name)}" loading="${loadAttr}" />`:`<div style="height:100%;display:grid;place-items:center;color:#475569">${icon('shirt','icon-xl')}</div>`}
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-face flip-front">
+          ${p.image?`<img src="${esc(optImg(p.image, 400))}" alt="${esc(p.name)}" loading="${loadAttr}" />`:`<div style="height:100%;display:grid;place-items:center;color:#475569">${icon('shirt','icon-xl')}</div>`}
+        </div>
+        ${hasBack?`<div class="flip-face flip-back"><img src="${esc(optImg(p.imageBack, 400))}" alt="${esc(p.name)} back" loading="lazy" /></div>`:''}
+      </div></div>
       <div class="badges"><span class="live-pill">Live</span><span class="badge badge-new">${icon('tag','icon-sm')} New</span></div>
       <span class="sport-chip">${esc(p.sport)}</span>
+      ${hasBack?`<button type="button" class="flip-btn" data-flip aria-label="Flip to see back">${icon('refresh','icon-sm')}</button>`:''}
     </a>
     <div class="product-body">
       <div><div class="product-team">${esc(p.team)}</div>
@@ -777,6 +795,7 @@ function pageProduct(id){
   if(!productUI[p.id])productUI[p.id]={size:null,color:p.colors[0],qty:1,added:false,sizeError:false};
   const ui=productUI[p.id];
   const related=products.filter(x=>x.id!==p.id&&(x.sport===p.sport||x.team===p.team)).slice(0,4);
+  const hasBack=!!p.imageBack;
   const smsBody=encodeURIComponent(`Hi! I want to order:
 ${p.name} (${p.team})
 Price: ${money(p.price)}
@@ -787,8 +806,14 @@ Please confirm!`);
     <a class="back-link" href="#/shop" data-link>${icon('arrowLeft','icon-sm')} Back to Shop</a>
     <div class="detail-grid"><div>
       <div class="gallery-main shimmer-bg" id="gallery-main">
-        ${p.image?`<img src="${esc(optImg(p.image, 800))}" alt="${esc(p.name)}" loading="eager" />`:`<div style="height:100%;display:grid;place-items:center;color:#475569">${icon('shirt','icon-xl')}</div>`}
+        <div class="flip-card"><div class="flip-inner">
+          <div class="flip-face flip-front">
+            ${p.image?`<img src="${esc(optImg(p.image, 800))}" alt="${esc(p.name)}" loading="eager" />`:`<div style="height:100%;display:grid;place-items:center;color:#475569">${icon('shirt','icon-xl')}</div>`}
+          </div>
+          ${hasBack?`<div class="flip-face flip-back"><img src="${esc(optImg(p.imageBack, 800))}" alt="${esc(p.name)} back" loading="lazy" /></div>`:''}
+        </div></div>
         <div class="gallery-shine"></div>
+        ${hasBack?`<button type="button" class="flip-btn" data-flip aria-label="Flip to see back">${icon('refresh','icon-sm')}</button>`:''}
       </div>
     </div><div>
       <div class="detail-tags"><span class="tag">${esc(p.sport)}</span><span class="tag tag-lime">New Arrival</span><span class="live-pill">Live listing</span></div>
@@ -960,6 +985,17 @@ document.getElementById('header-search').onsubmit=(e)=>{e.preventDefault();const
 document.getElementById('mobile-search').onsubmit=(e)=>{e.preventDefault();const q=new FormData(e.target).get('q')||'';closeMobile();location.hash=q?`/shop?q=${encodeURIComponent(String(q))}`:'/shop';e.target.reset()};
 document.getElementById('drawer-backdrop').onclick=closeFilterDrawer;
 document.body.addEventListener('click',(e)=>{if(e.target.closest('a[data-link]'))closeMobile()});
+// Flip-to-back handler for jersey images (front/back). Runs in the capture
+// phase so it fires before the link-close handler above and before the
+// surrounding <a> tag's default navigation.
+document.body.addEventListener('click',(e)=>{
+  const flipBtn=e.target.closest('[data-flip]');
+  if(!flipBtn)return;
+  e.preventDefault();
+  e.stopPropagation();
+  const inner=flipBtn.parentElement.querySelector('.flip-inner');
+  if(inner)inner.classList.toggle('flipped');
+},true);
 window.addEventListener('hashchange', render);
 loadLiveJerseys();
   </script>
