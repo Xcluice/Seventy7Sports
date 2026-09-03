@@ -321,6 +321,132 @@
     .hidden{display:none!important}.mt-section{margin-top:3.5rem}.text-center{text-align:center}
     .loading-bar{display:flex;align-items:center;justify-content:center;gap:.6rem;padding:4rem;color:#94a3b8}
     .spin{animation:spin .8s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
+
+    /* ============ MOTION SYSTEM ============ */
+    @media (prefers-reduced-motion: reduce) {
+      *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+    }
+
+    /* Page transition: main content fades+lifts on every route change */
+    #app{animation:pageIn .5s cubic-bezier(.22,.61,.36,1) both}
+    @keyframes pageIn{
+      from{opacity:0;transform:translateY(14px)}
+      to{opacity:1;transform:translateY(0)}
+    }
+
+    /* Scroll-reveal: elements start hidden, .reveal-in triggers the animation */
+    .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1);will-change:opacity,transform}
+    .reveal.reveal-in{opacity:1;transform:translateY(0)}
+    .reveal-stagger .reveal-in{transition-delay:calc(var(--ri,0) * 60ms)}
+
+    /* Header: subtle entrance + shrink-on-scroll affordance */
+    .header{transition:box-shadow .3s ease,border-color .3s ease}
+    .header.scrolled{box-shadow:0 8px 24px rgba(0,0,0,.35)}
+    .brand-mark{transition:transform .35s cubic-bezier(.34,1.56,.64,1)}
+    .brand:hover .brand-mark{transform:rotate(-8deg) scale(1.08)}
+
+    /* Nav links: animated underline sweep */
+    .nav-link{position:relative;overflow:hidden}
+    .nav-link::after{content:"";position:absolute;left:.75rem;right:.75rem;bottom:.3rem;height:2px;background:var(--lime);
+      transform:scaleX(0);transform-origin:left;transition:transform .3s cubic-bezier(.22,.61,.36,1)}
+    .nav-link:hover::after,.nav-link.active::after{transform:scaleX(1)}
+
+    /* Buttons: press + hover lift with a light sheen sweep */
+    .btn{position:relative;overflow:hidden;transform:translateY(0);transition:transform .2s cubic-bezier(.22,.61,.36,1),background-color .15s,box-shadow .2s}
+    .btn::before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 20%,rgba(255,255,255,.35) 45%,transparent 70%);
+      transform:translateX(-120%);transition:transform .6s ease}
+    .btn:hover::before{transform:translateX(120%)}
+    .btn:hover{transform:translateY(-2px)}
+    .btn:active{transform:translateY(0) scale(.97);transition-duration:.08s}
+    .btn-lime:hover{box-shadow:0 10px 26px rgba(200,245,66,.28)}
+    .btn-sms:hover{box-shadow:0 10px 26px rgba(59,130,246,.32)}
+
+    /* Icon buttons: gentle bounce */
+    .icon-btn{transition:transform .25s cubic-bezier(.34,1.56,.64,1),border-color .2s,color .2s}
+    .icon-btn:hover{transform:translateY(-2px) scale(1.06)}
+    .icon-btn:active{transform:scale(.92)}
+    .cart-badge{animation:badgePop .35s cubic-bezier(.34,1.56,.64,1)}
+    @keyframes badgePop{0%{transform:scale(0)}70%{transform:scale(1.25)}100%{transform:scale(1)}}
+
+    /* Product cards: entrance + lift already has hover; add smoother spring */
+    .product-card{transition:box-shadow .35s cubic-bezier(.22,.61,.36,1),border-color .35s,transform .35s cubic-bezier(.22,.61,.36,1)}
+    .badge-new{animation:badgeGlow 2.4s ease-in-out infinite}
+    @keyframes badgeGlow{0%,100%{box-shadow:0 0 0 0 rgba(200,245,66,.5)}50%{box-shadow:0 0 0 6px rgba(200,245,66,0)}}
+    .live-pill span,.live-pill{position:relative}
+    .live-pill::before{content:"";width:6px;height:6px;border-radius:999px;background:#6ee7b7;display:inline-block;margin-right:2px;animation:livePulse 1.6s ease-in-out infinite}
+    @keyframes livePulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+
+    /* Size / chip / filter buttons: tactile press */
+    .size-btn,.chip-btn,.chip{transition:transform .18s cubic-bezier(.34,1.56,.64,1),background-color .15s,color .15s,border-color .15s}
+    .size-btn:hover,.chip-btn:hover{transform:translateY(-2px)}
+    .size-btn:active,.chip-btn:active{transform:scale(.94)}
+    .size-btn.active{animation:sizeSelect .3s cubic-bezier(.34,1.56,.64,1)}
+    @keyframes sizeSelect{0%{transform:scale(.85)}60%{transform:scale(1.08)}100%{transform:scale(1)}}
+
+    /* Qty buttons */
+    .qty-wrap button{transition:transform .15s,color .15s}
+    .qty-wrap button:active{transform:scale(.85)}
+
+    /* Add to cart success check */
+    #add-cart{transition:transform .2s cubic-bezier(.34,1.56,.64,1),background-color .15s}
+    #add-cart:active{transform:scale(.96)}
+
+    /* Cards / panels lift-in when scrolled into view (paired with .reveal via JS) */
+    .trust-item,.value-card,.info-card,.mini-stat,.stat,.perk{transition:transform .3s cubic-bezier(.22,.61,.36,1)}
+
+    /* Modal: scale+fade entrance */
+    .modal-overlay{transition:opacity .25s ease}
+    .modal-overlay:not(.open){pointer-events:none}
+    .modal-content{transform:scale(.92) translateY(10px);opacity:0;transition:transform .35s cubic-bezier(.34,1.56,.64,1),opacity .3s ease}
+    .modal-overlay.open .modal-content{transform:scale(1) translateY(0);opacity:1}
+
+    /* Mobile menu slide */
+    .mobile-menu{max-height:0;overflow:hidden;padding-top:0;padding-bottom:0;transition:max-height .35s cubic-bezier(.22,.61,.36,1),padding .35s}
+    .mobile-menu.open{max-height:600px;padding:1rem}
+    .mobile-nav a{transition:transform .2s cubic-bezier(.22,.61,.36,1),background-color .15s,color .15s}
+    .mobile-nav a:active{transform:scale(.97)}
+
+    /* Filter drawer slide-in (drawer element exists in original markup, style it) */
+    .drawer-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:90;opacity:0;pointer-events:none;transition:opacity .3s ease}
+    .drawer-backdrop.open{opacity:1;pointer-events:auto}
+    .drawer{position:fixed;top:0;right:0;bottom:0;width:min(360px,88vw);background:var(--card);z-index:91;
+      padding:1.25rem;overflow-y:auto;transform:translateX(100%);transition:transform .38s cubic-bezier(.22,.61,.36,1);border-left:1px solid var(--border)}
+    .drawer.open{transform:translateX(0)}
+    .drawer-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem}
+
+    /* Hero elements staggered entrance on load */
+    .hero .pill{animation:fadeUp .6s cubic-bezier(.22,.61,.36,1) both .05s}
+    .hero h1{animation:fadeUp .6s cubic-bezier(.22,.61,.36,1) both .12s}
+    .hero-copy{animation:fadeUp .6s cubic-bezier(.22,.61,.36,1) both .2s}
+    .hero-actions{animation:fadeUp .6s cubic-bezier(.22,.61,.36,1) both .28s}
+    .stats{animation:fadeUp .6s cubic-bezier(.22,.61,.36,1) both .36s}
+    .hero-card-wrap{animation:fadeScaleIn .7s cubic-bezier(.22,.61,.36,1) both .2s}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes fadeScaleIn{from{opacity:0;transform:scale(.94) translateY(10px)}to{opacity:1;transform:scale(1) translateY(0)}}
+
+    /* Rating stars pop when viewed */
+    .stars span{display:inline-flex;transition:transform .2s cubic-bezier(.34,1.56,.64,1)}
+    .detail-rating:hover .stars span{transform:scale(1.1)}
+
+    /* Text link arrow nudge */
+    .text-link svg{transition:transform .25s cubic-bezier(.34,1.56,.64,1)}
+    .text-link:hover svg{transform:translateX(4px)}
+    .view-btn svg,.hero-actions .btn svg{transition:transform .25s cubic-bezier(.34,1.56,.64,1)}
+    .view-btn:hover svg,.hero-actions .btn:hover svg{transform:translateX(3px)}
+
+    /* Flip button spin cue */
+    .flip-btn{transition:transform .3s cubic-bezier(.34,1.56,.64,1),background-color .15s,color .15s}
+    .flip-btn:hover{transform:rotate(180deg) scale(1.08)}
+
+    /* Empty state icon float */
+    .empty h3::before,.center-state .icon-box{animation:floatY 3s ease-in-out infinite}
+    @keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+
+    /* Contact form success check pop */
+    .form-success svg{animation:sizeSelect .5s cubic-bezier(.34,1.56,.64,1)}
+
+    /* Loading spinner already present; enhance loading bar entrance */
+    .loading-bar{animation:fadeUp .4s ease both}
   </style>
 </head>
 <body>
@@ -543,6 +669,41 @@ function initTilts(){
   document.querySelectorAll('.product-card').forEach(bind3DTilt);
   const gal=document.querySelector('.gallery-main');if(gal)bind3DGallery(gal);
 }
+
+// --- MOTION: scroll-reveal observer ---
+let revealObserver=null;
+function initReveal(){
+  if(revealObserver)revealObserver.disconnect();
+  const els=document.querySelectorAll('.reveal');
+  if(!els.length)return;
+  revealObserver=new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('reveal-in');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  },{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
+  els.forEach(el=>{
+    // Elements already in the initial viewport reveal immediately without waiting on scroll
+    const r=el.getBoundingClientRect();
+    if(r.top<window.innerHeight*0.92 && r.bottom>0){
+      requestAnimationFrame(()=>el.classList.add('reveal-in'));
+    } else {
+      revealObserver.observe(el);
+    }
+  });
+}
+
+// --- MOTION: header shadow state on scroll ---
+function initHeaderScroll(){
+  const header=document.querySelector('.header');
+  if(!header)return;
+  const onScroll=()=>header.classList.toggle('scrolled',window.scrollY>8);
+  onScroll();
+  window.addEventListener('scroll',onScroll,{passive:true});
+}
+initHeaderScroll();
 
 const icons={
 shirt:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"/></svg>',
@@ -826,10 +987,12 @@ function getProduct(id){return products.find(p=>p.id===id)}
 function money(n){return new Intl.NumberFormat('en-IN',{style:'currency',currency:'INR',maximumFractionDigits:0}).format(Number(n)||0)}
 function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
 
-function productCard(p, index = 99){
+function productCard(p, index = 99, reveal = false){
   const loadAttr = index < 4 ? 'eager' : 'lazy';
   const hasBack = !!p.imageBack;
-  return`<article class="product-card">
+  const revealCls = reveal ? ` reveal` : '';
+  const revealStyle = reveal ? ` style="--ri:${index}"` : '';
+  return`<article class="product-card${revealCls}"${revealStyle}>
     <a class="product-media shimmer-bg" href="#/product/${p.id}" data-link>
       <div class="flip-card"><div class="flip-inner">
         <div class="flip-face flip-front">
@@ -878,25 +1041,25 @@ function pageHome(){
     <h3>${hero?esc(hero.name):'Upload your first kit'}</h3>
     <p>${hero?`${esc(hero.team)} · ${money(hero.price)}`:'AdminCompanion → Add Jersey'}</p></div>
   </div></div></div></section>
-  <section class="trust"><div class="container trust-grid">
+  <section class="trust reveal"><div class="container trust-grid">
     <div class="trust-item"><span class="icon-box">${icon('truck')}</span><div><h3>Fast Delivery</h3><p>Quick dispatch across Kashmir &amp; India</p></div></div>
     <div class="trust-item"><span class="icon-box">${icon('shield')}</span><div><h3>Authenticity Guaranteed</h3><p>Every kit inspected for quality</p></div></div>
     <div class="trust-item"><span class="icon-box">${icon('sms')}</span><div><h3>Order via SMS</h3><p>Tap order → SMS opens with all details</p></div></div>
   </div></section>
   <section class="section section-alt"><div class="container">
-    <div class="section-head"><div><div class="eyebrow">Live inventory</div><h2>Featured Jerseys</h2></div>
+    <div class="section-head reveal"><div><div class="eyebrow">Live inventory</div><h2>Featured Jerseys</h2></div>
     <a class="text-link" href="#/shop" data-link>Shop all ${icon('arrow','icon-sm')}</a></div>
-    ${featured.length?`<div class="product-grid cols-4">${featured.map((p, i) => productCard(p, i)).join('')}</div>`:emptyCatalog()}
+    ${featured.length?`<div class="product-grid cols-4 reveal-stagger">${featured.map((p, i) => productCard(p, i, true)).join('')}</div>`:emptyCatalog()}
   </div></section>
-  <section class="section"><div class="container"><div class="promo">
+  <section class="section"><div class="container"><div class="promo reveal">
     <div class="promo-content">${icon('sms','icon-xl')}<h2>Order by SMS</h2>
     <p>Pick your jersey, tap "Order via SMS", and your default messages app opens with the full order pre-filled. Easy.</p>
     <a class="btn btn-sms btn-md" href="sms:${SMS_NUMBER}">${icon('sms','icon-sm')} Text Us</a></div>
   </div></div></section>
   ${news.length?`<section class="section" style="padding-top:0"><div class="container">
-    <div class="section-head"><div><div class="eyebrow">Just landed</div><h2>New Arrivals</h2></div>
+    <div class="section-head reveal"><div><div class="eyebrow">Just landed</div><h2>New Arrivals</h2></div>
     <a class="text-link" href="#/shop" data-link>See more ${icon('arrow','icon-sm')}</a></div>
-    <div class="product-grid cols-4">${news.map((p, i) => productCard(p, i)).join('')}</div>
+    <div class="product-grid cols-4 reveal-stagger">${news.map((p, i) => productCard(p, i, true)).join('')}</div>
   </div></section>`:''}`
 }
 
@@ -951,7 +1114,7 @@ function pageShop(params){
       <div><div class="results-meta">Showing <strong>${list.length}</strong> jersey${list.length!==1?'s':''}</div>
       ${!products.length?emptyCatalog(loadError):list.length===0?`<div class="empty"><h3>No jerseys match your filters</h3><p>Try adjusting filters.</p>
       <button class="btn btn-lime btn-md" type="button" data-clear-filters>Reset Filters</button></div>`:
-      `<div class="product-grid">${list.map((p, i) => productCard(p, i)).join('')}</div>`}
+      `<div class="product-grid reveal-stagger">${list.map((p, i) => productCard(p, i, true)).join('')}</div>`}
       </div></div></div></div>`
 }
 function pageProduct(id){
@@ -994,8 +1157,8 @@ function pageProduct(id){
       <div class="perks"><div class="perk">${icon('truck','icon-md')}<div><strong>Ships in 1–2 days</strong><span>Fast dispatch</span></div></div>
       <div class="perk">${icon('shield','icon-md')}<div><strong>Quality checked</strong><span>30-day returns</span></div></div></div>
     </div></div>
-    ${related.length?`<div class="mt-section"><h2 style="font-size:1.5rem;margin-bottom:1.25rem">You May Also Like</h2>
-      <div class="product-grid cols-4">${related.map((p, i) => productCard(p, i)).join('')}</div></div>`:''}
+    ${related.length?`<div class="mt-section reveal"><h2 style="font-size:1.5rem;margin-bottom:1.25rem">You May Also Like</h2>
+      <div class="product-grid cols-4 reveal-stagger">${related.map((p, i) => productCard(p, i, true)).join('')}</div></div>`:''}
   </div></div>`
 }
 function pageCart(){
@@ -1037,16 +1200,16 @@ function pageAbout(){
     <div class="eyebrow">Our Story</div><h1>Born on the sidelines.<span class="accent">Built for the stands.</span></h1>
     <p>Seventy-7Sports started with a simple idea: fans deserve jerseys that look elite, feel premium, and celebrate football the way fans deserve.</p>
   </div></section>
-  <section class="section"><div class="container two-col"><div>
+  <section class="section reveal"><div class="container two-col"><div>
     <h2 style="font-size:1.9rem">Why Seventy-7?</h2>
     <p>The number 77 is our nod to underdog energy. We curate premium kits — now powered by a live Supabase catalog.</p>
     <div class="mini-stats"><div class="mini-stat"><strong>2019</strong><span>Founded</span></div><div class="mini-stat"><strong>${products.length}</strong><span>Live Kits</span></div><div class="mini-stat"><strong>K’shr</strong><span>Based</span></div></div>
   </div><div style="border:1px solid var(--border);border-radius:1.5rem;background:linear-gradient(145deg,#1e293b,#0b1220);min-height:280px;display:grid;place-items:center;color:var(--lime)">${icon('shirt','icon-xl')}</div></div></section>
   <section class="section section-alt"><div class="container">
-    <div class="text-center" style="margin-bottom:2rem"><div class="eyebrow">What we stand for</div><h2 style="font-size:1.9rem;margin-top:.4rem">Our Values</h2></div>
-    <div class="values-grid">${values.map(v=>`<div class="value-card"><span class="icon-box">${icon(v.icon)}</span><h3>${v.title}</h3><p>${v.desc}</p></div>`).join('')}</div>
+    <div class="text-center reveal" style="margin-bottom:2rem"><div class="eyebrow">What we stand for</div><h2 style="font-size:1.9rem;margin-top:.4rem">Our Values</h2></div>
+    <div class="values-grid reveal-stagger">${values.map((v,i)=>`<div class="value-card reveal" style="--ri:${i}"><span class="icon-box">${icon(v.icon)}</span><h3>${v.title}</h3><p>${v.desc}</p></div>`).join('')}</div>
   </div></section>
-  <section class="section"><div class="container"><div class="cta-box">${icon('users','icon-xl')}<h2>Ready to suit up?</h2>
+  <section class="section reveal"><div class="container"><div class="cta-box">${icon('users','icon-xl')}<h2>Ready to suit up?</h2>
     <p>Explore the live catalog or text us — our team loves helping fans find the perfect kit.</p>
     <div class="cta-actions"><a class="btn btn-lime btn-md" href="#/shop" data-link>${icon('shirt','icon-sm')} Shop Jerseys</a>
     <a class="btn btn-sms btn-md" href="sms:${SMS_NUMBER}">${icon('sms','icon-sm')} Text Us</a></div></div></div></section>`
@@ -1058,12 +1221,12 @@ function pageContact(){
   return`<div class="page-pad"><div class="container">
     <div class="eyebrow">Get in touch</div><h1 class="page-title">Contact Seventy-7Sports</h1>
     <p class="page-sub">Questions about sizing, custom printing, wholesale, or an order?</p>
-    <div class="contact-grid"><div>
-      <div class="info-card"><span class="icon-box">${icon('phone')}</span><div><h3>Phone / SMS</h3><p><a href="sms:${SMS_NUMBER}" style="color:var(--lime)">+91 7889335300</a></p></div></div>
-      <div class="info-card"><span class="icon-box">${icon('mail')}</span><div><h3>Instagram</h3><p><a href="https://www.instagram.com/seventy7sports/" target="_blank" rel="noopener noreferrer" style="color:var(--lime)">@seventy7sports</a></p></div></div>
-      <div class="info-card"><span class="icon-box">${icon('clock')}</span><div><h3>Support Hours</h3><p>8am – 8pm daily</p></div></div>
+    <div class="contact-grid"><div class="reveal-stagger">
+      <div class="info-card reveal" style="--ri:0"><span class="icon-box">${icon('phone')}</span><div><h3>Phone / SMS</h3><p><a href="sms:${SMS_NUMBER}" style="color:var(--lime)">+91 7889335300</a></p></div></div>
+      <div class="info-card reveal" style="--ri:1"><span class="icon-box">${icon('mail')}</span><div><h3>Instagram</h3><p><a href="https://www.instagram.com/seventy7sports/" target="_blank" rel="noopener noreferrer" style="color:var(--lime)">@seventy7sports</a></p></div></div>
+      <div class="info-card reveal" style="--ri:2"><span class="icon-box">${icon('clock')}</span><div><h3>Support Hours</h3><p>8am – 8pm daily</p></div></div>
     </div>
-    <div class="form-card"><div style="display:flex;align-items:center;gap:.6rem;margin-bottom:1.25rem">${icon('message','icon-md')}<h2 style="font-size:1.25rem">Send a Message</h2></div>
+    <div class="form-card reveal"><div style="display:flex;align-items:center;gap:.6rem;margin-bottom:1.25rem">${icon('message','icon-md')}<h2 style="font-size:1.25rem">Send a Message</h2></div>
       <form id="contact-form">
         <div class="form-row two"><label><span>Name</span><input required name="name" placeholder="Your name" /></label>
         <label><span>Email</span><input required type="email" name="email" placeholder="you@email.com" /></label></div>
@@ -1119,7 +1282,7 @@ function bindPageEvents(path){
   document.getElementById('contact-form')?.addEventListener('submit',(e)=>{e.preventDefault();contactSubmitted=true;render()});
   document.getElementById('reset-contact')?.addEventListener('click',()=>{contactSubmitted=false;render()});
   
-  requestAnimationFrame(initTilts);
+  requestAnimationFrame(()=>{initTilts();initReveal();});
 }
 function render(){
   if (!isReady) return;
@@ -1134,7 +1297,12 @@ function render(){
   else if(path==='/about')html=pageAbout();
   else if(path==='/contact')html=pageContact();
   else html=`<div class="center-state"><h1>Page not found</h1><a class="btn btn-lime btn-md" href="#/" data-link>Go Home</a></div>`;
-  app.innerHTML=html;window.scrollTo(0,0);bindPageEvents(path);
+  app.innerHTML=html;window.scrollTo(0,0);
+  // Restart the page-transition (fade+lift) animation on every route change
+  app.style.animation='none';
+  void app.offsetWidth;
+  app.style.animation='';
+  bindPageEvents(path);
 }
 
 document.getElementById('year').textContent=new Date().getFullYear();
