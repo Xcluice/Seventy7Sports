@@ -100,6 +100,10 @@
     .hero-card-wrap{display:none}@media(min-width:1024px){.hero-card-wrap{display:block}}
     .hero-card{position:relative;margin-left:auto;max-width:28rem;border-radius:2rem;overflow:hidden;border:1px solid rgba(255,255,255,.15);box-shadow:0 25px 50px rgba(0,0,0,.45);background:var(--card);min-height:420px}
     .hero-card img{width:100%;height:100%;object-fit:cover;min-height:420px}
+    .product-media img,.gallery-main img,.hero-card img,.cart-thumb img{
+      -webkit-touch-callout:none;-webkit-user-select:none;user-select:none;
+      -webkit-user-drag:none;user-drag:none;pointer-events:auto;
+    }
     .hero-card-fallback{min-height:420px;display:grid;place-items:center;color:var(--lime)}
     .hero-card-meta{position:absolute;inset:auto 0 0 0;background:linear-gradient(transparent,rgba(0,0,0,.92));padding:1.5rem}
     .hero-card-meta small{color:var(--lime);font-size:.75rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em}
@@ -137,7 +141,8 @@
 
     /* Fixed overflow for 3D flip */
     .product-media{
-      position:relative;aspect-ratio:4/5;display:block; border-radius:1rem 1rem 0 0;
+      position:relative;aspect-ratio:4/5;display:block; border-radius:1rem 1rem 0 0; overflow:hidden;
+      touch-action:pan-y;
     }
     .product-media img{
       width:100%;height:100%;object-fit:cover;
@@ -208,6 +213,7 @@
     .gallery-main{
       border-radius:1.5rem;border:1px solid var(--border);background:var(--card);aspect-ratio:1;
       position:relative; transform-style:preserve-3d; box-shadow:0 20px 60px rgba(0,0,0,.5); transition:box-shadow .3s;
+      overflow:hidden; touch-action:pan-y;
     }
     .gallery-main:hover{box-shadow:0 32px 80px rgba(0,0,0,.65),0 0 0 1px rgba(200,245,66,.2)}
     .gallery-main img{
@@ -256,6 +262,17 @@
     .qty-wrap button:hover{color:var(--lime)}.qty-wrap span{width:40px;text-align:center;font-weight:800}
     .detail-actions{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.75rem}
     .detail-actions .btn-lime{min-width:200px;flex:1}
+    .reviews-section{margin-top:2.5rem;padding-top:2rem;border-top:1px solid var(--border)}
+    .review-item{border:1px solid var(--border);background:var(--card);border-radius:12px;padding:1rem;margin-bottom:.85rem}
+    .review-head{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
+    .review-head strong{font-size:.875rem}
+    .review-date{color:#64748b;font-size:.75rem;margin-left:auto}
+    .review-comment{color:#cbd5e1;font-size:.875rem;margin-top:.5rem;line-height:1.6}
+    .star-picker{display:flex;gap:.3rem}
+    .star-pick{background:transparent;border:0;color:#475569;cursor:pointer;padding:.2rem;transition:transform .15s cubic-bezier(.34,1.56,.64,1)}
+    .star-pick:hover{color:#fbbf24;transform:scale(1.15)}
+    #review-comment{width:100%;border-radius:12px;border:1px solid var(--border);background:rgba(255,255,255,.05);color:#fff;padding:.8rem 1rem;margin-top:.75rem;min-height:90px;resize:vertical;outline:none;font:inherit}
+    #review-comment:focus{border-color:rgba(200,245,66,.5)}
     .perks{display:grid;gap:.75rem;margin-top:1.75rem}@media(min-width:640px){.perks{grid-template-columns:1fr 1fr}}
     .perk{display:flex;align-items:center;gap:.75rem;border:1px solid var(--border);background:var(--card);border-radius:12px;padding:1rem}
     .perk strong{display:block;font-size:.875rem}.perk span{font-size:.75rem;color:#94a3b8}
@@ -669,10 +686,35 @@ function bind3DGallery(el){
   },{passive:true});
 }
 
+function bindSwipeFlip(el){
+  const inner=el.querySelector('.flip-inner');
+  const hasBack=!!el.querySelector('.flip-back');
+  if(!inner||!hasBack)return;
+  let sx=0,sy=0,tracking=false;
+  el.addEventListener('touchstart',e=>{
+    const t=e.touches[0];sx=t.clientX;sy=t.clientY;tracking=true;
+  },{passive:true});
+  el.addEventListener('touchend',e=>{
+    if(!tracking)return;tracking=false;
+    const t=e.changedTouches[0];
+    const dx=t.clientX-sx,dy=t.clientY-sy;
+    if(Math.abs(dx)>36&&Math.abs(dx)>Math.abs(dy)*1.4){
+      inner.classList.toggle('flipped');
+    }
+  },{passive:true});
+}
+
 function initTilts(){
   document.querySelectorAll('.product-card').forEach(bind3DTilt);
+  document.querySelectorAll('.flip-card').forEach(bindSwipeFlip);
   const gal=document.querySelector('.gallery-main');if(gal)bind3DGallery(gal);
 }
+
+// Block the native long-press context menu on product imagery (Android/desktop);
+// -webkit-touch-callout in CSS handles iOS Safari's version of the same menu.
+document.addEventListener('contextmenu',e=>{
+  if(e.target.closest('.product-media, .gallery-main, .hero-card, .cart-thumb'))e.preventDefault();
+});
 
 // --- MOTION: scroll-reveal observer ---
 let revealObserver=null;
@@ -771,7 +813,7 @@ function mapRow(r){
     image:r.image_url||'',imageBack:r.image_back_url||'',images:r.image_url?[r.image_url]:[],
     description:`Official ${r.player_name} jersey${r.team?` for ${r.team}`:''}.`,
     sizes:['S','M','L','XL','XXL'],colors:['Default'],
-    featured:true,newArrival:true,rating:4.9,reviews:12,created_at:r.created_at
+    featured:true,newArrival:true,created_at:r.created_at
   };
 }
 
@@ -963,6 +1005,68 @@ function updateCartBadge(){
 }
 
 
+// --- REVIEWS (real, DB-backed — replaces the old static rating/reviews numbers) ---
+const REVIEWS_CACHE_KEY='s77-reviews-cache';
+let reviews=[];
+let reviewStats={};
+let reviewUI={};
+
+function computeReviewStats(){
+  reviewStats={};
+  reviews.forEach(r=>{
+    const s=reviewStats[r.jersey_id]||(reviewStats[r.jersey_id]={sum:0,count:0});
+    s.sum+=Number(r.rating)||0;s.count+=1;
+  });
+  Object.keys(reviewStats).forEach(id=>{reviewStats[id].avg=reviewStats[id].sum/reviewStats[id].count});
+}
+
+async function loadReviews(){
+  const cached=localStorage.getItem(REVIEWS_CACHE_KEY);
+  if(cached){try{reviews=JSON.parse(cached);computeReviewStats();}catch(e){}}
+  try{
+    const res=await fetch(`${SUPABASE_URL}/rest/v1/s77_reviews?select=*&order=created_at.desc`,{headers:{apikey:SUPABASE_KEY,Accept:'application/json'}});
+    if(res.ok){
+      reviews=await res.json();
+      localStorage.setItem(REVIEWS_CACHE_KEY,JSON.stringify(reviews));
+      computeReviewStats();
+      if(location.hash)render();
+    }
+  }catch(e){}
+}
+
+function overallRatingLabel(){
+  if(!reviews.length)return'—';
+  return(reviews.reduce((s,r)=>s+Number(r.rating),0)/reviews.length).toFixed(1);
+}
+
+async function submitReview(jerseyId){
+  if(!currentUser){showAuthModal();return;}
+  const ui=reviewUI[jerseyId]||{rating:0};
+  const rating=ui.rating||0;
+  if(!rating){alert('Please select a star rating');return;}
+  const commentEl=document.getElementById('review-comment');
+  const comment=commentEl?commentEl.value.trim():'';
+  const btn=document.getElementById('submit-review');
+  if(btn){btn.disabled=true;btn.textContent='Posting…';}
+  try{
+    const res=await fetch(`${SUPABASE_URL}/rest/v1/s77_reviews`,{
+      method:'POST',
+      headers:{apikey:SUPABASE_KEY,'Content-Type':'application/json',Prefer:'return=representation'},
+      body:JSON.stringify({jersey_id:jerseyId,user_id:currentUser.id,username:currentUser.username,rating,comment})
+    });
+    if(!res.ok)throw new Error('Could not post your review — please try again');
+    const saved=await res.json();
+    if(saved&&saved[0])reviews.unshift(saved[0]);
+    localStorage.setItem(REVIEWS_CACHE_KEY,JSON.stringify(reviews));
+    computeReviewStats();
+    reviewUI[jerseyId]={rating:0};
+    render();
+  }catch(e){
+    alert(e.message);
+    if(btn){btn.disabled=false;btn.textContent='Post Review';}
+  }
+}
+
 async function loadLiveJerseys(){
   const cached = localStorage.getItem(CACHE_KEY);
   if(cached) {
@@ -1015,13 +1119,14 @@ function productCard(p, index = 99, reveal = false){
   const hasBack = !!p.imageBack;
   const revealCls = reveal ? ` reveal` : '';
   const revealStyle = reveal ? ` style="--ri:${index}"` : '';
+  const rs = reviewStats[p.id];
   return`<article class="product-card${revealCls}"${revealStyle}>
     <a class="product-media shimmer-bg" href="#/product/${p.id}" data-link>
       <div class="flip-card"><div class="flip-inner">
         <div class="flip-face flip-front">
-          ${p.image?`<img src="${esc(optImg(p.image, 400))}" alt="${esc(p.name)}" loading="${loadAttr}" />`:`<div style="height:100%;display:grid;place-items:center;color:#475569">${icon('shirt','icon-xl')}</div>`}
+          ${p.image?`<img src="${esc(optImg(p.image, 400))}" alt="${esc(p.name)}" loading="${loadAttr}" draggable="false" />`:`<div style="height:100%;display:grid;place-items:center;color:#475569">${icon('shirt','icon-xl')}</div>`}
         </div>
-        ${hasBack?`<div class="flip-face flip-back"><img src="${esc(optImg(p.imageBack, 400))}" alt="${esc(p.name)} back" loading="lazy" /></div>`:''}
+        ${hasBack?`<div class="flip-face flip-back"><img src="${esc(optImg(p.imageBack, 400))}" alt="${esc(p.name)} back" loading="lazy" draggable="false" /></div>`:''}
       </div></div>
       <div class="badges"><span class="live-pill">Live</span><span class="badge badge-new">${icon('tag','icon-sm')} New</span></div>
       <span class="sport-chip">${esc(p.sport)}</span>
@@ -1030,7 +1135,7 @@ function productCard(p, index = 99, reveal = false){
     <div class="product-body">
       <div><div class="product-team">${esc(p.team)}</div>
       <a href="#/product/${p.id}" data-link><h3 class="product-name">${esc(p.name)}</h3></a></div>
-      <div class="rating"><span class="star">${icon('star','icon-sm')}</span><strong>${Number(p.rating).toFixed(1)}</strong><span>(${p.reviews})</span></div>
+      <div class="rating">${rs&&rs.count?`<span class="star">${icon('star','icon-sm')}</span><strong>${rs.avg.toFixed(1)}</strong><span>(${rs.count})</span>`:`<span style="color:#64748b;font-size:.75rem">No reviews yet</span>`}</div>
       <div class="product-footer"><div class="price">${money(p.price)}</div>
       <a class="view-btn" href="#/product/${p.id}" data-link>${icon('bag','icon-sm')} View</a></div>
     </div></article>`
@@ -1056,10 +1161,10 @@ function pageHome(){
       <a class="btn btn-lime btn-lg" href="#/shop" data-link>Shop All Jerseys ${icon('arrow','icon-sm')}</a>
       <a class="btn btn-ghost btn-lg" href="#/shop" data-link>Browse Catalog</a>
     </div>
-    <div class="stats"><div class="stat"><strong>${products.length}</strong><span>Live Kits</span></div><div class="stat"><strong>48h</strong><span>Fast Ship</span></div><div class="stat"><strong>4.9</strong><span>Fan Rating</span></div></div>
+    <div class="stats"><div class="stat"><strong>${products.length}</strong><span>Live Kits</span></div><div class="stat"><strong>48h</strong><span>Fast Ship</span></div><div class="stat"><strong>${overallRatingLabel()}</strong><span>Fan Rating</span></div></div>
   </div>
   <div class="hero-card-wrap"><div class="hero-card shimmer-bg">
-    ${hero&&hero.image?`<img src="${esc(optImg(hero.image, 800))}" alt="${esc(hero.name)}" loading="eager" />`:`<div class="hero-card-fallback">${icon('shirt','icon-xl')}</div>`}
+    ${hero&&hero.image?`<img src="${esc(optImg(hero.image, 800))}" alt="${esc(hero.name)}" loading="eager" draggable="false" />`:`<div class="hero-card-fallback">${icon('shirt','icon-xl')}</div>`}
     <div class="hero-card-meta"><small>Featured Drop</small>
     <h3>${hero?esc(hero.name):'Upload your first kit'}</h3>
     <p>${hero?`${esc(hero.team)} · ${money(hero.price)}`:'AdminCompanion → Add Jersey'}</p></div>
@@ -1148,6 +1253,10 @@ function pageProduct(id){
   const ui=productUI[p.id];
   const related=products.filter(x=>x.id!==p.id&&(x.sport===p.sport||x.team===p.team)).slice(0,4);
   const hasBack=!!p.imageBack;
+  const rs=reviewStats[p.id];
+  const productReviews=reviews.filter(r=>r.jersey_id===p.id);
+  if(!reviewUI[p.id])reviewUI[p.id]={rating:0};
+  const rui=reviewUI[p.id];
   const smsBody=encodeURIComponent(`Hi! I want to order:\n${p.name} (${p.team})\nPrice: ${money(p.price)}\n${STORE_URL}/#/product/${p.id}\nPlease confirm!`);
   const smsSep=/iP(hone|ad|od)/.test(navigator.userAgent)?'&':'?';
   return`<div class="page-pad"><div class="container">
@@ -1156,9 +1265,9 @@ function pageProduct(id){
       <div class="gallery-main shimmer-bg" id="gallery-main">
         <div class="flip-card"><div class="flip-inner">
           <div class="flip-face flip-front">
-            ${p.image?`<img src="${esc(optImg(p.image, 800))}" alt="${esc(p.name)}" loading="eager" />`:`<div style="height:100%;display:grid;place-items:center;color:#475569">${icon('shirt','icon-xl')}</div>`}
+            ${p.image?`<img src="${esc(optImg(p.image, 800))}" alt="${esc(p.name)}" loading="eager" draggable="false" />`:`<div style="height:100%;display:grid;place-items:center;color:#475569">${icon('shirt','icon-xl')}</div>`}
           </div>
-          ${hasBack?`<div class="flip-face flip-back"><img src="${esc(optImg(p.imageBack, 800))}" alt="${esc(p.name)} back" loading="lazy" /></div>`:''}
+          ${hasBack?`<div class="flip-face flip-back"><img src="${esc(optImg(p.imageBack, 800))}" alt="${esc(p.name)} back" loading="lazy" draggable="false" /></div>`:''}
         </div></div>
         <div class="gallery-shine"></div>
         ${hasBack?`<button type="button" class="flip-btn" data-flip aria-label="Flip to see back">${icon('refresh','icon-sm')}</button>`:''}
@@ -1166,7 +1275,7 @@ function pageProduct(id){
     </div><div>
       <div class="detail-tags"><span class="tag">${esc(p.sport)}</span><span class="tag tag-lime">New Arrival</span><span class="live-pill">Live listing</span></div>
       <div class="detail-team">${esc(p.team)}</div><h1 class="detail-title">${esc(p.name)}</h1>
-      <div class="detail-rating"><div class="stars">${stars(p.rating)}</div><strong>${Number(p.rating).toFixed(1)}</strong><span style="color:#64748b">· ${p.reviews} reviews</span></div>
+      <div class="detail-rating"><div class="stars">${stars(rs?rs.avg:0)}</div>${rs&&rs.count?`<strong>${rs.avg.toFixed(1)}</strong><span style="color:#64748b">· ${rs.count} review${rs.count!==1?'s':''}</span>`:`<span style="color:#64748b">No reviews yet</span>`}</div>
       <div class="detail-price">${money(p.price)}</div>
       <p class="detail-desc">${esc(p.description)}</p>
       <div class="option-block"><div class="option-label">Size ${ui.sizeError&&!ui.size?'<span class="err">— please select a size</span>':''}</div>
@@ -1180,6 +1289,21 @@ function pageProduct(id){
       <div class="perks"><div class="perk">${icon('truck','icon-md')}<div><strong>Ships in 1–2 days</strong><span>Fast dispatch</span></div></div>
       <div class="perk">${icon('shield','icon-md')}<div><strong>Quality checked</strong><span>30-day returns</span></div></div></div>
     </div></div>
+    <div class="reviews-section reveal">
+      <h2 style="font-size:1.3rem;margin-bottom:1rem">Reviews${rs&&rs.count?` (${rs.count})`:''}</h2>
+      ${productReviews.length?productReviews.map(r=>`<div class="review-item">
+        <div class="review-head"><strong>${esc(r.username)}</strong><div class="stars">${stars(r.rating)}</div><span class="review-date">${new Date(r.created_at).toLocaleDateString()}</span></div>
+        ${r.comment?`<p class="review-comment">${esc(r.comment)}</p>`:''}
+      </div>`).join(''):`<p style="color:#94a3b8">No reviews yet — be the first to share your experience.</p>`}
+      <div id="review-form-wrap">
+        ${currentUser?`
+        <h3 style="font-size:1rem;margin:1.5rem 0 .75rem">Write a Review</h3>
+        <div class="star-picker" id="star-picker">${[1,2,3,4,5].map(n=>`<button type="button" class="star-pick" data-star="${n}">${icon(n<=rui.rating?'star':'starOutline','icon-md')}</button>`).join('')}</div>
+        <textarea id="review-comment" placeholder="Share your thoughts on fit, quality, fabric..."></textarea>
+        <button class="btn btn-lime btn-md" style="margin-top:.75rem" type="button" id="submit-review">Post Review</button>
+        `:`<p style="color:#94a3b8;margin-top:1.25rem"><a href="#" id="review-signin-link" style="color:var(--lime)">Sign in</a> to leave a review.</p>`}
+      </div>
+    </div>
     ${related.length?`<div class="mt-section reveal"><h2 style="font-size:1.5rem;margin-bottom:1.25rem">You May Also Like</h2>
       <div class="product-grid cols-4 reveal-stagger">${related.map((p, i) => productCard(p, i, true)).join('')}</div></div>`:''}
   </div></div>`
@@ -1199,7 +1323,7 @@ function pageCart(){
       <button class="back-link" type="button" id="clear-cart" style="margin:0">Clear cart</button></div>
     <div class="cart-layout"><div style="display:grid;gap:1rem">
       ${cart.map(item=>`<div class="cart-item">
-        <a class="cart-thumb shimmer-bg" href="#/product/${item.id}" data-link>${item.image?`<img src="${esc(optImg(item.image, 200))}" alt="${esc(item.name)}" loading="lazy" />`:''}</a>
+        <a class="cart-thumb shimmer-bg" href="#/product/${item.id}" data-link>${item.image?`<img src="${esc(optImg(item.image, 200))}" alt="${esc(item.name)}" loading="lazy" draggable="false" />`:''}</a>
         <div class="cart-info"><a href="#/product/${item.id}" data-link><h3>${esc(item.name)}</h3></a>
         <p>${esc(item.team)} · Size ${esc(item.size)}</p><div class="price">${money(item.price)}</div></div>
         <div class="cart-controls"><div class="qty-wrap">
@@ -1295,6 +1419,16 @@ function bindPageEvents(path){
     document.querySelectorAll('[data-size]').forEach(b=>{b.onclick=()=>{ui.size=b.getAttribute('data-size');ui.sizeError=false;render()}});
     document.querySelectorAll('[data-qty-delta]').forEach(b=>{b.onclick=()=>{const d=Number(b.getAttribute('data-qty-delta'));ui.qty=Math.min(10,Math.max(1,ui.qty+d));render()}});
     document.getElementById('add-cart')?.addEventListener('click',()=>{if(!ui.size){ui.sizeError=true;render();return}addToCart(p,ui.size,ui.color,ui.qty);ui.added=true;render();setTimeout(()=>{ui.added=false;render()},1800)});
+    if(!reviewUI[p.id])reviewUI[p.id]={rating:0};
+    document.querySelectorAll('.star-pick').forEach((b,i)=>{
+      b.onclick=()=>{
+        const n=Number(b.getAttribute('data-star'));
+        reviewUI[p.id].rating=n;
+        document.querySelectorAll('.star-pick').forEach((btn,j)=>{btn.innerHTML=icon((j+1)<=n?'star':'starOutline','icon-md')});
+      };
+    });
+    document.getElementById('submit-review')?.addEventListener('click',()=>submitReview(p.id));
+    document.getElementById('review-signin-link')?.addEventListener('click',e=>{e.preventDefault();showAuthModal()});
   }
   if(path==='/cart'){
     document.getElementById('clear-cart')?.addEventListener('click',()=>{clearCart();render()});
@@ -1346,6 +1480,7 @@ document.body.addEventListener('click',(e)=>{
 },true);
 window.addEventListener('hashchange', render);
 loadLiveJerseys();
+loadReviews();
   </script>
 </body>
 </html>
