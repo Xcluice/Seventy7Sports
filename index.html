@@ -21,7 +21,10 @@
     html,body,a,button,input,select,textarea,label,summary,[role="button"]{-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none}
     button,a,input,select,textarea{outline:none}
     button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid #c8f542;outline-offset:2px}
-    html{scroll-behavior:smooth}
+    html{scroll-behavior:auto}
+    html.lenis,html.lenis body{height:auto}
+    .lenis.lenis-smooth{scroll-behavior:auto!important}
+    .lenis.lenis-stopped{overflow:hidden}
     body{margin:0;min-height:100vh;font-family:var(--font);background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
     h1,h2,h3,h4{font-family:var(--display);letter-spacing:.01em;margin:0}
     p{margin:0}a{color:inherit;text-decoration:none}
@@ -541,6 +544,7 @@
       </div>
     </footer>
   </div>
+  <script src="https://unpkg.com/lenis@1.1.17/dist/lenis.min.js"></script>
   <div class="drawer-backdrop" id="drawer-backdrop"></div>
   <div class="drawer" id="filter-drawer"></div>
 
@@ -704,6 +708,25 @@ function initHeaderScroll(){
   window.addEventListener('scroll',onScroll,{passive:true});
 }
 initHeaderScroll();
+
+// --- MOTION: Lenis smooth scroll ---
+let lenis=null;
+function initLenis(){
+  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduced||typeof Lenis==='undefined')return;
+  lenis=new Lenis({
+    duration:1.15,
+    easing:t=>Math.min(1,1-Math.pow(2,-10*t)),
+    smoothWheel:true,
+    touchMultiplier:1.35,
+    autoRaf:true
+  });
+}
+initLenis();
+function scrollToTop(){
+  if(lenis)lenis.scrollTo(0,{immediate:true});
+  else window.scrollTo(0,0);
+}
 
 const icons={
 shirt:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"/></svg>',
@@ -1297,7 +1320,7 @@ function render(){
   else if(path==='/about')html=pageAbout();
   else if(path==='/contact')html=pageContact();
   else html=`<div class="center-state"><h1>Page not found</h1><a class="btn btn-lime btn-md" href="#/" data-link>Go Home</a></div>`;
-  app.innerHTML=html;window.scrollTo(0,0);
+  app.innerHTML=html;scrollToTop();
   // Restart the page-transition (fade+lift) animation on every route change
   app.style.animation='none';
   void app.offsetWidth;
